@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import LoginIcon from '@mui/icons-material/Login';
+import AboutDialog from './AboutDialog';
 
 export default function Nav() {
   return (
@@ -14,11 +15,9 @@ export default function Nav() {
       <AppBar position="static">
         <Toolbar sx={{backgroundColor: "#2D728F"}} >
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Pomotify
+            Focudoro
           </Typography>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            About
-          </Typography>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}><AboutDialog/></Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Tasks
           </Typography>
