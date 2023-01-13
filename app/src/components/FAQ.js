@@ -38,7 +38,7 @@ export default function FAQ() {
           xs={10}
         >
           <Typography
-            variant="h2"
+            variant="h3"
             fontWeight={700}
             textAlign={"center"}
             color="#2D728F"
@@ -66,7 +66,7 @@ export default function FAQ() {
             breaks regularly.
           </Typography>
           <Typography
-            variant="h2"
+            variant="h3"
             fontWeight={700}
             textAlign={"center"}
             color="#2D728F"
@@ -117,7 +117,7 @@ export default function FAQ() {
             </List>
           </Typography>
           <Typography
-            variant="h2"
+            variant="h3"
             fontWeight={700}
             textAlign={"center"}
             color="#2D728F"
