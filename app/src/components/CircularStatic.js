@@ -5,6 +5,9 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Button, Grid } from "@mui/material";
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import StopIcon from '@mui/icons-material/Stop';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 function CircularProgressWithLabel(props) {
   console.log(props.value);
@@ -52,8 +55,9 @@ function CircularProgressWithLabel(props) {
             variant="text"
             onClick={props.start}
             disabled={props.isRunning === true}
+            color="success"
           >
-            Start
+            <PlayArrowIcon/>
           </Button>
         </Grid>
         <Grid
@@ -64,9 +68,10 @@ function CircularProgressWithLabel(props) {
             fullWidth
             variant="text"
             onClick={props.stop}
+            color="error"
             disabled={props.isRunning === false}
           >
-            Stop
+            <StopIcon/>
           </Button>
         </Grid>
         <Grid
@@ -76,9 +81,10 @@ function CircularProgressWithLabel(props) {
           <Button
             fullWidth
             variant="text"
+            color="warning"
             onClick={props.reset}
           >
-            Reset
+            <RestartAltIcon/>
           </Button>
         </Grid>
       </Grid>
