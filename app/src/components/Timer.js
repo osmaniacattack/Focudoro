@@ -7,44 +7,6 @@ export default function Timer() {
   return (
     <>
       <CircularStatic />
-      <Grid
-        container
-        sx={{ m: 2 }}
-      >
-        <Grid
-          item
-          xs={4}
-        >
-          <Button
-            fullWidth
-            variant="text"
-          >
-            Focus
-          </Button>
-        </Grid>
-        <Grid
-          item
-          xs={4}
-        >
-          <Button
-            fullWidth
-            variant="text"
-          >
-            Short Break
-          </Button>
-        </Grid>
-        <Grid
-          item
-          xs={4}
-        >
-          <Button
-            fullWidth
-            variant="text"
-          >
-            Long Break
-          </Button>
-        </Grid>
-      </Grid>
     </>
   );
 }
