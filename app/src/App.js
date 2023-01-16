@@ -7,7 +7,7 @@ function App() {
     <>
       <Nav />
       <Paper
-        sx={{bgcolor: "#f5f5f5", height: "100%", width:"100%"}}
+        sx={{ bgcolor: "#f5f5f5", height: "100%", width: "100%" }}
         elevation={4}
       >
         <Grid
@@ -27,11 +27,11 @@ function App() {
             item
             sx={{ m: 5 }}
           >
-            <YoutubeReact/>
+            <YoutubeReact />
           </Grid>
         </Grid>
       </Paper>
-      <Footer/>
+      <Footer />
     </>
   );
 }
