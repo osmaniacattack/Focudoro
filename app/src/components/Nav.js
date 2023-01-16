@@ -13,7 +13,7 @@ export default function Nav() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar sx={{ backgroundColor: "#2D728F" }}>
+        <Toolbar color="info">
           <Typography
             variant="h6"
             component="div"

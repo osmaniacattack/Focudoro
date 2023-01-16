@@ -44,8 +44,8 @@ export default function YoutubeReact() {
   }, [currentVideoIdx, videoIds, player]);
 
   const opts = {
-    width: "700",
-    height: "400",
+    width: "1",
+    height: "1",
     playerVars: {
       autoplay: 1,
       controls: 1,
@@ -85,7 +85,7 @@ export default function YoutubeReact() {
         color="warning"
         onClick={() => setShow((show) => !show)}
       >
-        {show ? 'Hide Lo-Fi Music' : 'Study with Lo-Fi Music'}
+        {show ? 'Hide Lo-Fi Radio' : 'Study with Lo-Fi Radio'}
       </Button>
       {show ? (
         <Card sx={{ display: "flex" }}>
