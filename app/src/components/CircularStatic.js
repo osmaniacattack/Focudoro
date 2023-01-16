@@ -12,9 +12,9 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 function CircularProgressWithLabel(props) {
   return (
     <>
-      <Box sx={{ position: "relative", display: "inline-flex" }}>
+      <Box sx={{ position: "relative", display: "inline-flex"}}>
         <CircularProgress
-          size="30rem"
+          size="20rem"
           thickness="1"
           sx={{ color: "#2D728F" }}
           variant="determinate"
