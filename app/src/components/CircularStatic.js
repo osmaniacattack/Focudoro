@@ -10,7 +10,6 @@ import StopIcon from '@mui/icons-material/Stop';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 function CircularProgressWithLabel(props) {
-  console.log(props.value);
   return (
     <>
       <Box sx={{ position: "relative", display: "inline-flex" }}>
@@ -100,6 +99,7 @@ function CircularProgressWithLabel(props) {
             fullWidth
             variant="text"
             onClick={props.focus}
+            sx={{color:"#2D728F"}}
           >
             Focus
           </Button>
@@ -112,6 +112,7 @@ function CircularProgressWithLabel(props) {
             fullWidth
             variant="text"
             onClick={props.short}
+            sx={{color:"#2D728F"}}
           >
             Short Break
           </Button>
@@ -124,6 +125,7 @@ function CircularProgressWithLabel(props) {
             fullWidth
             variant="text"
             onClick={props.long}
+            sx={{color:"#2D728F"}}
           >
             Long Break
           </Button>
