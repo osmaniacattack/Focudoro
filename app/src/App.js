@@ -1,20 +1,31 @@
 import "./App.css";
-import { Nav, Timer, YoutubeReact, Footer, Tasks, PomoCounter, LofiCard } from "./components/index";
+import {
+  Nav,
+  Timer,
+  YoutubeReact,
+  Footer,
+  Tasks,
+  PomoCounter,
+  LofiCard,
+} from "./components/index";
 import { Grid, Paper, Typography } from "@mui/material";
 import React from "react";
 
 function App() {
   return (
     <>
-    <Paper
+      <Paper
         sx={{
-          '@media (max-height: 500px)': {
-            height: '100%'
+          bgcolor: "#E3F2FD",
+          height: "100vh",
+          width: "100%",
+          '@media (max-width: 1199px)': {
+            height: "100%"
           },
-          bgcolor: "#E3F2FD", height: "100vh", width: "100%" }}
+        }}
         elevation={4}
       >
-      <Nav />
+        <Nav />
         <Grid
           container
           spacing={2}
@@ -27,53 +38,76 @@ function App() {
             xs={10}
             lg={8}
             sx={{
-              '@media (min-width: 300px)': {
-                marginTop: '2.5vh',
+              "@media (min-width: 300px)": {
+                marginTop: "2.5vh",
               },
             }}
           >
             <Paper
               elevation={8}
               sx={{
-                bgcolor: "#fff", height: "100%", width: "100%", borderRadius:"15px"
+                bgcolor: "#fff",
+                height: "100%",
+                width: "100%",
+                borderRadius: "15px",
               }}
             >
               <Timer />
             </Paper>
           </Grid>
-          <Grid item xs={10} lg={2}>
-          <Paper
+          <Grid
+            item
+            xs={10}
+            lg={2}
+          >
+            <Paper
               elevation={8}
               sx={{
-                bgcolor: "#fff", height: "100%", width: "100%", borderRadius:"15px"
+                bgcolor: "#fff",
+                height: "100%",
+                width: "100%",
+                borderRadius: "15px",
               }}
             >
-              <Tasks/>
+              <Tasks />
             </Paper>
           </Grid>
-          <Grid item xs={10} lg={5}>
-          <Paper
+          <Grid
+            item
+            xs={10}
+            lg={5}
+          >
+            <Paper
               elevation={8}
               sx={{
-                bgcolor: "#fff", height: "100%", width: "100%", borderRadius:"15px"
+                bgcolor: "#fff",
+                height: "100%",
+                width: "100%",
+                borderRadius: "15px",
               }}
             >
-              <PomoCounter/>
+              <PomoCounter />
             </Paper>
           </Grid>
-          <Grid item xs={10} lg={5}>
-          <Paper
+          <Grid
+            item
+            xs={10}
+            lg={5}
+          >
+            <Paper
               elevation={8}
               sx={{
-                bgcolor: "#fff", height: "100%", width: "100%", borderRadius:"15px"
+                bgcolor: "#fff",
+                height: "100%",
+                width: "100%",
+                borderRadius: "15px",
               }}
             >
-              {/* <LofiCard/> */}
-              <YoutubeReact/>
+              <YoutubeReact />
             </Paper>
           </Grid>
         </Grid>
-      <Footer />
+        <Footer />
       </Paper>
     </>
   );
@@ -81,4 +115,6 @@ function App() {
 
 export default App;
 
-{/* <YoutubeReact /> */}
+{
+  /* <YoutubeReact /> */
+}
