@@ -14,6 +14,8 @@ import {
 import MainCard from "./MainCard";
 import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import YouTube from "react-youtube";
 import { useTheme, styled } from "@mui/material/styles";
 
@@ -101,7 +103,10 @@ export default function YoutubeReact() {
     ["coffee shop radio // 24/7 lofi hip-hop beats", "STEEZYASF*CK"],
     ["lofi hip hop radio - beats to study/relax to 🐾", "Chillhop Music"],
     ["24/7 Korean Underground Indie/R&B/Hip-hop Radio", "Mellowbeat Seeker"],
-    ["Tokyo cafe ☕ Beautiful relaxing jazz music and bossa nova piano for stress relief", 'In the Rain']
+    [
+      "Tokyo cafe ☕ Beautiful relaxing jazz music and bossa nova piano for stress relief",
+      "In the Rain",
+    ],
   ];
 
   return (
@@ -143,13 +148,15 @@ export default function YoutubeReact() {
             </ListItem>
           </List>
         </Box>
-        <Box sx={{m:-2}}>
-          <YouTube
-            videoId={videoIds[currentVideoIdx]}
-            opts={opts}
-            onReady={onReady}
-            onEnd={onEnd}
-          />
+        <Box sx={{ m: -2 }}>
+          {show === true ? (
+            <YouTube
+              videoId={videoIds[currentVideoIdx]}
+              opts={opts}
+              onReady={onReady}
+              onEnd={onEnd}
+            />
+          ) : null}
         </Box>
         <Box
           sx={{
@@ -180,6 +187,23 @@ export default function YoutubeReact() {
               <SkipNextIcon />
             )}
           </IconButton>
+          {show === true ? (
+            <IconButton
+              aria-label="Mute"
+              onClick={() => setShow(false)}
+              sx={{ color: "#fff" }}
+            >
+              <VolumeUpIcon />
+            </IconButton>
+          ) : (
+            <IconButton
+              aria-label="Unmute"
+              onClick={() => setShow(true)}
+              sx={{ color: "#fff" }}
+            >
+              <VolumeOffIcon />
+            </IconButton>
+          )}
         </Box>
       </CardWrapper>
     </>
