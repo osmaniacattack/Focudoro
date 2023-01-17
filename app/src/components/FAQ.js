@@ -1,29 +1,14 @@
 import * as React from "react";
 import {
   Typography,
-  Container,
   Grid,
-  Box,
   List,
   ListItem,
-  ListItemAvatar,
-  ListItemIcon,
   ListItemText,
-  Paper,
 } from "@mui/material";
-import { makeStyles } from "@material-ui/core/styles";
 import Question from "../assets/question.png";
 import Clock from "../assets/clock.png";
 import Research from "../assets/research.png";
-
-const useStyles = makeStyles({
-  paper: {
-    padding: "20px",
-    margin: "20px",
-    backgroundColor: "#f5f5f5",
-    boxShadow: "10px 10px 5px #888888",
-  },
-});
 
 export default function FAQ() {
 

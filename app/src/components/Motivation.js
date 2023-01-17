@@ -5,7 +5,6 @@ import {
   Box,
   TextField,
   Button,
-  Grid,
 } from "@mui/material";
 
 export default function Motivation() {

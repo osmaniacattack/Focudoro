@@ -1,5 +1,5 @@
 import "./App.css";
-import { Nav, Timer, FAQ, YoutubeReact, Footer } from "./components/index";
+import { Nav, Timer, YoutubeReact, Footer } from "./components/index";
 import { Grid, Paper } from "@mui/material";
 
 function App() {

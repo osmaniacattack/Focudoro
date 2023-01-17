@@ -3,13 +3,8 @@ import {
   Box,
   Button,
   Card,
-  CardActionArea,
   CardContent,
-  CardHeader,
-  CardMedia,
   IconButton,
-  Grid,
-  Select,
   Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
@@ -18,7 +13,7 @@ import SkipNextIcon from "@mui/icons-material/SkipNext";
 import YouTube from "react-youtube";
 
 export default function YoutubeReact() {
-  const [videoIds, setVideoIds] = useState([
+  const [videoIds] = useState([
     "jfKfPfyJRdk",
     "kgx4WGK0oNU",
     "e3L1PIY1pN8",
@@ -27,7 +22,7 @@ export default function YoutubeReact() {
   ]);
   const [currentVideoIdx, setCurrentVideoIdx] = useState(1);
   const [player, setPlayer] = useState(null);
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const theme = useTheme();
 
   const onReady = useCallback(
@@ -85,7 +80,7 @@ export default function YoutubeReact() {
         color="warning"
         onClick={() => setShow((show) => !show)}
       >
-        {show ? 'Hide Lo-Fi Radio' : 'Study with Lo-Fi Radio'}
+        {show ? "Study Without Lo-Fi Radio" : "Study with Lo-Fi Radio"}
       </Button>
       {show ? (
         <Card sx={{ display: "flex" }}>
