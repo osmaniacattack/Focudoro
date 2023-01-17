@@ -51,7 +51,7 @@ export default function Tasks() {
                     variant="subtitle2"
                     color="inherit"
                   >
-                    Tell Akif I love him
+                    Test
                   </Typography>
                 </Grid>
                 <Grid item>
@@ -79,7 +79,7 @@ export default function Tasks() {
                     variant="subtitle2"
                     color="inherit"
                   >
-                    Give Akif kissies
+                    Test
                   </Typography>
                 </Grid>
                 <Grid item>
@@ -107,7 +107,7 @@ export default function Tasks() {
                     variant="subtitle2"
                     color="inherit"
                   >
-                    Work on the dumpy for Akif
+                    Test
                   </Typography>
                 </Grid>
                 <Grid item>
@@ -135,7 +135,7 @@ export default function Tasks() {
                     variant="subtitle2"
                     color="inherit"
                   >
-                    Get a job for cute dates
+                    Test
                   </Typography>
                 </Grid>
                 <Grid item>

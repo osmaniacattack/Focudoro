@@ -48,7 +48,7 @@ function CircularProgressWithLabel(props) {
       </Typography>
       <Grid
         container
-        sx={{ mt: 1 }}
+        sx={{p:2 }}
       >
         <Grid
           item

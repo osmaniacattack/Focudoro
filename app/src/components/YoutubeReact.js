@@ -51,6 +51,7 @@ export default function YoutubeReact() {
     "e3L1PIY1pN8",
     "7NOSDKb0HlU",
     "IUT1qAhMY4w",
+    "Ha2UW8a0Vzc",
   ]);
   const [currentVideoIdx, setCurrentVideoIdx] = useState(1);
   const [player, setPlayer] = useState(null);
@@ -81,12 +82,12 @@ export default function YoutubeReact() {
 
   const handleBack = () => {
     currentVideoIdx === 0
-      ? setCurrentVideoIdx(4)
+      ? setCurrentVideoIdx(5)
       : setCurrentVideoIdx((currentVideoIdx) => currentVideoIdx - 1);
   };
 
   const handleForward = () => {
-    currentVideoIdx === 4
+    currentVideoIdx === 5
       ? setCurrentVideoIdx(0)
       : setCurrentVideoIdx((currentVideoIdx) => currentVideoIdx + 1);
   };
@@ -100,6 +101,7 @@ export default function YoutubeReact() {
     ["coffee shop radio // 24/7 lofi hip-hop beats", "STEEZYASF*CK"],
     ["lofi hip hop radio - beats to study/relax to 🐾", "Chillhop Music"],
     ["24/7 Korean Underground Indie/R&B/Hip-hop Radio", "Mellowbeat Seeker"],
+    ["Tokyo cafe ☕ Beautiful relaxing jazz music and bossa nova piano for stress relief", 'In the Rain']
   ];
 
   return (
