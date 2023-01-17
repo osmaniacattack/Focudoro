@@ -3,4 +3,7 @@ export {default as Timer} from "./Timer";
 export {default as FAQ} from "./FAQ";
 export {default as AboutDialog} from './AboutDialog';
 export {default as YoutubeReact} from './YoutubeReact';
+export {default as Tasks} from './Tasks';
+export {default as PomoCounter} from './PomoCounter';
+export {default as LofiCard} from './LofiCard';
 export {default as Footer} from './Footer';

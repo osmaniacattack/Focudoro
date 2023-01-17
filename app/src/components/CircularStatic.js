@@ -5,47 +5,50 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Button, Grid } from "@mui/material";
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import StopIcon from '@mui/icons-material/Stop';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import StopIcon from "@mui/icons-material/Stop";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 function CircularProgressWithLabel(props) {
   return (
     <>
-    <Typography textAlign={"center"} width="100%">
-      <Box sx={{ position: "relative", display: "inline-flex", m:3}}>
-        <CircularProgress
-          size="20rem"
-          thickness="1"
-          color="info"
-          variant="determinate"
-          value={props.value}
-        />
-        <Box
-          sx={{
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-            position: "absolute",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Typography
-            variant="h1"
-            component="div"
-            color="text.secondary"
+      <Typography
+        textAlign={"center"}
+        width="100%"
+      >
+        <Box sx={{ position: "relative", display: "inline-flex", mt:3}}>
+          <CircularProgress
+            size="20rem"
+            thickness="1"
+            color="info"
+            variant="determinate"
+            value={props.value}
+          />
+          <Box
+            sx={{
+              top: 0,
+              left: 0,
+              bottom: 0,
+              right: 0,
+              position: "absolute",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
-            {`${props.time}`}
-          </Typography>
+            <Typography
+              variant="h1"
+              component="div"
+              color="text.secondary"
+            >
+              {`${props.time}`}
+            </Typography>
+          </Box>
         </Box>
-      </Box>
       </Typography>
       <Grid
         container
-        sx={{mt:1}}
+        sx={{ mt: 1 }}
       >
         <Grid
           item
@@ -58,7 +61,7 @@ function CircularProgressWithLabel(props) {
             disabled={props.isRunning === true}
             color="success"
           >
-            <PlayArrowIcon/>
+            <PlayArrowIcon />
           </Button>
         </Grid>
         <Grid
@@ -72,7 +75,7 @@ function CircularProgressWithLabel(props) {
             color="error"
             disabled={props.isRunning === false}
           >
-            <StopIcon/>
+            <StopIcon />
           </Button>
         </Grid>
         <Grid
@@ -85,13 +88,13 @@ function CircularProgressWithLabel(props) {
             color="warning"
             onClick={props.reset}
           >
-            <RestartAltIcon/>
+            <RestartAltIcon />
           </Button>
         </Grid>
       </Grid>
       <Grid
         container
-        sx={{ mt: 2 }}
+        sx={{p:2 }}
       >
         <Grid
           item
@@ -147,16 +150,15 @@ CircularProgressWithLabel.propTypes = {
 };
 
 export default function CircularStatic() {
-
   const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 minutes in seconds
   const [isRunning, setIsRunning] = useState(false);
   const [type, setType] = useState("focus");
-  const [intervalId, setIntervalId] = useState(null)
+  const [intervalId, setIntervalId] = useState(null);
 
   const handleFocus = () => {
     setType("focus");
     setTimeLeft(25 * 60); // 25 minutes in seconds
-  }
+  };
 
   const handleShortBreak = () => {
     setType("short");
@@ -168,7 +170,6 @@ export default function CircularStatic() {
     setTimeLeft(15 * 60); // 15 minutes in seconds
   };
 
-
   useEffect(() => {
     if (timeLeft === 0) {
       clearInterval(intervalId);
@@ -177,24 +178,26 @@ export default function CircularStatic() {
 
   const handleStart = () => {
     setIsRunning(true);
-    setIntervalId(setInterval(() => {
-      setTimeLeft((timeLeft) => {
-        if (timeLeft === 0) {
-          resetTimer();
-          return 0;
-        }
-        return timeLeft - 1;
-      });
-    }, 1000));
+    setIntervalId(
+      setInterval(() => {
+        setTimeLeft((timeLeft) => {
+          if (timeLeft === 0) {
+            resetTimer();
+            return 0;
+          }
+          return timeLeft - 1;
+        });
+      }, 1000)
+    );
   };
-  
+
   const handleStop = () => {
     clearInterval(intervalId);
     setIsRunning(false);
   };
   const resetTimer = () => {
     handleStop();
-    switch(type){
+    switch (type) {
       case "short":
         setTimeLeft(5 * 60);
         break;
@@ -215,7 +218,7 @@ export default function CircularStatic() {
   const remainingTime = () => {
     let duration = 0;
 
-    switch(type){
+    switch (type) {
       case "short":
         duration = 5 * 60;
         break;
@@ -228,11 +231,11 @@ export default function CircularStatic() {
 
     if (timeLeft < 0) {
       return 100;
-    } else if (timeLeft > duration){
+    } else if (timeLeft > duration) {
       return 0;
     }
-    return (1 - (timeLeft / duration)) * 100;
-  }
+    return (1 - timeLeft / duration) * 100;
+  };
 
   return (
     <CircularProgressWithLabel
