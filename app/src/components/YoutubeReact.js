@@ -4,13 +4,45 @@ import {
   Button,
   Card,
   CardContent,
+  CardMedia,
   IconButton,
   Typography,
+  List,
+  ListItem,
+  ListItemText,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
+import MainCard from "./MainCard";
 import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import YouTube from "react-youtube";
+import { useTheme, styled } from "@mui/material/styles";
+
+const CardWrapper = styled(MainCard)(({ theme }) => ({
+  backgroundColor: theme.palette.primary.dark,
+  color: theme.palette.primary.light,
+  overflow: "hidden",
+  position: "relative",
+  "&:after": {
+    content: '""',
+    position: "absolute",
+    width: 210,
+    height: 210,
+    background: `linear-gradient(210.04deg, ${theme.palette.secondary[200]} -50.94%, rgba(144, 202, 249, 0) 83.49%)`,
+    borderRadius: "50%",
+    top: -30,
+    right: -180,
+  },
+  "&:before": {
+    content: '""',
+    position: "absolute",
+    width: 210,
+    height: 210,
+    background: `linear-gradient(140.9deg, ${theme.palette.secondary[200]} -14.02%, rgba(144, 202, 249, 0) 77.58%)`,
+    borderRadius: "50%",
+    top: -160,
+    right: -130,
+  },
+}));
 
 export default function YoutubeReact() {
   const [videoIds] = useState([
@@ -22,7 +54,7 @@ export default function YoutubeReact() {
   ]);
   const [currentVideoIdx, setCurrentVideoIdx] = useState(1);
   const [player, setPlayer] = useState(null);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const theme = useTheme();
 
   const onReady = useCallback(
@@ -72,72 +104,82 @@ export default function YoutubeReact() {
 
   return (
     <>
-      <Typography textAlign={"center"}>
-        <Button
-          size="medium"
-          variant="contained"
-          sx={{ mb: 3, mt: 3 }}
-          color="warning"
-          onClick={() => setShow((show) => !show)}
-        >
-          {show ? "Study Without Lo-Fi Radio" : "Study with Lo-Fi Radio"}
-        </Button>
-      </Typography>
-      {show ? (
-        <Card sx={{ display: "flex", p:2, mb: 2 }}>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <CardContent sx={{ flex: "1 0 auto" }}>
-              <Typography
-                component="div"
-                variant="h5"
-              >
-                {cardDescription[currentVideoIdx][0]}
-              </Typography>
-              <Typography
-                variant="subtitle1"
-                color="text.secondary"
-                component="div"
-              >
-                by: {cardDescription[currentVideoIdx][1]}
-              </Typography>
-            </CardContent>
-            <YouTube
-              videoId={videoIds[currentVideoIdx]}
-              opts={opts}
-              onReady={onReady}
-              onEnd={onEnd}
-            />
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                mx: "auto",
-              }}
+      <CardWrapper
+        border={false}
+        content={true}
+      >
+        <Box sx={{ p: 2 }}>
+          <List sx={{ py: 0 }}>
+            <ListItem
+              alignItems="center"
+              disableGutters
+              sx={{ py: 0 }}
             >
-              <IconButton
-                aria-label="previous"
-                onClick={handleBack}
-              >
-                {theme.direction === "rtl" ? (
-                  <SkipNextIcon />
-                ) : (
-                  <SkipPreviousIcon />
-                )}
-              </IconButton>
-              <IconButton
-                aria-label="next"
-                onClick={handleForward}
-              >
-                {theme.direction === "rtl" ? (
-                  <SkipPreviousIcon />
-                ) : (
-                  <SkipNextIcon />
-                )}
-              </IconButton>
-            </Box>
-          </Box>
-        </Card>
-      ) : null}
+              <ListItemText
+                sx={{
+                  py: 0,
+                  mt: 0.45,
+                  mb: 0.45,
+                }}
+                primary={
+                  <Typography
+                    variant="h6"
+                    sx={{ color: "#fff" }}
+                  >
+                    <i>{cardDescription[currentVideoIdx][0]}</i>
+                  </Typography>
+                }
+                secondary={
+                  <Typography
+                    variant="subtitle2"
+                    sx={{ color: "#fff", mt: 0.25 }}
+                  >
+                    by: {cardDescription[currentVideoIdx][1]}
+                  </Typography>
+                }
+              />
+            </ListItem>
+          </List>
+        </Box>
+        <Box sx={{m:-2}}>
+          <YouTube
+            videoId={videoIds[currentVideoIdx]}
+            opts={opts}
+            onReady={onReady}
+            onEnd={onEnd}
+          />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            mx: "auto",
+          }}
+        >
+          <IconButton
+            aria-label="previous"
+            onClick={handleBack}
+            sx={{ color: "#fff" }}
+          >
+            {theme.direction === "rtl" ? (
+              <SkipNextIcon />
+            ) : (
+              <SkipPreviousIcon />
+            )}
+          </IconButton>
+          <IconButton
+            aria-label="next"
+            onClick={handleForward}
+            sx={{ color: "#fff" }}
+          >
+            {theme.direction === "rtl" ? (
+              <SkipPreviousIcon />
+            ) : (
+              <SkipNextIcon />
+            )}
+          </IconButton>
+        </Box>
+      </CardWrapper>
     </>
   );
 }

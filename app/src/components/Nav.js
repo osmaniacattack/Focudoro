@@ -15,7 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import LoginIcon from "@mui/icons-material/Login";
 import AboutDialog from "./AboutDialog";
 
-const settings = ['Profile', 'Logout'];
+const settings = ['Profile', 'Settings', 'Logout'];
 
 
 export default function Nav() {
@@ -125,13 +125,13 @@ export default function Nav() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                Tasks
+                Feedback
               </Button>
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                Settings
+                Privacy
               </Button>
           </Box>
 
