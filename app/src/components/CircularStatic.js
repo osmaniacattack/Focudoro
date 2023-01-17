@@ -12,11 +12,12 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 function CircularProgressWithLabel(props) {
   return (
     <>
-      <Box sx={{ position: "relative", display: "inline-flex"}}>
+    <Typography textAlign={"center"} width="100%">
+      <Box sx={{ position: "relative", display: "inline-flex", m:3}}>
         <CircularProgress
           size="20rem"
           thickness="1"
-          sx={{ color: "#2D728F" }}
+          color="info"
           variant="determinate"
           value={props.value}
         />
@@ -41,9 +42,10 @@ function CircularProgressWithLabel(props) {
           </Typography>
         </Box>
       </Box>
+      </Typography>
       <Grid
         container
-        sx={{mt:4}}
+        sx={{mt:1}}
       >
         <Grid
           item
@@ -89,7 +91,7 @@ function CircularProgressWithLabel(props) {
       </Grid>
       <Grid
         container
-        sx={{ mt: 5 }}
+        sx={{ mt: 2 }}
       >
         <Grid
           item
@@ -99,7 +101,7 @@ function CircularProgressWithLabel(props) {
             fullWidth
             variant="text"
             onClick={props.focus}
-            sx={{color:"#2D728F"}}
+            color="info"
           >
             Focus
           </Button>
@@ -112,7 +114,7 @@ function CircularProgressWithLabel(props) {
             fullWidth
             variant="text"
             onClick={props.short}
-            sx={{color:"#2D728F"}}
+            color="info"
           >
             Short Break
           </Button>
@@ -125,7 +127,7 @@ function CircularProgressWithLabel(props) {
             fullWidth
             variant="text"
             onClick={props.long}
-            sx={{color:"#2D728F"}}
+            color="info"
           >
             Long Break
           </Button>
