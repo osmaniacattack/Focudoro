@@ -65,25 +65,26 @@ export default function YoutubeReact() {
       `jazz/lofi hip hop radio🌱chill beats to relax/study to [LIVE 24/7]`,
       "Abao in Tokyo",
     ],
-    ["coffee shop radio // 24/7 lofi hip-hop beats", "STEEZYASFUCK"],
+    ["coffee shop radio // 24/7 lofi hip-hop beats", "STEEZYASF*CK"],
     ["lofi hip hop radio - beats to study/relax to 🐾", "Chillhop Music"],
     ["24/7 Korean Underground Indie/R&B/Hip-hop Radio", "Mellowbeat Seeker"],
   ];
 
   return (
     <>
-      <Button
-        size="medium"
-        variant="contained"
-        sx={{ m: 1, mb: "10vh" }}
-        fullWidth
-        color="warning"
-        onClick={() => setShow((show) => !show)}
-      >
-        {show ? "Study Without Lo-Fi Radio" : "Study with Lo-Fi Radio"}
-      </Button>
+      <Typography textAlign={"center"}>
+        <Button
+          size="medium"
+          variant="contained"
+          sx={{ mb: 3, mt: 3 }}
+          color="warning"
+          onClick={() => setShow((show) => !show)}
+        >
+          {show ? "Study Without Lo-Fi Radio" : "Study with Lo-Fi Radio"}
+        </Button>
+      </Typography>
       {show ? (
-        <Card sx={{ display: "flex" }}>
+        <Card sx={{ display: "flex", p:2, mb: 2 }}>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <CardContent sx={{ flex: "1 0 auto" }}>
               <Typography
@@ -110,9 +111,7 @@ export default function YoutubeReact() {
               sx={{
                 display: "flex",
                 alignItems: "center",
-                m: "auto",
-                pl: 1,
-                pb: 1,
+                mx: "auto",
               }}
             >
               <IconButton
