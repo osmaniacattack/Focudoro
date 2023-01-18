@@ -39,7 +39,7 @@ function App() {
           <Grid
             item
             xs={10}
-            lg={8}
+            lg={7}
             sx={{
               "@media (min-width: 300px)": {
                 marginTop: "2.5vh",
@@ -61,7 +61,7 @@ function App() {
           <Grid
             item
             xs={10}
-            lg={2}
+            lg={3}
           >
             <Paper
               elevation={8}
@@ -69,7 +69,6 @@ function App() {
                 bgcolor: "#fff",
                 height: "100%",
                 width: "100%",
-                borderRadius: "15px",
               }}
             >
               <Tasks />
