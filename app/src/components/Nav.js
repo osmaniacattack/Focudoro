@@ -90,8 +90,12 @@ export default function Nav() {
                   <Typography textAlign="center"><AboutDialog/></Typography>
                 </MenuItem>
                 <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">Tasks</Typography>
+                  <Typography textAlign="center">Feedback</Typography>
                 </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">Privacy</Typography>
+                </MenuItem>
+                
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">Settings</Typography>
                 </MenuItem>
@@ -133,9 +137,15 @@ export default function Nav() {
               >
                 Privacy
               </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                Settings
+              </Button>
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="User Profile" />
@@ -163,7 +173,7 @@ export default function Nav() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box> */}
         </Toolbar>
       </Container>
     </AppBar>
