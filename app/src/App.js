@@ -8,19 +8,22 @@ import {
   PomoCounter,
   LofiCard,
 } from "./components/index";
-import { Grid, Paper, Typography } from "@mui/material";
-import React from "react";
+import { Grid, Paper } from "@mui/material";
+import React, {useState, createContext} from "react";
+
+export const PomoContext = createContext();
 
 function App() {
+  const [pomoCount, setPomoCount] = useState(0);
   return (
-    <>
+    <PomoContext.Provider value={[pomoCount, setPomoCount]}>
       <Paper
         sx={{
           bgcolor: "#E3F2FD",
           height: "100vh",
           width: "100%",
-          '@media (max-width: 1199px)': {
-            height: "100%"
+          "@media (max-width: 1199px)": {
+            height: "100%",
           },
         }}
         elevation={4}
@@ -109,7 +112,7 @@ function App() {
         </Grid>
         <Footer />
       </Paper>
-    </>
+    </PomoContext.Provider>
   );
 }
 

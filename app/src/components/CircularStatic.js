@@ -1,5 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
@@ -8,6 +7,7 @@ import { Button, Grid } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import StopIcon from "@mui/icons-material/Stop";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import { PomoContext } from "../App";
 
 function CircularProgressWithLabel(props) {
   return (
@@ -105,6 +105,7 @@ function CircularProgressWithLabel(props) {
             variant="text"
             onClick={props.focus}
             color="info"
+            disabled = {props.type === "focus"}
           >
             Focus
           </Button>
@@ -118,6 +119,7 @@ function CircularProgressWithLabel(props) {
             variant="text"
             onClick={props.short}
             color="info"
+            disabled = {props.type === "short"}
           >
             Short Break
           </Button>
@@ -131,6 +133,7 @@ function CircularProgressWithLabel(props) {
             variant="text"
             onClick={props.long}
             color="info"
+            disabled = {props.type === "long"}
           >
             Long Break
           </Button>
@@ -154,6 +157,15 @@ export default function CircularStatic() {
   const [isRunning, setIsRunning] = useState(false);
   const [type, setType] = useState("focus");
   const [intervalId, setIntervalId] = useState(null);
+  const [pomoCount, setPomoCount] = useContext(PomoContext);
+
+  useEffect(() => {
+    if (timeLeft === 0 && type === "focus"){
+      setPomoCount(pomoCount + 1);
+      resetTimer();
+      setIsRunning(false);
+    }
+  },[timeLeft, type])
 
   const handleFocus = () => {
     setType("focus");
@@ -182,7 +194,7 @@ export default function CircularStatic() {
       setInterval(() => {
         setTimeLeft((timeLeft) => {
           if (timeLeft === 0) {
-            resetTimer();
+            handleStop();
             return 0;
           }
           return timeLeft - 1;
@@ -248,6 +260,7 @@ export default function CircularStatic() {
       stop={handleStop}
       reset={resetTimer}
       isRunning={isRunning}
+      type={type}
     />
   );
 }
