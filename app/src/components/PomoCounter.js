@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useTheme, styled } from "@mui/material/styles";
 import {
   Avatar,
@@ -10,6 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import MainCard from "./MainCard";
+import { PomoContext } from "../App";
 
 // styles
 const CardWrapper = styled(MainCard)(({ theme }) => ({
@@ -39,7 +40,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 export default function PomoCounter() {
   const theme = useTheme();
-
+  const pomoCount = useContext(PomoContext);
   return (
     <CardWrapper
       border={false}
@@ -58,7 +59,7 @@ export default function PomoCounter() {
                 mt: 0.45,
                 mb: 0.45,
               }}
-              primary={<Typography variant="h4">3</Typography>}
+              primary={<Typography variant="h4">{pomoCount}</Typography>}
               secondary={
                 <Typography
                   variant="subtitle2"
@@ -67,7 +68,7 @@ export default function PomoCounter() {
                     mt: 0.5,
                   }}
                 >
-                  Total Pomodoros
+                  {`Total Pomodoro(s) this session`}
                 </Typography>
               }
             />
