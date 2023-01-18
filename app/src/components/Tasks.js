@@ -24,8 +24,10 @@ import AddIcon from "@mui/icons-material/Add"; // install axios
 import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function Tasks() {
-  const [tasks, setTasks] = useState([
-  ]);
+  const LOCAL_STORAGE_KEY = "tasks";
+  const LOCAL_STORAGE_KEY_C = "completedTasks";
+
+  const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [open, setOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
@@ -48,9 +50,33 @@ export default function Tasks() {
     setTasks(newTasks);
   };
 
+  useEffect(() => {
+    const storedTasks = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (storedTasks) {
+        setTasks(JSON.parse(storedTasks));
+    }
+    const storedCompletedTasks = localStorage.getItem(LOCAL_STORAGE_KEY_C);
+    if (storedCompletedTasks) {
+        setCompletedTasks(JSON.parse(storedCompletedTasks));
+    }
+}, []);
+
+useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
+    localStorage.setItem(LOCAL_STORAGE_KEY_C, JSON.stringify(completedTasks));
+}, [tasks, completedTasks]);
+
   return (
     <>
-      <Card sx={{ pb: 2, mt: 2, maxHeight: "470px", overflowY: "scroll" }}>
+      <Card
+        sx={{
+          pb: 2,
+          mt: 2,
+          minHeight: "470px",
+          maxHeight: "470px",
+          overflowY: "scroll",
+        }}
+      >
         <CardContent>
           <Grid
             container
@@ -64,7 +90,7 @@ export default function Tasks() {
                 container
                 alignContent="center"
                 justifyContent="space-between"
-                sx={{m:1}}
+                sx={{ m: 1 }}
               >
                 <Grid
                   item
@@ -82,7 +108,7 @@ export default function Tasks() {
                   xs={3}
                 >
                   <Button
-                    sx={{ height: 20, p:2 }}
+                    sx={{ height: 20, p: 2 }}
                     size="small"
                     variant="contained"
                     color="primary"
@@ -96,11 +122,12 @@ export default function Tasks() {
                   xs={3}
                 >
                   <Button
-                    sx={{ height: 20, p:2 }}
+                    sx={{ height: 20, p: 2 }}
                     size="small"
                     variant="outlined"
                     color="primary"
                     onClick={() => setDeleteOpen(true)}
+                    disabled = {tasks.length === 0}
                   >
                     <DeleteIcon />
                   </Button>
