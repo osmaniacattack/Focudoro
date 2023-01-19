@@ -10,8 +10,9 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AboutDialog from "./AboutDialog";
+import PrivacyPolicyDialog from "./PrivacyPolicyDialog";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { GoogleOAuthProvider} from "@react-oauth/google";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import { UserContext } from "../App";
@@ -94,7 +95,9 @@ export default function Nav() {
                 <Typography textAlign="center">Feedback</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Privacy</Typography>
+                <Typography textAlign="center">
+                  <PrivacyPolicyDialog />
+                </Typography>
               </MenuItem>
               {Object.keys(user).length > 0 ? (
                 <MenuItem onClick={handleCloseNavMenu}>
@@ -163,7 +166,7 @@ export default function Nav() {
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              Privacy
+              <PrivacyPolicyDialog />
             </Button>
             {Object.keys(user).length > 0 ? (
               <Button
