@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Avatar,
   Button,
@@ -20,8 +20,9 @@ import {
   Checkbox,
   IconButton,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add"; // install axios
+import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { UserContext } from "../App";
 
 export default function Tasks() {
   const LOCAL_STORAGE_KEY = "tasks";
@@ -33,6 +34,8 @@ export default function Tasks() {
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [deleteIndex, setDeleteIndex] = useState(0);
+  const [user] = useContext(UserContext);
+
 
   const handleCheckboxChange = (index) => {
     const newCompletedTasks = [...completedTasks];
@@ -100,7 +103,7 @@ useEffect(() => {
                     variant="h6"
                     color="primary"
                   >
-                    My Tasks
+                    {`${user.given_name}'s `} Tasks
                   </Typography>
                 </Grid>
                 <Grid

@@ -8,115 +8,126 @@ import {
   PomoCounter,
   LofiCard,
 } from "./components/index";
-import { Grid, Paper } from "@mui/material";
-import React, {useState, createContext} from "react";
+import { Grid, Paper, Button, Typography, Container } from "@mui/material";
+import { GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
+import React, { useState, createContext, useEffect } from "react";
+import { GoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 export const PomoContext = createContext();
+export const UserContext = createContext();
 
 function App() {
   const [pomoCount, setPomoCount] = useState(0);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   return (
-    <PomoContext.Provider value={[pomoCount, setPomoCount]}>
-      <Paper
-        sx={{
-          bgcolor: "#E3F2FD",
-          height: "100vh",
-          width: "100%",
-          "@media (max-width: 1199px)": {
-            height: "100%",
-          },
-        }}
-        elevation={4}
-      >
-        <Nav />
-        <Grid
-          container
-          spacing={2}
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
+    <UserContext.Provider value={[user, setUser]}>
+      <PomoContext.Provider value={[pomoCount, setPomoCount]}>
+        <Paper
+          sx={{
+            bgcolor: "#E3F2FD",
+            height: "100vh",
+            width: "100%",
+            "@media (max-width: 1199px)": {
+              height: "100%",
+            },
+          }}
+          elevation={4}
         >
-          <Grid
-            item
-            xs={10}
-            lg={7}
-            sx={{
-              "@media (min-width: 300px)": {
-                marginTop: "2.5vh",
-              },
-            }}
-          >
-            <Paper
-              elevation={8}
-              sx={{
-                bgcolor: "#fff",
-                height: "100%",
-                width: "100%",
-                borderRadius: "15px",
-              }}
+          <Nav />
+          {Object.keys(user).length === 0 ? null : (
+            <Grid
+              container
+              spacing={2}
+              direction="row"
+              alignItems="center"
+              justifyContent="center"
             >
-              <Timer />
-            </Paper>
-          </Grid>
-          <Grid
-            item
-            xs={10}
-            lg={3}
-          >
-            <Paper
-              elevation={8}
-              sx={{
-                bgcolor: "#fff",
-                height: "100%",
-                width: "100%",
-              }}
-            >
-              <Tasks />
-            </Paper>
-          </Grid>
-          <Grid
-            item
-            xs={10}
-            lg={5}
-          >
-            <Paper
-              elevation={8}
-              sx={{
-                bgcolor: "#fff",
-                height: "100%",
-                width: "100%",
-                borderRadius: "15px",
-              }}
-            >
-              <PomoCounter />
-            </Paper>
-          </Grid>
-          <Grid
-            item
-            xs={10}
-            lg={5}
-          >
-            <Paper
-              elevation={8}
-              sx={{
-                bgcolor: "#fff",
-                height: "100%",
-                width: "100%",
-                borderRadius: "15px",
-              }}
-            >
-              <YoutubeReact />
-            </Paper>
-          </Grid>
-        </Grid>
-        <Footer />
-      </Paper>
-    </PomoContext.Provider>
+              <Grid
+                item
+                xs={10}
+                lg={7}
+                sx={{
+                  "@media (min-width: 300px)": {
+                    marginTop: "2.5vh",
+                  },
+                }}
+              >
+                <Paper
+                  elevation={8}
+                  sx={{
+                    bgcolor: "#fff",
+                    height: "100%",
+                    width: "100%",
+                    borderRadius: "15px",
+                  }}
+                >
+                  <Timer />
+                </Paper>
+              </Grid>
+              <Grid
+                item
+                xs={10}
+                lg={3}
+              >
+                <Paper
+                  elevation={8}
+                  sx={{
+                    bgcolor: "#fff",
+                    height: "100%",
+                    width: "100%",
+                  }}
+                >
+                  <Tasks />
+                </Paper>
+              </Grid>
+              <Grid
+                item
+                xs={10}
+                lg={5}
+              >
+                <Paper
+                  elevation={8}
+                  sx={{
+                    bgcolor: "#fff",
+                    height: "100%",
+                    width: "100%",
+                    borderRadius: "15px",
+                  }}
+                >
+                  <PomoCounter />
+                </Paper>
+              </Grid>
+              <Grid
+                item
+                xs={10}
+                lg={5}
+              >
+                <Paper
+                  elevation={8}
+                  sx={{
+                    bgcolor: "#fff",
+                    height: "100%",
+                    width: "100%",
+                    borderRadius: "15px",
+                  }}
+                >
+                  <YoutubeReact />
+                </Paper>
+              </Grid>
+            </Grid>
+          )}
+          <Footer />
+        </Paper>
+      </PomoContext.Provider>
+    </UserContext.Provider>
   );
 }
 
 export default App;
-
-{
-  /* <YoutubeReact /> */
-}
