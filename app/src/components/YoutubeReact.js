@@ -57,7 +57,7 @@ export default function YoutubeReact() {
   ]);
   const [currentVideoIdx, setCurrentVideoIdx] = useState(1);
   const [player, setPlayer] = useState(null);
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const theme = useTheme();
 
   const onReady = useCallback(
