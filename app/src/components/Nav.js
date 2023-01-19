@@ -7,19 +7,14 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AboutDialog from "./AboutDialog";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { GoogleOAuthProvider, useGoogleLogin } from "@react-oauth/google";
+import { GoogleOAuthProvider} from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
-import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { UserContext } from "../App";
-import { Tooltip } from "@mui/material";
-
-const settings = ["one", "two", "three"];
 
 export default function Nav() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
