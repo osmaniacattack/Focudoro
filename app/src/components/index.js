@@ -4,6 +4,8 @@ export { default as FAQ } from "./FAQ";
 export { default as AboutDialog } from "./AboutDialog";
 export { default as Policy } from "./Policy";
 export { default as PrivacyPolicyDialog } from "./PrivacyPolicyDialog";
+export { default as Settings } from "./Settings";
+export { default as SettingsDialog } from "./SettingsDialog";
 export { default as YoutubeReact } from "./YoutubeReact";
 export { default as Tasks } from "./Tasks";
 export { default as PomoCounter } from "./PomoCounter";

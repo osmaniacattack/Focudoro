@@ -8,6 +8,10 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import StopIcon from "@mui/icons-material/Stop";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { PomoContext } from "../App";
+import clockalarm from '../assets/clockalarm.mp3';
+import ffseven from '../assets/ffseven.mp3';
+import digital from '../assets/digital.mp3';
+import { AudioContext } from "../App";
 
 function CircularProgressWithLabel(props) {
   return (
@@ -153,14 +157,29 @@ CircularProgressWithLabel.propTypes = {
 };
 
 export default function CircularStatic() {
-  const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 minutes in seconds
+  const manualAlarm = new Audio(clockalarm);
+  const fanfareAlarm = new Audio(ffseven);
+  const digitalAlarm = new Audio(digital);
+  const [timeLeft, setTimeLeft] = useState(5); // 25 minutes in seconds
   const [isRunning, setIsRunning] = useState(false);
   const [type, setType] = useState("focus");
   const [intervalId, setIntervalId] = useState(null);
   const [pomoCount, setPomoCount] = useContext(PomoContext);
+  const [audio, setAudio] = useContext(AudioContext);
 
   useEffect(() => {
     if (timeLeft === 0 && type === "focus"){
+      switch(audio){
+        case "vintage":
+          manualAlarm.play();
+          break;
+        case "digital":
+          digitalAlarm.play();
+          break;
+        case "victory":
+          fanfareAlarm.play();
+          break;
+      }
       setPomoCount(pomoCount + 1);
       resetTimer();
       setIsRunning(false);

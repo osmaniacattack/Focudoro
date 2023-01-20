@@ -1,9 +1,5 @@
 import * as React from "react";
-import { Typography, Grid, List, ListItem, ListItemText } from "@mui/material";
-import Question from "../assets/question.png";
-import Clock from "../assets/clock.png";
-import Research from "../assets/research.png";
-import Music from "../assets/music.png";
+import { Typography, Grid} from "@mui/material";
 
 export default function Policy() {
   return (

@@ -11,11 +11,12 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AboutDialog from "./AboutDialog";
 import PrivacyPolicyDialog from "./PrivacyPolicyDialog";
+import SettingsDialog from "./SettingsDialog";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
 import { UserContext } from "../App";
+import jwt_decode from "jwt-decode";
 
 export default function Nav() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -101,7 +102,7 @@ export default function Nav() {
               </MenuItem>
               {Object.keys(user).length > 0 ? (
                 <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">Settings</Typography>
+                  <Typography textAlign="center"><SettingsDialog/></Typography>
                 </MenuItem>
               ) : null}
               {Object.keys(user).length > 0 ? (
@@ -173,7 +174,7 @@ export default function Nav() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                Settings
+                <SettingsDialog/>
               </Button>
             ) : null}
           </Box>

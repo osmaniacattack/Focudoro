@@ -33,7 +33,7 @@ export default function FAQ() {
           textAlign={"center"}
           color="#2D728F"
         >
-          What is Pomodoro?
+          What is Focudoro?
         </Typography>
         <Typography textAlign={"center"} sx={{m:-1}}>
           <img
@@ -48,9 +48,9 @@ export default function FAQ() {
           color="#2D728F"
           sx={{ m: 2 }}
         >
-          The Pomodoro™ Technique is a time management method developed by
+          Focudoro is a web app designed to help you focus and accomplish your goals. It is inspired by the Pomodoro™ Technique, a time management method developed by
           Francesco Cirillo in the late 1980s. This technique uses a timer to
-          break down works into a set of intervals separated by breaks. Pomodoro
+          break down works into a set of intervals separated by breaks. The Pomodoro
           technique increases productivity by taking short scheduled breaks
           regularly.
         </Typography>
@@ -152,7 +152,7 @@ export default function FAQ() {
         >
           In addition to the Pomodoro timer, you can <u>add your own tasks</u> and it
           will be saved with the Google account you login with. Furthermore,
-          this web app currently syncs up to <u>five different live lo-fi
+          this web app currently syncs up to <u>six different live lo-fi
           streams on YouTube</u> for your convenience! Respectively, they are:
           <ul>
             {cardDescription.map((card, index) => {

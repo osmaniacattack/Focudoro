@@ -17,10 +17,12 @@ import jwt_decode from "jwt-decode";
 
 export const PomoContext = createContext();
 export const UserContext = createContext();
+export const AudioContext = createContext();
 
 function App() {
   const [pomoCount, setPomoCount] = useState(0);
   const [user, setUser] = useState({});
+  const [audio, setAudio] = useState("vintage");
 
   useEffect(() => {
     console.log(user);
@@ -29,6 +31,7 @@ function App() {
   return (
     <UserContext.Provider value={[user, setUser]}>
       <PomoContext.Provider value={[pomoCount, setPomoCount]}>
+        <AudioContext.Provider value={[audio, setAudio]}>
         <Paper
           sx={{
             bgcolor: "#E3F2FD",
@@ -37,6 +40,12 @@ function App() {
             "@media (max-width: 1199px)": {
               height: "100%",
             },
+            "@media (max-height: 1199px)":{
+              height: "100vh"
+            },
+            "@media (min-height: 1200px)":{
+              height: "100vh"
+            }
           }}
           elevation={4}
         >
@@ -48,6 +57,7 @@ function App() {
               direction="row"
               alignItems="center"
               justifyContent="center"
+              sx={{bgColor:"#E3F2FD"}}
             >
               <Grid
                 item
@@ -125,6 +135,7 @@ function App() {
           )}
           <Footer />
         </Paper>
+        </AudioContext.Provider>
       </PomoContext.Provider>
     </UserContext.Provider>
   );
