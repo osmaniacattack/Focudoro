@@ -25,9 +25,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { UserContext } from "../App";
 
 export default function Tasks() {
-  const LOCAL_STORAGE_KEY = "tasks";
-  const LOCAL_STORAGE_KEY_C = "completedTasks";
-
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [open, setOpen] = useState(false);
@@ -35,6 +32,29 @@ export default function Tasks() {
   const [completedTasks, setCompletedTasks] = useState([]);
   const [deleteIndex, setDeleteIndex] = useState(0);
   const [user] = useContext(UserContext);
+
+  const localTasks = JSON.parse(localStorage.getItem('tasks'));
+  const localCompleted = JSON.parse(localStorage.getItem('completed'));
+
+  useEffect(() => {
+    if (localTasks){
+      setTasks(localTasks);
+    }
+    if (completedTasks){
+      setCompletedTasks(localCompleted);
+    }
+  },[])
+
+  useEffect(() => {
+    if (localTasks){
+      localStorage.removeItem('tasks');
+    }
+    if (localCompleted){
+      localStorage.removeItem('completed');
+    }
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    localStorage.setItem('completed', JSON.stringify(completedTasks));
+  },[tasks, completedTasks])
 
 
   const handleCheckboxChange = (index) => {
@@ -52,22 +72,6 @@ export default function Tasks() {
     newTasks.splice(index, 1);
     setTasks(newTasks);
   };
-
-  useEffect(() => {
-    const storedTasks = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (storedTasks) {
-        setTasks(JSON.parse(storedTasks));
-    }
-    const storedCompletedTasks = localStorage.getItem(LOCAL_STORAGE_KEY_C);
-    if (storedCompletedTasks) {
-        setCompletedTasks(JSON.parse(storedCompletedTasks));
-    }
-}, []);
-
-useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tasks));
-    localStorage.setItem(LOCAL_STORAGE_KEY_C, JSON.stringify(completedTasks));
-}, [tasks, completedTasks]);
 
   return (
     <>

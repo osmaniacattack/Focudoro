@@ -22,16 +22,26 @@ function App() {
   const [audio, setAudio] = useState("vintage");
   const [studyTime, setStudyTime] = useState(25);
   let localUser = JSON.parse(localStorage.getItem('user'));
+  let localPomoCount = JSON.parse(localStorage.getItem('pomoCounts'));
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]);
 
   useEffect(() => {
     if (localUser){
+      if(localUser.exp < Date.now()/1000){
+        localStorage.removeItem('user');
+      }
       setUser(localUser);
     }
-  },[])
+  },[]);
+
+  useEffect(() => {
+    if (localPomoCount){
+      setPomoCount(localPomoCount)
+    }
+  }, []);
 
   return (
     <UserContext.Provider value={[user, setUser]}>

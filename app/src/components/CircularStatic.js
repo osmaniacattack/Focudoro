@@ -167,6 +167,14 @@ export default function CircularStatic() {
   const [audio] = useContext(AudioContext);
   const [studyTime] = useContext(StudyContext);
 
+  const checkPomoCounts = () => {
+    const pomoCounts = JSON.parse(localStorage.getItem("pomoCounts"));
+    if (pomoCounts) {
+      localStorage.removeItem("pomoCounts");
+    }
+    localStorage.setItem("pomoCounts", JSON.stringify(pomoCount));
+  };
+
   useEffect(() => {
     if (timeLeft === 0 && (type === "focus" || type === "custom")) {
       switch (audio) {
@@ -181,6 +189,7 @@ export default function CircularStatic() {
           break;
       }
       setPomoCount(pomoCount + 1);
+      checkPomoCounts();
       resetTimer();
       setIsRunning(false);
     }
