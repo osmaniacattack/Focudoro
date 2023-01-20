@@ -7,11 +7,10 @@ import { Button, Grid } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import StopIcon from "@mui/icons-material/Stop";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
-import { PomoContext } from "../App";
+import { PomoContext, StudyContext, AudioContext } from "../App";
 import clockalarm from '../assets/clockalarm.mp3';
 import ffseven from '../assets/ffseven.mp3';
 import digital from '../assets/digital.mp3';
-import { AudioContext } from "../App";
 
 function CircularProgressWithLabel(props) {
   return (
@@ -160,12 +159,13 @@ export default function CircularStatic() {
   const manualAlarm = new Audio(clockalarm);
   const fanfareAlarm = new Audio(ffseven);
   const digitalAlarm = new Audio(digital);
-  const [timeLeft, setTimeLeft] = useState(5); // 25 minutes in seconds
+  const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 minutes in seconds
   const [isRunning, setIsRunning] = useState(false);
   const [type, setType] = useState("focus");
   const [intervalId, setIntervalId] = useState(null);
   const [pomoCount, setPomoCount] = useContext(PomoContext);
-  const [audio, setAudio] = useContext(AudioContext);
+  const [audio] = useContext(AudioContext);
+  const [studyTime] = useContext(StudyContext);
 
   useEffect(() => {
     if (timeLeft === 0 && type === "focus"){
@@ -186,9 +186,15 @@ export default function CircularStatic() {
     }
   },[timeLeft, type])
 
+  useEffect(() => {
+    setTimeLeft(studyTime * 60);
+    setType("custom");
+    console.log(type);
+  }, [studyTime])
+
   const handleFocus = () => {
     setType("focus");
-    setTimeLeft(25 * 60); // 25 minutes in seconds
+    setTimeLeft(studyTime * 60); // 25 minutes in seconds
   };
 
   const handleShortBreak = () => {
@@ -235,6 +241,9 @@ export default function CircularStatic() {
       case "long":
         setTimeLeft(15 * 60);
         break;
+      case "custom":
+        setTimeLeft(studyTime * 60);
+        break;
       default:
         setTimeLeft(25 * 60);
         break;
@@ -255,6 +264,9 @@ export default function CircularStatic() {
         break;
       case "long":
         duration = 15 * 60;
+        break;
+      case "custom":
+        duration = studyTime * 60;
         break;
       default:
         duration = 25 * 60;

@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import {
   Typography,
   Container,
@@ -15,9 +15,12 @@ import Clock from "../assets/clock.png";
 import Research from "../assets/research.png";
 import Music from "../assets/music.png";
 import { AudioContext } from "../App";
+import { StudyContext } from "../App";
 
 export default function Settings() {
   const [alarm, setAlarm] = useContext(AudioContext);
+  const [studyTime, setStudyTime] = useContext(StudyContext);
+
   return (
     <Container>
       <Typography
@@ -28,20 +31,58 @@ export default function Settings() {
       >
         Settings
       </Typography>
-      <Divider/>
+      <Divider />
+      <Typography
+        sx={{ m: 1 }}
+        variant="h6"
+        fontWeight={400}
+        color="gray"
+        textAlign={"left"}
+      >
+        Alarm Sounds
+      </Typography>
       <TextField
         fullWidth
         select
         value={alarm}
         onChange={(e) => setAlarm(e.target.value)}
-        sx={{mt:3}}
+        sx={{ mt: 1 }}
         label="Alarm Sound"
       >
         <MenuItem value="vintage">Vintage Alarm</MenuItem>
         <MenuItem value="digital">Digital Alarm</MenuItem>
         <MenuItem value="victory">Victory Fanfare</MenuItem>
       </TextField>
-      <Divider/>
+      <Divider sx={{ m: 2 }} />
+      <Typography
+        sx={{ m: 1 }}
+        variant="h6"
+        fontWeight={400}
+        color="gray"
+        textAlign={"left"}
+      >
+        Timer Duration in Minutes
+      </Typography>
+      <Grid
+        container
+        spacing={1}
+      >
+        <Grid
+          item
+          xs={12}
+        >
+          <TextField
+            fullWidth
+            value={studyTime}
+            type="number"
+            sx={{ mt: 3 }}
+            label="Study Timer"
+            onChange={(e) => setStudyTime(e.target.value)}
+          />
+        </Grid>
+
+      </Grid>
+      <Divider sx={{ m: 2 }} />
     </Container>
   );
 }
