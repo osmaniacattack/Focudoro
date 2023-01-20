@@ -21,10 +21,17 @@ function App() {
   const [user, setUser] = useState({});
   const [audio, setAudio] = useState("vintage");
   const [studyTime, setStudyTime] = useState(25);
+  let localUser = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
     console.log(user);
   }, [user]);
+
+  useEffect(() => {
+    if (localUser){
+      setUser(localUser);
+    }
+  },[])
 
   return (
     <UserContext.Provider value={[user, setUser]}>

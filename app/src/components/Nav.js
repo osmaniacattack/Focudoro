@@ -23,6 +23,11 @@ export default function Nav() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [user, setUser] = useContext(UserContext);
 
+  const handleSignOut = () => {
+    localStorage.removeItem('user');
+    setUser({});
+  }
+
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -106,7 +111,7 @@ export default function Nav() {
                 </MenuItem>
               ) : null}
               {Object.keys(user).length > 0 ? (
-                <MenuItem onClick={() => setUser({})}>
+                <MenuItem onClick={handleSignOut}>
                   <Typography textAlign="center">Log Out</Typography>
                 </MenuItem>
               ) : null}
@@ -117,10 +122,12 @@ export default function Nav() {
                       shape="pill"
                       onSuccess={async (credentialResponse) => {
                         try {
+                          console.log(credentialResponse)
                           let userObject = jwt_decode(
                             credentialResponse.credential
                           );
                           setUser(userObject);
+                          localStorage.setItem('user', JSON.stringify(userObject));
                         } catch (err) {
                           console.log(err);
                         }
@@ -190,6 +197,7 @@ export default function Nav() {
                         credentialResponse.credential
                       );
                       setUser(userObject);
+                      localStorage.setItem('user', JSON.stringify(userObject));
                     } catch (err) {
                       console.log(err);
                     }
@@ -202,7 +210,7 @@ export default function Nav() {
             ) : (
               <Button
                 sx={{ color: "#fff", height: "10" }}
-                onClick={() => setUser({})}
+                onClick={handleSignOut}
               >
                 <LogoutIcon />
               </Button>

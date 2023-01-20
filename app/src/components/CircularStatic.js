@@ -8,9 +8,9 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import StopIcon from "@mui/icons-material/Stop";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { PomoContext, StudyContext, AudioContext } from "../App";
-import clockalarm from '../assets/clockalarm.mp3';
-import ffseven from '../assets/ffseven.mp3';
-import digital from '../assets/digital.mp3';
+import clockalarm from "../assets/clockalarm.mp3";
+import ffseven from "../assets/ffseven.mp3";
+import digital from "../assets/digital.mp3";
 
 function CircularProgressWithLabel(props) {
   return (
@@ -19,7 +19,7 @@ function CircularProgressWithLabel(props) {
         textAlign={"center"}
         width="100%"
       >
-        <Box sx={{ position: "relative", display: "inline-flex", mt:3}}>
+        <Box sx={{ position: "relative", display: "inline-flex", mt: 3 }}>
           <CircularProgress
             size="20rem"
             thickness="1"
@@ -51,7 +51,7 @@ function CircularProgressWithLabel(props) {
       </Typography>
       <Grid
         container
-        sx={{p:2 }}
+        sx={{ p: 2 }}
       >
         <Grid
           item
@@ -97,7 +97,7 @@ function CircularProgressWithLabel(props) {
       </Grid>
       <Grid
         container
-        sx={{p:2 }}
+        sx={{ p: 2 }}
       >
         <Grid
           item
@@ -108,7 +108,7 @@ function CircularProgressWithLabel(props) {
             variant="text"
             onClick={props.focus}
             color="info"
-            disabled = {props.type === "focus"}
+            disabled={props.type === "focus"}
           >
             Focus
           </Button>
@@ -122,7 +122,7 @@ function CircularProgressWithLabel(props) {
             variant="text"
             onClick={props.short}
             color="info"
-            disabled = {props.type === "short"}
+            disabled={props.type === "short"}
           >
             Short Break
           </Button>
@@ -136,7 +136,7 @@ function CircularProgressWithLabel(props) {
             variant="text"
             onClick={props.long}
             color="info"
-            disabled = {props.type === "long"}
+            disabled={props.type === "long"}
           >
             Long Break
           </Button>
@@ -168,8 +168,8 @@ export default function CircularStatic() {
   const [studyTime] = useContext(StudyContext);
 
   useEffect(() => {
-    if (timeLeft === 0 && type === "focus"){
-      switch(audio){
+    if (timeLeft === 0 && (type === "focus" || type === "custom")) {
+      switch (audio) {
         case "vintage":
           manualAlarm.play();
           break;
@@ -184,13 +184,12 @@ export default function CircularStatic() {
       resetTimer();
       setIsRunning(false);
     }
-  },[timeLeft, type])
+  }, [timeLeft, type]);
 
   useEffect(() => {
     setTimeLeft(studyTime * 60);
     setType("custom");
-    console.log(type);
-  }, [studyTime])
+  }, [studyTime]);
 
   const handleFocus = () => {
     setType("focus");

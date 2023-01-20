@@ -46,16 +46,15 @@ export default function Settings() {
         select
         value={alarm}
         onChange={(e) => setAlarm(e.target.value)}
-        sx={{ mt: 1 }}
+        sx={{ my: 1 }}
         label="Alarm Sound"
       >
         <MenuItem value="vintage">Vintage Alarm</MenuItem>
         <MenuItem value="digital">Digital Alarm</MenuItem>
         <MenuItem value="victory">Victory Fanfare</MenuItem>
       </TextField>
-      <Divider sx={{ m: 2 }} />
       <Typography
-        sx={{ m: 1 }}
+        sx={{ my: 1 }}
         variant="h6"
         fontWeight={400}
         color="gray"
@@ -75,14 +74,13 @@ export default function Settings() {
             fullWidth
             value={studyTime}
             type="number"
-            sx={{ mt: 3 }}
+            sx={{ mt: 1 }}
             label="Study Timer"
             onChange={(e) => setStudyTime(e.target.value)}
           />
         </Grid>
 
       </Grid>
-      <Divider sx={{ m: 2 }} />
     </Container>
   );
 }
