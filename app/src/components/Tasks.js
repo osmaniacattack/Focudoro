@@ -145,7 +145,8 @@ export default function Tasks() {
               </Grid>
             </Grid>
             {tasks.map((task, index) => {
-              const isCompleted = completedTasks.includes(index);
+              // let isCompleted;
+              // completedTasks === null ? isCompleted=[] : completedTasks.includes(index);
               return (
                 <Grid
                   item
@@ -156,7 +157,7 @@ export default function Tasks() {
                     container
                     alignItems="center"
                   >
-                    <Grid
+                    {/* <Grid
                       item
                       xs={2}
                     >
@@ -166,12 +167,12 @@ export default function Tasks() {
                         onChange={() => handleCheckboxChange(index)}
                         checked={isCompleted}
                       />
-                    </Grid>
+                    </Grid> */}
                     <Grid
                       item
-                      xs={10}
+                      xs={12}
                     >
-                      {isCompleted ? (
+                      {/* {isCompleted ? (
                         <Typography
                           variant="subtitle2"
                           color="inherit"
@@ -179,14 +180,14 @@ export default function Tasks() {
                         >
                           {task}
                         </Typography>
-                      ) : (
+                      ) : ( */}
                         <Typography
                           variant="subtitle2"
                           color="inherit"
                         >
-                          {task}
+                          {`${index+1}. `}{task}
                         </Typography>
-                      )}
+                      {/* )} */}
                     </Grid>
                   </Grid>
                   <Divider sx={{ my: 1.5 }} />
