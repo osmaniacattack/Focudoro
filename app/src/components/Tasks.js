@@ -49,13 +49,16 @@ export default function Tasks() {
     if (localTasks){
       localStorage.removeItem('tasks');
     }
+ 
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  },[tasks])
+
+  useEffect(() => {
     if (localCompleted){
       localStorage.removeItem('completed');
     }
-    localStorage.setItem('tasks', JSON.stringify(tasks));
     localStorage.setItem('completed', JSON.stringify(completedTasks));
-  },[tasks, completedTasks])
-
+  },[completedTasks])
 
   const handleCheckboxChange = (index) => {
     const newCompletedTasks = [...completedTasks];
@@ -143,7 +146,6 @@ export default function Tasks() {
             </Grid>
             {tasks.map((task, index) => {
               const isCompleted = completedTasks.includes(index);
-
               return (
                 <Grid
                   item
