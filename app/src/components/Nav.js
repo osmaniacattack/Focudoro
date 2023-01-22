@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AboutDialog from "./AboutDialog";
 import PrivacyPolicyDialog from "./PrivacyPolicyDialog";
 import SettingsDialog from "./SettingsDialog";
+import FeedbackDialog from "./FeedbackDialog";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
@@ -98,7 +99,7 @@ export default function Nav() {
                 </Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Feedback</Typography>
+                <Typography textAlign="center"><FeedbackDialog/></Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">
@@ -168,7 +169,7 @@ export default function Nav() {
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              Feedback
+              <FeedbackDialog/>
             </Button>
             <Button
               onClick={handleCloseNavMenu}
