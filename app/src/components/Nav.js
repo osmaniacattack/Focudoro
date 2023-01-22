@@ -25,9 +25,9 @@ export default function Nav() {
   const [user, setUser] = useContext(UserContext);
 
   const handleSignOut = () => {
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     setUser({});
-  }
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -98,9 +98,13 @@ export default function Nav() {
                   <AboutDialog />
                 </Typography>
               </MenuItem>
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center"><FeedbackDialog/></Typography>
-              </MenuItem>
+              {Object.keys(user).length > 0 ? (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <FeedbackDialog />
+                  </Typography>
+                </MenuItem>
+              ) : null}
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">
                   <PrivacyPolicyDialog />
@@ -108,7 +112,9 @@ export default function Nav() {
               </MenuItem>
               {Object.keys(user).length > 0 ? (
                 <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center"><SettingsDialog/></Typography>
+                  <Typography textAlign="center">
+                    <SettingsDialog />
+                  </Typography>
                 </MenuItem>
               ) : null}
               {Object.keys(user).length > 0 ? (
@@ -123,12 +129,15 @@ export default function Nav() {
                       shape="pill"
                       onSuccess={async (credentialResponse) => {
                         try {
-                          console.log(credentialResponse)
+                          console.log(credentialResponse);
                           let userObject = jwt_decode(
                             credentialResponse.credential
                           );
                           setUser(userObject);
-                          localStorage.setItem('user', JSON.stringify(userObject));
+                          localStorage.setItem(
+                            "user",
+                            JSON.stringify(userObject)
+                          );
                         } catch (err) {
                           console.log(err);
                         }
@@ -165,12 +174,14 @@ export default function Nav() {
             >
               <AboutDialog />
             </Button>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              <FeedbackDialog/>
-            </Button>
+            {Object.keys(user).length > 0 ? (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                <FeedbackDialog />
+              </Button>
+            ) : null}
             <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
@@ -182,7 +193,7 @@ export default function Nav() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                <SettingsDialog/>
+                <SettingsDialog />
               </Button>
             ) : null}
           </Box>
@@ -198,7 +209,7 @@ export default function Nav() {
                         credentialResponse.credential
                       );
                       setUser(userObject);
-                      localStorage.setItem('user', JSON.stringify(userObject));
+                      localStorage.setItem("user", JSON.stringify(userObject));
                     } catch (err) {
                       console.log(err);
                     }
