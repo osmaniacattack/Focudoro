@@ -10,4 +10,6 @@ export { default as YoutubeReact } from "./YoutubeReact";
 export { default as Tasks } from "./Tasks";
 export { default as PomoCounter } from "./PomoCounter";
 export { default as LofiCard } from "./LofiCard";
+export { default as Feedback} from './Feedback';
+export { default as FeedbackDialog} from './FeedbackDialog'
 export { default as Footer } from "./Footer";
