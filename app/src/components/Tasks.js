@@ -33,32 +33,16 @@ export default function Tasks() {
   const [deleteIndex, setDeleteIndex] = useState(0);
   const [user] = useContext(UserContext);
 
-  const localTasks = JSON.parse(localStorage.getItem("tasks"));
-  const localCompleted = JSON.parse(localStorage.getItem("completed"));
-
   useEffect(() => {
-    if (localTasks) {
-      setTasks(localTasks);
+    const storedTasks = JSON.parse(localStorage.getItem("tasks"));
+    if (storedTasks) {
+      setTasks(storedTasks);
     }
-    if (completedTasks) {
-      setCompletedTasks(localCompleted);
+    const storedCompletedTasks = JSON.parse(localStorage.getItem("completedTasks"));
+    if (storedCompletedTasks) {
+      setCompletedTasks(storedCompletedTasks);
     }
   }, []);
-
-  useEffect(() => {
-    if (localTasks) {
-      localStorage.removeItem("tasks");
-    }
-
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
-
-  useEffect(() => {
-    if (localCompleted) {
-      localStorage.removeItem("completed");
-    }
-    localStorage.setItem("completed", JSON.stringify(completedTasks));
-  }, [completedTasks]);
 
   const handleCheckboxChange = (index) => {
     const newCompletedTasks = [...completedTasks];
@@ -68,13 +52,38 @@ export default function Tasks() {
       newCompletedTasks.push(index);
     }
     setCompletedTasks(newCompletedTasks);
+    localStorage.setItem("completedTasks", JSON.stringify(newCompletedTasks));
   };
 
   const handleDelete = (index) => {
     let newTasks = [...tasks];
     newTasks.splice(index, 1);
     setTasks(newTasks);
+    localStorage.setItem("tasks", JSON.stringify(newTasks));
   };
+
+  const handleAdd = () => {
+    let newTasks = [...tasks];
+    newTasks.push(newTask);
+    setTasks(newTasks);
+    localStorage.setItem("tasks", JSON.stringify(newTasks));
+  }
+
+  // const handleCheckboxChange = (index) => {
+  //   const newCompletedTasks = [...completedTasks];
+  //   if (newCompletedTasks.includes(index)) {
+  //     newCompletedTasks.splice(newCompletedTasks.indexOf(index), 1);
+  //   } else {
+  //     newCompletedTasks.push(index);
+  //   }
+  //   setCompletedTasks(newCompletedTasks);
+  // };
+
+  // const handleDelete = (index) => {
+  //   let newTasks = [...tasks];
+  //   newTasks.splice(index, 1);
+  //   setTasks(newTasks);
+  // };
 
   return (
     <>
@@ -145,7 +154,6 @@ export default function Tasks() {
               </Grid>
             </Grid>
             {tasks.map((task, index) => {
-              let isCompleted = completedTasks.includes(index);
               return (
                 <Grid
                   item
@@ -164,14 +172,14 @@ export default function Tasks() {
                         color="primary"
                         inputProps={{ "aria-label": "secondary checkbox" }}
                         onChange={() => handleCheckboxChange(index)}
-                        checked={isCompleted}
+                        checked={completedTasks.includes(index)}
                       />
                     </Grid>
                     <Grid
                       item
                       xs={10}
                     >
-                      {isCompleted ? (
+                      {completedTasks.includes(index) ? (
                         <Typography
                           variant="subtitle2"
                           color="inherit"
@@ -184,7 +192,6 @@ export default function Tasks() {
                           variant="subtitle2"
                           color="inherit"
                         >
-                          {/* {`${index + 1}. `} */}
                           {task}
                         </Typography>
                       )}
@@ -216,7 +223,7 @@ export default function Tasks() {
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setOpen(false)}>Cancel</Button>
-            <Button onClick={() => setTasks([...tasks, newTask])}>Add</Button>
+            <Button onClick={() => handleAdd()}>Add</Button>
           </DialogActions>
         </Dialog>
 
