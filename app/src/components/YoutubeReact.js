@@ -64,6 +64,7 @@ export default function YoutubeReact() {
     (event) => {
       setPlayer(event.target);
       event.target.playVideo();
+      event.target.setLoop(true);
     },
     [setPlayer]
   );

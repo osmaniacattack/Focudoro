@@ -7,8 +7,10 @@ import {
   ListItem,
   ListItemText,
   TextField,
+  Switch,
   MenuItem,
   Divider,
+  FormControlLabel,
 } from "@mui/material";
 import Question from "../assets/question.png";
 import Clock from "../assets/clock.png";
@@ -17,9 +19,34 @@ import Music from "../assets/music.png";
 import { AudioContext } from "../App";
 import { StudyContext } from "../App";
 
-export default function Settings() {
+export default function Settings({onChange}) {
   const [alarm, setAlarm] = useContext(AudioContext);
   const [studyTime, setStudyTime] = useContext(StudyContext);
+  const [checked, setChecked] = React.useState(true);
+  const [customURL, setCustomURL] = React.useState("");
+  const [error, setError] = useState(false);
+  const [helperText, setHelperText] = useState("");
+
+  const handleURLChange = (e) => {
+    const value = e.target.value;
+    const youtubeRegex = /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
+    if (!youtubeRegex.test(value)) {
+      setError(true);
+      setHelperText("Please enter a valid YouTube URL");
+    } else {
+      setError(false);
+      setHelperText("");
+      setCustomURL(value);
+      onChange(value);
+    }
+  };
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+    if (checked === false) {
+      setCustomURL("");
+    }
+  };
 
   return (
     <Container>
@@ -79,8 +106,46 @@ export default function Settings() {
             onChange={(e) => setStudyTime(e.target.value)}
           />
         </Grid>
-
       </Grid>
+      <Typography
+        sx={{ my: 1 }}
+        variant="h6"
+        fontWeight={400}
+        color="gray"
+        textAlign={"left"}
+      >
+        YouTube Player
+      </Typography>
+      <Typography
+        sx={{ my: 1 }}
+        variant="subtitle2"
+        fontWeight={400}
+        color="gray"
+        textAlign={"left"}
+      >
+        Toggle between preset live music stations or enter in your preferred
+        YouTube video of choice to listen to on loop.
+      </Typography>
+      <FormControlLabel
+        control={
+          <Switch
+            checked={checked}
+            color="primary"
+            onChange={handleChange}
+            inputProps={{ "aria-label": "controlled" }}
+          />
+        }
+        label="Toggle Radio / Custom Music"
+      />
+      {checked === true ? (
+        <TextField
+          variant="outlined"
+          error={error}
+          helperText={helperText}
+          fullWidth
+          onChange={(e) => handleURLChange(e)}
+        />
+      ) : null}
     </Container>
   );
 }
