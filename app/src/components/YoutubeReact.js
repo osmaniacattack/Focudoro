@@ -54,6 +54,7 @@ export default function YoutubeReact() {
     "7NOSDKb0HlU",
     "IUT1qAhMY4w",
     "Ha2UW8a0Vzc",
+    "WDXPJWIgX-o"
   ]);
   const [currentVideoIdx, setCurrentVideoIdx] = useState(1);
   const [player, setPlayer] = useState(null);
@@ -84,12 +85,12 @@ export default function YoutubeReact() {
 
   const handleBack = () => {
     currentVideoIdx === 0
-      ? setCurrentVideoIdx(5)
+      ? setCurrentVideoIdx(6)
       : setCurrentVideoIdx((currentVideoIdx) => currentVideoIdx - 1);
   };
 
   const handleForward = () => {
-    currentVideoIdx === 5
+    currentVideoIdx === 6
       ? setCurrentVideoIdx(0)
       : setCurrentVideoIdx((currentVideoIdx) => currentVideoIdx + 1);
   };
@@ -107,6 +108,7 @@ export default function YoutubeReact() {
       "Tokyo cafe ☕ Beautiful relaxing jazz music and bossa nova piano for stress relief",
       "In the Rain",
     ],
+    ["anime lofi hip hop radio - 24/7 chill lofi remixes of anime", "nostalgic"]
   ];
 
   return (

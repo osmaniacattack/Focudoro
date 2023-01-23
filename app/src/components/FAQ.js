@@ -15,7 +15,8 @@ export default function FAQ() {
     ["coffee shop radio // 24/7 lofi hip-hop beats", "STEEZYASF*CK"],
     ["lofi hip hop radio - beats to study/relax to 🐾", "Chillhop Music"],
     ["24/7 Korean Underground Indie/R&B/Hip-hop Radio", "Mellowbeat Seeker"],
-    ["Tokyo cafe ☕ Beautiful relaxing jazz music and bossa nova piano for stress relief", 'In the Rain']
+    ["Tokyo cafe ☕ Beautiful relaxing jazz music and bossa nova piano for stress relief", 'In the Rain'],
+    ["anime lofi hip hop radio - 24/7 chill lofi remixes of anime", "nostalgic"]
   ];
   return (
     <Grid container>
@@ -152,7 +153,7 @@ export default function FAQ() {
         >
           In addition to the Pomodoro timer, you can <u>add your own tasks</u> and it
           will be saved with the Google account you login with. Furthermore,
-          this web app currently syncs up to <u>six different live lo-fi
+          this web app currently syncs up to <u>seven different live lo-fi
           streams on YouTube</u> for your convenience! Respectively, they are:
           <ul>
             {cardDescription.map((card, index) => {
