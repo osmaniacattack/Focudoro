@@ -33,32 +33,32 @@ export default function Tasks() {
   const [deleteIndex, setDeleteIndex] = useState(0);
   const [user] = useContext(UserContext);
 
-  const localTasks = JSON.parse(localStorage.getItem('tasks'));
-  const localCompleted = JSON.parse(localStorage.getItem('completed'));
+  const localTasks = JSON.parse(localStorage.getItem("tasks"));
+  const localCompleted = JSON.parse(localStorage.getItem("completed"));
 
   useEffect(() => {
-    if (localTasks){
+    if (localTasks) {
       setTasks(localTasks);
     }
-    if (completedTasks){
+    if (completedTasks) {
       setCompletedTasks(localCompleted);
     }
-  },[])
+  }, []);
 
   useEffect(() => {
-    if (localTasks){
-      localStorage.removeItem('tasks');
+    if (localTasks) {
+      localStorage.removeItem("tasks");
     }
- 
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  },[tasks])
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
   useEffect(() => {
-    if (localCompleted){
-      localStorage.removeItem('completed');
+    if (localCompleted) {
+      localStorage.removeItem("completed");
     }
-    localStorage.setItem('completed', JSON.stringify(completedTasks));
-  },[completedTasks])
+    localStorage.setItem("completed", JSON.stringify(completedTasks));
+  }, [completedTasks]);
 
   const handleCheckboxChange = (index) => {
     const newCompletedTasks = [...completedTasks];
@@ -137,7 +137,7 @@ export default function Tasks() {
                     variant="outlined"
                     color="primary"
                     onClick={() => setDeleteOpen(true)}
-                    disabled = {tasks.length === 0}
+                    disabled={tasks.length === 0}
                   >
                     <DeleteIcon />
                   </Button>
@@ -145,8 +145,7 @@ export default function Tasks() {
               </Grid>
             </Grid>
             {tasks.map((task, index) => {
-              // let isCompleted;
-              // completedTasks === null ? isCompleted=[] : completedTasks.includes(index);
+              let isCompleted = completedTasks.includes(index);
               return (
                 <Grid
                   item
@@ -157,7 +156,7 @@ export default function Tasks() {
                     container
                     alignItems="center"
                   >
-                    {/* <Grid
+                    <Grid
                       item
                       xs={2}
                     >
@@ -167,12 +166,12 @@ export default function Tasks() {
                         onChange={() => handleCheckboxChange(index)}
                         checked={isCompleted}
                       />
-                    </Grid> */}
+                    </Grid>
                     <Grid
                       item
-                      xs={12}
+                      xs={10}
                     >
-                      {/* {isCompleted ? (
+                      {isCompleted ? (
                         <Typography
                           variant="subtitle2"
                           color="inherit"
@@ -180,14 +179,15 @@ export default function Tasks() {
                         >
                           {task}
                         </Typography>
-                      ) : ( */}
+                      ) : (
                         <Typography
                           variant="subtitle2"
                           color="inherit"
                         >
-                          {`${index+1}. `}{task}
+                          {/* {`${index + 1}. `} */}
+                          {task}
                         </Typography>
-                      {/* )} */}
+                      )}
                     </Grid>
                   </Grid>
                   <Divider sx={{ my: 1.5 }} />
