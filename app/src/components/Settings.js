@@ -18,32 +18,36 @@ import Research from "../assets/research.png";
 import Music from "../assets/music.png";
 import { AudioContext } from "../App";
 import { StudyContext } from "../App";
+import { YoutubeContext } from "../App";
 
-export default function Settings({onChange}) {
+export default function Settings() {
   const [alarm, setAlarm] = useContext(AudioContext);
   const [studyTime, setStudyTime] = useContext(StudyContext);
-  const [checked, setChecked] = React.useState(true);
-  const [customURL, setCustomURL] = React.useState("");
+  const [checked, setChecked] = React.useState(false);
+  const [value, setValue] = useState('');
   const [error, setError] = useState(false);
-  const [helperText, setHelperText] = useState("");
+  const [customURL, setCustomURL] = useContext(YoutubeContext);
 
-  const handleURLChange = (e) => {
-    const value = e.target.value;
-    const youtubeRegex = /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
-    if (!youtubeRegex.test(value)) {
-      setError(true);
-      setHelperText("Please enter a valid YouTube URL");
-    } else {
-      setError(false);
-      setHelperText("");
-      setCustomURL(value);
-      onChange(value);
+  function handleURLChange(e) {
+    setValue(e.target.value);
+    setError(false);
+    let url = e.target.value;
+    let videoId = url.split('v=')[1];
+    let ampersandPosition = videoId.indexOf('&');
+    if(ampersandPosition !== -1) {
+      videoId = videoId.substring(0, ampersandPosition);
     }
-  };
+    if(!videoId) {
+      setError(true);
+    } else {
+      setCustomURL(videoId);
+    }
+  }
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
     if (checked === false) {
+      setValue("");
       setCustomURL("");
     }
   };
@@ -141,9 +145,10 @@ export default function Settings({onChange}) {
         <TextField
           variant="outlined"
           error={error}
-          helperText={helperText}
+          label="YouTube URL"
+          value={value}
           fullWidth
-          onChange={(e) => handleURLChange(e)}
+          onChange={handleURLChange}
         />
       ) : null}
     </Container>

@@ -1,10 +1,6 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 import {
   Box,
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
   IconButton,
   Typography,
   List,
@@ -18,6 +14,8 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import YouTube from "react-youtube";
 import { useTheme, styled } from "@mui/material/styles";
+import { YoutubeContext } from "../App";
+import axios from 'axios';
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.primary.dark,
@@ -47,6 +45,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 }));
 
 export default function YoutubeReact() {
+  const theme = useTheme();
   const [videoIds] = useState([
     "jfKfPfyJRdk",
     "kgx4WGK0oNU",
@@ -58,7 +57,29 @@ export default function YoutubeReact() {
   const [currentVideoIdx, setCurrentVideoIdx] = useState(1);
   const [player, setPlayer] = useState(null);
   const [show, setShow] = useState(false);
-  const theme = useTheme();
+  const [customURL, setCustomURL] = useContext(YoutubeContext);
+  const [videoInfo, setVideoInfo] = useState(null);
+
+  const API_KEY = 'AIzaSyCf2ymIc7M9-YaFmwm_V1krweRPkRiFtK0';
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${customURL}&key=${API_KEY}`);
+      setVideoInfo(response.data.items[0].snippet);
+    };
+
+    if (customURL !== ""){
+      fetchData();
+    } ;
+  }, [customURL]);
+
+  useEffect(() => {
+    if (customURL === "") {
+      setCurrentVideoIdx(1);
+      setPlayer(null);
+      setShow(false);
+    }
+  }, [customURL]);
 
   const onReady = useCallback(
     (event) => {
@@ -134,7 +155,7 @@ export default function YoutubeReact() {
                     variant="h6"
                     sx={{ color: "#fff" }}
                   >
-                    <i>{cardDescription[currentVideoIdx][0]}</i>
+                    <i>{customURL !== "" ? videoInfo.title : cardDescription[currentVideoIdx][0]}</i>
                   </Typography>
                 }
                 secondary={
@@ -142,7 +163,7 @@ export default function YoutubeReact() {
                     variant="subtitle2"
                     sx={{ color: "#fff", mt: 0.25 }}
                   >
-                    by: {cardDescription[currentVideoIdx][1]}
+                    by: {customURL !== "" ? videoInfo.channelTitle : cardDescription[currentVideoIdx][1]}
                   </Typography>
                 }
               />
@@ -155,7 +176,12 @@ export default function YoutubeReact() {
               videoId={videoIds[currentVideoIdx]}
               opts={opts}
               onReady={onReady}
-              onEnd={onEnd}
+            />
+          ) : null}
+          {show === false && customURL !== "" ? (
+            <YouTube
+              videoId={customURL}
+              opts={opts}
             />
           ) : null}
         </Box>

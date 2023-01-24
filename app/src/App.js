@@ -15,31 +15,29 @@ export const PomoContext = createContext();
 export const UserContext = createContext();
 export const AudioContext = createContext();
 export const StudyContext = createContext();
+export const YoutubeContext = createContext();
 
 function App() {
   const [pomoCount, setPomoCount] = useState(0);
   const [user, setUser] = useState({});
   const [audio, setAudio] = useState("vintage");
   const [studyTime, setStudyTime] = useState(25);
-  let localUser = JSON.parse(localStorage.getItem('user'));
-  let localPomoCount = JSON.parse(localStorage.getItem('pomoCounts'));
-
-  // useEffect(() => {
-  //   console.log(user);
-  // }, [user]);
+  const [customURL, setCustomURL] = useState("");
+  let localUser = JSON.parse(localStorage.getItem("user"));
+  let localPomoCount = JSON.parse(localStorage.getItem("pomoCounts"));
 
   useEffect(() => {
-    if (localUser){
-      if(localUser.exp < Date.now()/1000){
-        localStorage.removeItem('user');
+    if (localUser) {
+      if (localUser.exp < Date.now() / 1000) {
+        localStorage.removeItem("user");
       }
       setUser(localUser);
     }
-  },[]);
+  }, []);
 
   useEffect(() => {
-    if (localPomoCount){
-      setPomoCount(localPomoCount)
+    if (localPomoCount) {
+      setPomoCount(localPomoCount);
     }
   }, []);
 
@@ -47,12 +45,8 @@ function App() {
     <UserContext.Provider value={[user, setUser]}>
       <PomoContext.Provider value={[pomoCount, setPomoCount]}>
         <AudioContext.Provider value={[audio, setAudio]}>
-          <StudyContext.Provider
-            value={[
-              studyTime,
-              setStudyTime,
-            ]}
-          >
+          <StudyContext.Provider value={[studyTime, setStudyTime]}>
+            <YoutubeContext.Provider value={[customURL, setCustomURL]}>
             <Paper
               sx={{
                 bgcolor: "#E3F2FD",
@@ -156,6 +150,7 @@ function App() {
               )}
               <Footer />
             </Paper>
+            </YoutubeContext.Provider>
           </StudyContext.Provider>
         </AudioContext.Provider>
       </PomoContext.Provider>
