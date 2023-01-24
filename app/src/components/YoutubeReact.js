@@ -12,10 +12,11 @@ import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
+import BackspaceIcon from "@mui/icons-material/Backspace";
 import YouTube from "react-youtube";
 import { useTheme, styled } from "@mui/material/styles";
 import { YoutubeContext } from "../App";
-import axios from 'axios';
+import axios from "axios";
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.primary.dark,
@@ -60,17 +61,19 @@ export default function YoutubeReact() {
   const [customURL, setCustomURL] = useContext(YoutubeContext);
   const [videoInfo, setVideoInfo] = useState(null);
 
-  const API_KEY = 'AIzaSyCf2ymIc7M9-YaFmwm_V1krweRPkRiFtK0';
+  const API_KEY = "AIzaSyCf2ymIc7M9-YaFmwm_V1krweRPkRiFtK0";
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${customURL}&key=${API_KEY}`);
+      const response = await axios.get(
+        `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${customURL}&key=${API_KEY}`
+      );
       setVideoInfo(response.data.items[0].snippet);
     };
 
-    if (customURL !== ""){
+    if (customURL !== "") {
       fetchData();
-    } ;
+    }
   }, [customURL]);
 
   useEffect(() => {
@@ -84,8 +87,8 @@ export default function YoutubeReact() {
   const onReady = useCallback(
     (event) => {
       setPlayer(event.target);
-      event.target.playVideo();
       event.target.setLoop(true);
+      event.target.playVideo();
     },
     [setPlayer]
   );
@@ -94,6 +97,11 @@ export default function YoutubeReact() {
     setCurrentVideoIdx((currentVideoIdx + 1) % videoIds.length);
     player.loadVideoById(videoIds[currentVideoIdx]);
   }, [currentVideoIdx, videoIds, player]);
+
+  const onCustomEnd = useCallback((event) => {
+    setPlayer(event.target);
+    event.target.playVideo();
+  });
 
   const opts = {
     width: "1",
@@ -104,14 +112,22 @@ export default function YoutubeReact() {
     },
   };
 
+  const handleMute = () => {
+    if (show === true) {
+      setShow(false);
+    } else if (show === false) {
+      setShow(true);
+    }
+  };
+
   const handleBack = () => {
     currentVideoIdx === 0
-      ? setCurrentVideoIdx(5)
+      ? setCurrentVideoIdx(videoIds.length - 1)
       : setCurrentVideoIdx((currentVideoIdx) => currentVideoIdx - 1);
   };
 
   const handleForward = () => {
-    currentVideoIdx === 5
+    currentVideoIdx === videoIds.length - 1
       ? setCurrentVideoIdx(0)
       : setCurrentVideoIdx((currentVideoIdx) => currentVideoIdx + 1);
   };
@@ -155,7 +171,11 @@ export default function YoutubeReact() {
                     variant="h6"
                     sx={{ color: "#fff" }}
                   >
-                    <i>{customURL !== "" ? videoInfo.title : cardDescription[currentVideoIdx][0]}</i>
+                    <i>
+                      {customURL !== "" && videoInfo !== null
+                        ? videoInfo.title
+                        : cardDescription[currentVideoIdx][0]}
+                    </i>
                   </Typography>
                 }
                 secondary={
@@ -163,7 +183,10 @@ export default function YoutubeReact() {
                     variant="subtitle2"
                     sx={{ color: "#fff", mt: 0.25 }}
                   >
-                    by: {customURL !== "" ? videoInfo.channelTitle : cardDescription[currentVideoIdx][1]}
+                    by:
+                    {customURL !== "" && videoInfo !== null
+                      ? videoInfo.channelTitle
+                      : cardDescription[currentVideoIdx][1]}
                   </Typography>
                 }
               />
@@ -173,15 +196,16 @@ export default function YoutubeReact() {
         <Box sx={{ m: -2 }}>
           {show === true ? (
             <YouTube
-              videoId={videoIds[currentVideoIdx]}
+              videoId={
+                customURL !== "" && videoInfo !== null
+                  ? customURL
+                  : videoIds[currentVideoIdx]
+              }
               opts={opts}
               onReady={onReady}
-            />
-          ) : null}
-          {show === false && customURL !== "" ? (
-            <YouTube
-              videoId={customURL}
-              opts={opts}
+              onEnd={
+                customURL !== "" && videoInfo !== null ? onCustomEnd : onEnd
+              }
             />
           ) : null}
         </Box>
@@ -217,7 +241,7 @@ export default function YoutubeReact() {
           {show === true ? (
             <IconButton
               aria-label="Mute"
-              onClick={() => setShow(false)}
+              onClick={(e) => handleMute(e)}
               sx={{ color: "#fff" }}
             >
               <VolumeUpIcon />
@@ -225,12 +249,21 @@ export default function YoutubeReact() {
           ) : (
             <IconButton
               aria-label="Unmute"
-              onClick={() => setShow(true)}
+              onClick={(e) => handleMute(e)}
               sx={{ color: "#fff" }}
             >
               <VolumeOffIcon />
             </IconButton>
           )}
+          {customURL !== "" && videoInfo !== null ? (
+            <IconButton
+              aria-label="clear custom"
+              onClick={() => setCustomURL("")}
+              sx={{ color: "#fff" }}
+            >
+              <BackspaceIcon />
+            </IconButton>
+          ) : null}
         </Box>
       </CardWrapper>
     </>
