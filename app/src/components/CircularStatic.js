@@ -11,8 +11,10 @@ import { PomoContext, StudyContext, AudioContext } from "../App";
 import clockalarm from "../assets/clockalarm.mp3";
 import ffseven from "../assets/ffseven.mp3";
 import digital from "../assets/digital.mp3";
+import "../App.css";
 
 function CircularProgressWithLabel(props) {
+  const [toggleInfo, setToggleInfo] = useState(false);
   return (
     <>
       <Typography
@@ -39,13 +41,29 @@ function CircularProgressWithLabel(props) {
               justifyContent: "center",
             }}
           >
-            <Typography
-              variant="h1"
-              component="div"
-              color="text.secondary"
-            >
-              {`${props.time}`}
-            </Typography>
+            {toggleInfo === false ? (
+              <Typography
+                variant="h1"
+                component="div"
+                color="primary"
+                className="nunito"
+                sx={{fontWeight: 700}}
+                onClick={() => setToggleInfo(!toggleInfo)}
+              >
+                {`${props.time}`}
+              </Typography>
+            ) : (
+              <Typography
+                variant="h2"
+                component="div"
+                color="primary"
+                className="nunito"
+                sx={{fontWeight: 700}}
+                onClick={() => setToggleInfo(!toggleInfo)}
+              >
+                {`${props.pomoCount} Pomodoro(s)`}
+              </Typography>
+            )}
           </Box>
         </Box>
       </Typography>
@@ -300,6 +318,7 @@ export default function CircularStatic() {
       reset={resetTimer}
       isRunning={isRunning}
       type={type}
+      pomoCount={pomoCount}
     />
   );
 }

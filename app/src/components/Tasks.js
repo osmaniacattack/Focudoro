@@ -69,22 +69,6 @@ export default function Tasks() {
     localStorage.setItem("tasks", JSON.stringify(newTasks));
   }
 
-  // const handleCheckboxChange = (index) => {
-  //   const newCompletedTasks = [...completedTasks];
-  //   if (newCompletedTasks.includes(index)) {
-  //     newCompletedTasks.splice(newCompletedTasks.indexOf(index), 1);
-  //   } else {
-  //     newCompletedTasks.push(index);
-  //   }
-  //   setCompletedTasks(newCompletedTasks);
-  // };
-
-  // const handleDelete = (index) => {
-  //   let newTasks = [...tasks];
-  //   newTasks.splice(index, 1);
-  //   setTasks(newTasks);
-  // };
-
   return (
     <>
       <Card
@@ -197,7 +181,7 @@ export default function Tasks() {
                       )}
                     </Grid>
                   </Grid>
-                  <Divider sx={{ my: 1.5 }} />
+                  <Divider/>
                 </Grid>
               );
             })}
