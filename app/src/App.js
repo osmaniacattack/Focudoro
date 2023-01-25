@@ -55,12 +55,6 @@ function App() {
                 "@media (max-width: 1199px)": {
                   height: "100%",
                 },
-                "@media (max-height: 1199px)": {
-                  height: "100vh",
-                },
-                "@media (min-height: 1200px)": {
-                  height: "100vh",
-                },
               }}
               elevation={4}
             >
