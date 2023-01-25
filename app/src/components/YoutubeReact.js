@@ -183,7 +183,7 @@ export default function YoutubeReact() {
                     variant="subtitle2"
                     sx={{ color: "#fff", mt: 0.25 }}
                   >
-                    by:
+                    {`by: `}
                     {customURL !== "" && videoInfo !== null
                       ? videoInfo.channelTitle
                       : cardDescription[currentVideoIdx][1]}
