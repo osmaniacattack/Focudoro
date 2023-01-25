@@ -15,7 +15,10 @@ export default function FAQ() {
     ["coffee shop radio // 24/7 lofi hip-hop beats", "STEEZYASF*CK"],
     ["lofi hip hop radio - beats to study/relax to 🐾", "Chillhop Music"],
     ["24/7 Korean Underground Indie/R&B/Hip-hop Radio", "Mellowbeat Seeker"],
-    ["Tokyo cafe ☕ Beautiful relaxing jazz music and bossa nova piano for stress relief", 'In the Rain']
+    [
+      "Tokyo cafe ☕ Beautiful relaxing jazz music and bossa nova piano for stress relief",
+      "In the Rain",
+    ],
   ];
   return (
     <Grid container>
@@ -35,7 +38,10 @@ export default function FAQ() {
         >
           What is Focudoro?
         </Typography>
-        <Typography textAlign={"center"} sx={{m:-1}}>
+        <Typography
+          textAlign={"center"}
+          sx={{ m: -1 }}
+        >
           <img
             src={Question}
             width="25%"
@@ -48,11 +54,12 @@ export default function FAQ() {
           color="#2D728F"
           sx={{ m: 2 }}
         >
-          Focudoro is a web app designed to help you focus and accomplish your goals. It is inspired by the Pomodoro™ Technique, a time management method developed by
-          Francesco Cirillo in the late 1980s. This technique uses a timer to
-          break down works into a set of intervals separated by breaks. The Pomodoro
-          technique increases productivity by taking short scheduled breaks
-          regularly.
+          Focudoro is a web app designed to help you focus and accomplish your
+          goals. It is inspired by the Pomodoro™ Technique, a time management
+          method developed by Francesco Cirillo in the late 1980s. This
+          technique uses a timer to break down works into a set of intervals
+          separated by breaks. The Pomodoro technique increases productivity by
+          taking short scheduled breaks regularly.
         </Typography>
         <Typography
           variant="h3"
@@ -62,7 +69,10 @@ export default function FAQ() {
         >
           How Does It Work?
         </Typography>
-        <Typography textAlign={"center"} sx={{m:-2}}>
+        <Typography
+          textAlign={"center"}
+          sx={{ m: -2 }}
+        >
           <img
             src={Clock}
             width="25%"
@@ -112,7 +122,10 @@ export default function FAQ() {
         >
           Disclaimer
         </Typography>
-        <Typography textAlign={"center"} sx={{m:-1}}>
+        <Typography
+          textAlign={"center"}
+          sx={{ m: -1 }}
+        >
           <img
             src={Research}
             width="25%"
@@ -137,7 +150,10 @@ export default function FAQ() {
         >
           Why Focudoro?
         </Typography>
-        <Typography textAlign={"center"} sx={{m:2}}>
+        <Typography
+          textAlign={"center"}
+          sx={{ m: 2 }}
+        >
           <img
             src={Music}
             width="18%"
@@ -150,10 +166,12 @@ export default function FAQ() {
           color="#2D728F"
           sx={{ m: 2 }}
         >
-          In addition to the Pomodoro timer, you can <u>add your own tasks</u> and it
-          will be saved with the Google account you login with. Furthermore,
-          this web app currently syncs up to <u>six different live lo-fi
-          streams on YouTube</u> for your convenience! Respectively, they are:
+          In addition to the Pomodoro timer, you can <u>add your own tasks</u>{" "}
+          and it will be saved with the Google account you login with for the
+          session you are logged in with. Furthermore, this web app currently
+          allows you to add a YouTube video of your choice to listen to on loop as
+          well as having up to <u>six different live lo-fi streams on YouTube</u>{" "}
+          for your convenience! Those streams are:
           <ul>
             {cardDescription.map((card, index) => {
               return (
