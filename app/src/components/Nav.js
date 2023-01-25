@@ -26,6 +26,7 @@ export default function Nav() {
 
   const handleSignOut = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("pomoCounts");
     setUser({});
   };
 

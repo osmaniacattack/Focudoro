@@ -7,8 +7,10 @@ import {
   ListItem,
   ListItemText,
   TextField,
+  Switch,
   MenuItem,
   Divider,
+  FormControlLabel,
 } from "@mui/material";
 import Question from "../assets/question.png";
 import Clock from "../assets/clock.png";
@@ -16,10 +18,39 @@ import Research from "../assets/research.png";
 import Music from "../assets/music.png";
 import { AudioContext } from "../App";
 import { StudyContext } from "../App";
+import { YoutubeContext } from "../App";
 
 export default function Settings() {
   const [alarm, setAlarm] = useContext(AudioContext);
   const [studyTime, setStudyTime] = useContext(StudyContext);
+  const [checked, setChecked] = React.useState(false);
+  const [value, setValue] = useState('');
+  const [error, setError] = useState(false);
+  const [customURL, setCustomURL] = useContext(YoutubeContext);
+
+  function handleURLChange(e) {
+    setValue(e.target.value);
+    setError(false);
+    let url = e.target.value;
+    let videoId = url.split('v=')[1];
+    let ampersandPosition = videoId.indexOf('&');
+    if(ampersandPosition !== -1) {
+      videoId = videoId.substring(0, ampersandPosition);
+    }
+    if(!videoId) {
+      setError(true);
+    } else {
+      setCustomURL(videoId);
+    }
+  }
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+    if (checked === false) {
+      setValue("");
+      setCustomURL("");
+    }
+  };
 
   return (
     <Container>
@@ -79,8 +110,47 @@ export default function Settings() {
             onChange={(e) => setStudyTime(e.target.value)}
           />
         </Grid>
-
       </Grid>
+      <Typography
+        sx={{ my: 1 }}
+        variant="h6"
+        fontWeight={400}
+        color="gray"
+        textAlign={"left"}
+      >
+        YouTube Player
+      </Typography>
+      <Typography
+        sx={{ my: 1 }}
+        variant="subtitle2"
+        fontWeight={400}
+        color="gray"
+        textAlign={"left"}
+      >
+        Toggle between preset live music stations or enter in your preferred
+        YouTube video of choice to listen to on loop.
+      </Typography>
+      <FormControlLabel
+        control={
+          <Switch
+            checked={checked}
+            color="primary"
+            onChange={handleChange}
+            inputProps={{ "aria-label": "controlled" }}
+          />
+        }
+        label="Toggle Radio / Custom Music"
+      />
+      {checked === true ? (
+        <TextField
+          variant="outlined"
+          error={error}
+          label="YouTube URL"
+          value={value}
+          fullWidth
+          onChange={handleURLChange}
+        />
+      ) : null}
     </Container>
   );
 }
