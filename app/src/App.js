@@ -6,7 +6,7 @@ import {
   Footer,
   Tasks,
   PomoCounter,
-  LofiCard,
+  Landing,
 } from "./components/index";
 import { Grid, Paper, Button, Typography, Container } from "@mui/material";
 import React, { useState, createContext, useEffect } from "react";
@@ -47,103 +47,116 @@ function App() {
         <AudioContext.Provider value={[audio, setAudio]}>
           <StudyContext.Provider value={[studyTime, setStudyTime]}>
             <YoutubeContext.Provider value={[customURL, setCustomURL]}>
-            <Paper
-              sx={{
-                bgcolor: "#E3F2FD",
-                height: "100vh",
-                width: "100%",
-                "@media (max-width: 1199px)": {
-                  height: "100%",
-                },
-              }}
-              elevation={4}
-            >
-              <Nav />
-              {Object.keys(user).length === 0 ? null : (
-                <Grid
-                  container
-                  spacing={2}
-                  direction="row"
-                  alignItems="center"
-                  justifyContent="center"
-                  sx={{ bgColor: "#E3F2FD" }}
-                >
-                  <Grid
-                    item
-                    xs={10}
-                    lg={7}
+              <Paper
+                sx={{
+                  bgcolor: "#E3F2FD",
+                  height: "100vh",
+                  width: "100%",
+                  "@media (max-width: 1199px)": {
+                    height: "100%",
+                  },
+                }}
+                elevation={4}
+              >
+                <Nav />
+                {Object.keys(user).length === 0 ? (
+                  <Paper
                     sx={{
-                      "@media (min-width: 300px)": {
-                        marginTop: "2.5vh",
+                      bgcolor: "#fff",
+                      width: "100%",
+                      "@media (max-width: 1199px)": {
+                        height: "100%",
                       },
                     }}
+                    elevation={4}
                   >
-                    <Paper
-                      elevation={8}
-                      sx={{
-                        bgcolor: "#fff",
-                        height: "100%",
-                        width: "100%",
-                        borderRadius: "15px",
-                      }}
-                    >
-                      <Timer />
-                    </Paper>
-                  </Grid>
+                    <Landing />
+                  </Paper>
+                ) : (
                   <Grid
-                    item
-                    xs={10}
-                    lg={3}
+                    container
+                    spacing={2}
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="center"
+                    sx={{ bgColor: "#E3F2FD" }}
                   >
-                    <Paper
-                      elevation={8}
+                    <Grid
+                      item
+                      xs={10}
+                      lg={7}
                       sx={{
-                        bgcolor: "#fff",
-                        height: "100%",
-                        width: "100%",
+                        "@media (min-width: 300px)": {
+                          marginTop: "2.5vh",
+                        },
                       }}
                     >
-                      <Tasks />
-                    </Paper>
-                  </Grid>
-                  <Grid
-                    item
-                    xs={10}
-                    lg={5}
-                  >
-                    <Paper
-                      elevation={8}
-                      sx={{
-                        bgcolor: "#fff",
-                        height: "100%",
-                        width: "100%",
-                        borderRadius: "15px",
-                      }}
+                      <Paper
+                        elevation={8}
+                        sx={{
+                          bgcolor: "#fff",
+                          height: "100%",
+                          width: "100%",
+                          borderRadius: "15px",
+                        }}
+                      >
+                        <Timer />
+                      </Paper>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={10}
+                      lg={3}
                     >
-                      <PomoCounter />
-                    </Paper>
-                  </Grid>
-                  <Grid
-                    item
-                    xs={10}
-                    lg={5}
-                  >
-                    <Paper
-                      elevation={8}
-                      sx={{
-                        bgcolor: "#fff",
-                        height: "100%",
-                        width: "100%",
-                        borderRadius: "15px",
-                      }}
+                      <Paper
+                        elevation={8}
+                        sx={{
+                          bgcolor: "#fff",
+                          height: "100%",
+                          width: "100%",
+                        }}
+                      >
+                        <Tasks />
+                      </Paper>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={10}
+                      lg={5}
                     >
-                      <YoutubeReact />
-                    </Paper>
+                      <Paper
+                        elevation={8}
+                        sx={{
+                          bgcolor: "#fff",
+                          height: "100%",
+                          width: "100%",
+                          borderRadius: "15px",
+                        }}
+                      >
+                        <PomoCounter />
+                      </Paper>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={10}
+                      lg={5}
+                    >
+                      <Paper
+                        elevation={8}
+                        sx={{
+                          bgcolor: "#fff",
+                          height: "100%",
+                          width: "100%",
+                          borderRadius: "15px",
+                        }}
+                      >
+                        <YoutubeReact />
+                      </Paper>
+                    </Grid>
                   </Grid>
-                </Grid>
-              )}
-              <Footer />
-            </Paper>
+                )}
+                <Footer />
+              </Paper>
             </YoutubeContext.Provider>
           </StudyContext.Provider>
         </AudioContext.Provider>

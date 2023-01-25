@@ -94,11 +94,13 @@ export default function Nav() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">
-                  <AboutDialog />
-                </Typography>
-              </MenuItem>
+              {Object.keys(user).length > 0 ? (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <AboutDialog />
+                  </Typography>
+                </MenuItem>
+              ) : null}
               {Object.keys(user).length > 0 ? (
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
@@ -169,12 +171,14 @@ export default function Nav() {
             FOCUDORO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              <AboutDialog />
-            </Button>
+            {Object.keys(user).length > 0 ? (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                <AboutDialog />
+              </Button>
+            ) : null}
             {Object.keys(user).length > 0 ? (
               <Button
                 onClick={handleCloseNavMenu}
