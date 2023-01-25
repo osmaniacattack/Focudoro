@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useContext} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,11 +9,13 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useForm, ValidationError } from '@formspree/react';
+import { UserContext } from '../App';
 
 const theme = createTheme();
 
 export default function Feedback() {
   const [state, handleSubmit] = useForm("mjvdklbj");
+  const [user, setUser] = useContext(UserContext);
   if (state.succeeded) {
     return <p>Thank you for the feedback!<br/>We appreciate your interest in improving Focudoro.</p>
 }
@@ -37,6 +39,17 @@ export default function Feedback() {
             Have Feedback?
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="Name"
+              name="name"
+              autoComplete="name"
+              disabled
+              value={`${user.given_name} ${user.family_name}`}
+            />
             <TextField
               margin="normal"
               required
@@ -45,10 +58,12 @@ export default function Feedback() {
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
+              disabled
+              value={user.email}
             />
             <TextField
               margin="normal"
+              autoFocus
               multiline
               rows={4}
               required

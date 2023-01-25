@@ -27,6 +27,10 @@ function App() {
   let localPomoCount = JSON.parse(localStorage.getItem("pomoCounts"));
 
   useEffect(() => {
+    console.log(user);
+  }, [user])
+
+  useEffect(() => {
     if (localUser) {
       if (localUser.exp < Date.now() / 1000) {
         localStorage.removeItem("user");
