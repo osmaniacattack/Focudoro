@@ -15,6 +15,8 @@ export default function Footer() {
           variant="subtitle2"
           textAlign={"center"}
           color="white"
+          fontFamily={"Nunito"}
+          fontWeight={700}
         >
           <Link
             href="https://www.buymeacoffee.com/aqosman"

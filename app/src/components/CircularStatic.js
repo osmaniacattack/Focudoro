@@ -11,8 +11,10 @@ import { PomoContext, StudyContext, AudioContext } from "../App";
 import clockalarm from "../assets/clockalarm.mp3";
 import ffseven from "../assets/ffseven.mp3";
 import digital from "../assets/digital.mp3";
+import "../App.css";
 
 function CircularProgressWithLabel(props) {
+  const [toggleInfo, setToggleInfo] = useState(false);
   return (
     <>
       <Typography
@@ -22,7 +24,7 @@ function CircularProgressWithLabel(props) {
         <Box sx={{ position: "relative", display: "inline-flex", mt: 3 }}>
           <CircularProgress
             size="20rem"
-            thickness="1"
+            thickness="3"
             color="info"
             variant="determinate"
             value={props.value}
@@ -39,13 +41,31 @@ function CircularProgressWithLabel(props) {
               justifyContent: "center",
             }}
           >
-            <Typography
-              variant="h1"
-              component="div"
-              color="text.secondary"
-            >
-              {`${props.time}`}
-            </Typography>
+            {toggleInfo === false ? (
+              <Typography
+                variant="h1"
+                component="div"
+                color="primary"
+                fontFamily={"Nunito"}
+                fontWeight={700}
+                onClick={() => setToggleInfo(!toggleInfo)}
+                sx={{ ":hover": { cursor: "pointer" } }}
+              >
+                {`${props.time}`}
+              </Typography>
+            ) : (
+              <Typography
+                variant="h4"
+                component="div"
+                color="primary"
+                fontFamily={"Nunito"}
+                fontWeight={800}
+                onClick={() => setToggleInfo(!toggleInfo)}
+                sx={{ ":hover": { cursor: "pointer" } }}
+              >
+                {`${props.pomoCount} Pomodoro(s)`}
+              </Typography>
+            )}
           </Box>
         </Box>
       </Typography>
@@ -64,7 +84,7 @@ function CircularProgressWithLabel(props) {
             disabled={props.isRunning === true}
             color="success"
           >
-            <PlayArrowIcon />
+            <PlayArrowIcon fontSize="large" />
           </Button>
         </Grid>
         <Grid
@@ -78,7 +98,7 @@ function CircularProgressWithLabel(props) {
             color="error"
             disabled={props.isRunning === false}
           >
-            <StopIcon />
+            <StopIcon fontSize="large" />
           </Button>
         </Grid>
         <Grid
@@ -91,7 +111,7 @@ function CircularProgressWithLabel(props) {
             color="warning"
             onClick={props.reset}
           >
-            <RestartAltIcon />
+            <RestartAltIcon fontSize="large" />
           </Button>
         </Grid>
       </Grid>
@@ -110,7 +130,13 @@ function CircularProgressWithLabel(props) {
             color="info"
             disabled={props.type === "focus"}
           >
-            Focus
+            <Typography
+              variant="h6"
+              fontWeight={"700"}
+              fontFamily={"Nunito"}
+            >
+              Focus
+            </Typography>
           </Button>
         </Grid>
         <Grid
@@ -124,7 +150,13 @@ function CircularProgressWithLabel(props) {
             color="info"
             disabled={props.type === "short"}
           >
-            Short Break
+            <Typography
+              variant="h6"
+              fontWeight="700"
+              fontFamily={"Nunito"}
+            >
+              Break
+            </Typography>
           </Button>
         </Grid>
         <Grid
@@ -138,7 +170,13 @@ function CircularProgressWithLabel(props) {
             color="info"
             disabled={props.type === "long"}
           >
-            Long Break
+            <Typography
+              variant="h6"
+              fontWeight="700"
+              fontFamily={"Nunito"}
+            >
+              Rest
+            </Typography>
           </Button>
         </Grid>
       </Grid>
@@ -300,6 +338,7 @@ export default function CircularStatic() {
       reset={resetTimer}
       isRunning={isRunning}
       type={type}
+      pomoCount={pomoCount}
     />
   );
 }

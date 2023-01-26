@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import { Typography } from '@mui/material';
-import Settings from './Settings';
+import React, { useState } from "react";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import { Typography } from "@mui/material";
+import Settings from "./Settings";
 
 export default function SettingsDialog() {
   const [open, setOpen] = useState(false);
@@ -18,7 +18,11 @@ export default function SettingsDialog() {
 
   return (
     <div>
-      <Typography variant="outlined" onClick={handleClickOpen}>
+      <Typography
+        variant="outlined"
+        onClick={handleClickOpen}
+        fontFamily={"Nunito"}
+      >
         Settings
       </Typography>
       <Dialog
@@ -29,7 +33,7 @@ export default function SettingsDialog() {
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            <Settings/>
+            <Settings />
           </DialogContentText>
         </DialogContent>
       </Dialog>

@@ -1,4 +1,10 @@
-import React, { useState, useCallback, useEffect, useContext } from "react";
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useContext,
+  useRef,
+} from "react";
 import {
   Box,
   IconButton,
@@ -6,6 +12,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  Slider,
 } from "@mui/material";
 import MainCard from "./MainCard";
 import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
@@ -60,6 +67,7 @@ export default function YoutubeReact() {
   const [show, setShow] = useState(false);
   const [customURL, setCustomURL] = useContext(YoutubeContext);
   const [videoInfo, setVideoInfo] = useState(null);
+  const playerRef = useRef(null);
 
   const API_KEY = "AIzaSyCf2ymIc7M9-YaFmwm_V1krweRPkRiFtK0";
 
@@ -147,6 +155,10 @@ export default function YoutubeReact() {
     ],
   ];
 
+  const handleVolumeChange = (event, newValue) => {
+    playerRef.current.internalPlayer.setVolume(newValue);
+  };
+
   return (
     <>
       <CardWrapper
@@ -170,6 +182,8 @@ export default function YoutubeReact() {
                   <Typography
                     variant="h6"
                     sx={{ color: "#fff" }}
+                    fontFamily={"Nunito"}
+                    fontWeight={800}
                   >
                     <i>
                       {customURL !== "" && videoInfo !== null
@@ -182,6 +196,8 @@ export default function YoutubeReact() {
                   <Typography
                     variant="subtitle2"
                     sx={{ color: "#fff", mt: 0.25 }}
+                    fontFamily={"Nunito"}
+                    fontWeight={700}
                   >
                     {`by: `}
                     {customURL !== "" && videoInfo !== null
@@ -196,6 +212,7 @@ export default function YoutubeReact() {
         <Box sx={{ m: -2 }}>
           {show === true ? (
             <YouTube
+              ref={playerRef}
               videoId={
                 customURL !== "" && videoInfo !== null
                   ? customURL
@@ -264,6 +281,13 @@ export default function YoutubeReact() {
               <BackspaceIcon />
             </IconButton>
           ) : null}
+          <Slider
+            defaultValue={50}
+            disabled={show === false}
+            aria-labelledby="volume-slider"
+            sx={{ color: "#fff", width: "25%", ml: 3 }}
+            onChange={handleVolumeChange}
+          />
         </Box>
       </CardWrapper>
     </>

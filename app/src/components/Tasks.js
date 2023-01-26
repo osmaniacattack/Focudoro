@@ -20,9 +20,10 @@ import {
   Checkbox,
   IconButton,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { UserContext } from "../App";
+import "../App.css";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
@@ -38,7 +39,9 @@ export default function Tasks() {
     if (storedTasks) {
       setTasks(storedTasks);
     }
-    const storedCompletedTasks = JSON.parse(localStorage.getItem("completedTasks"));
+    const storedCompletedTasks = JSON.parse(
+      localStorage.getItem("completedTasks")
+    );
     if (storedCompletedTasks) {
       setCompletedTasks(storedCompletedTasks);
     }
@@ -67,23 +70,7 @@ export default function Tasks() {
     newTasks.push(newTask);
     setTasks(newTasks);
     localStorage.setItem("tasks", JSON.stringify(newTasks));
-  }
-
-  // const handleCheckboxChange = (index) => {
-  //   const newCompletedTasks = [...completedTasks];
-  //   if (newCompletedTasks.includes(index)) {
-  //     newCompletedTasks.splice(newCompletedTasks.indexOf(index), 1);
-  //   } else {
-  //     newCompletedTasks.push(index);
-  //   }
-  //   setCompletedTasks(newCompletedTasks);
-  // };
-
-  // const handleDelete = (index) => {
-  //   let newTasks = [...tasks];
-  //   newTasks.splice(index, 1);
-  //   setTasks(newTasks);
-  // };
+  };
 
   return (
     <>
@@ -91,16 +78,14 @@ export default function Tasks() {
         sx={{
           pb: 2,
           mt: 2,
-          minHeight: "470px",
-          maxHeight: "470px",
-          overflowY: "scroll",
+          minHeight: "650px",
+          maxHeight: "650px",
+          overflowY: "auto",
+          borderRadius: "20px",
         }}
       >
         <CardContent>
-          <Grid
-            container
-            spacing={0}
-          >
+          <Grid container>
             <Grid
               item
               xs={12}
@@ -118,6 +103,8 @@ export default function Tasks() {
                   <Typography
                     variant="h6"
                     color="primary"
+                    fontWeight={700}
+                    fontFamily={"Nunito"}
                   >
                     {`${user.given_name}'s `} Tasks
                   </Typography>
@@ -125,25 +112,27 @@ export default function Tasks() {
                 <Grid
                   item
                   xs={3}
+                  sx={{ m: "auto" }}
                 >
                   <Button
                     sx={{ height: 20, p: 2 }}
                     size="small"
-                    variant="contained"
+                    // variant="contained"
                     color="primary"
                     onClick={() => setOpen(true)}
                   >
-                    <AddIcon />
+                    <CreateIcon />
                   </Button>
                 </Grid>
                 <Grid
                   item
                   xs={3}
+                  sx={{ m: "auto" }}
                 >
                   <Button
                     sx={{ height: 20, p: 2 }}
                     size="small"
-                    variant="outlined"
+                    // variant="outlined"
                     color="primary"
                     onClick={() => setDeleteOpen(true)}
                     disabled={tasks.length === 0}
@@ -184,6 +173,7 @@ export default function Tasks() {
                           variant="subtitle2"
                           color="inherit"
                           sx={{ textDecoration: "line-through" }}
+                          fontFamily={"Nunito"}
                         >
                           {task}
                         </Typography>
@@ -191,13 +181,14 @@ export default function Tasks() {
                         <Typography
                           variant="subtitle2"
                           color="inherit"
+                          fontFamily={"Nunito"}
                         >
                           {task}
                         </Typography>
                       )}
                     </Grid>
                   </Grid>
-                  <Divider sx={{ my: 1.5 }} />
+                  <Divider />
                 </Grid>
               );
             })}
@@ -207,9 +198,9 @@ export default function Tasks() {
           open={open}
           onClose={() => setOpen(false)}
         >
-          <DialogTitle>Add New Task</DialogTitle>
+          <DialogTitle fontFamily={"Nunito"}>Add New Task</DialogTitle>
           <DialogContent>
-            <DialogContentText>
+            <DialogContentText fontFamily={"Nunito"}>
               Add the task you would like to finish during your focus session.
             </DialogContentText>
             <TextField
@@ -222,8 +213,13 @@ export default function Tasks() {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setOpen(false)}>Cancel</Button>
-            <Button onClick={() => handleAdd()}>Add</Button>
+            <Button  onClick={() => setOpen(false)}>Cancel</Button>
+            <Button
+              variant="contained"
+              onClick={() => handleAdd()}
+            >
+              Add
+            </Button>
           </DialogActions>
         </Dialog>
 
@@ -231,7 +227,7 @@ export default function Tasks() {
           open={deleteOpen}
           onClose={() => setDeleteOpen(false)}
         >
-          <DialogTitle>Delete</DialogTitle>
+          <DialogTitle fontFamily={"Nunito"}>Delete</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Select the task you would like to delete.
@@ -251,7 +247,7 @@ export default function Tasks() {
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setDeleteOpen(false)}>Cancel</Button>
-            <Button onClick={() => handleDelete(deleteIndex)}>Delete</Button>
+            <Button variant="contained" onClick={() => handleDelete(deleteIndex)}>Delete</Button>
           </DialogActions>
         </Dialog>
       </Card>

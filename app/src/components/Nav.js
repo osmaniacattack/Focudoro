@@ -50,13 +50,13 @@ export default function Nav() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
-            variant="h6"
+            variant="h5"
             noWrap
-            component="a"
+            fontFamily={"Nunito"}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontWeight: 700,
+              fontWeight: 1000,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
@@ -155,12 +155,12 @@ export default function Nav() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
+            fontFamily={"Nunito"}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontWeight: 700,
+              fontWeight: 1000,
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",

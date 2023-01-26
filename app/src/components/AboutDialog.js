@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import { Typography } from '@mui/material';
-import FAQ from './FAQ';
+import React, { useState } from "react";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import { Typography } from "@mui/material";
+import FAQ from "./FAQ";
 
 export default function AboutDialog() {
   const [open, setOpen] = useState(false);
@@ -18,7 +18,11 @@ export default function AboutDialog() {
 
   return (
     <div>
-      <Typography variant="outlined" onClick={handleClickOpen}>
+      <Typography
+        variant="outlined"
+        fontFamily={"Nunito"}
+        onClick={handleClickOpen}
+      >
         About
       </Typography>
       <Dialog
@@ -29,7 +33,7 @@ export default function AboutDialog() {
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            <FAQ/>
+            <FAQ />
           </DialogContentText>
         </DialogContent>
       </Dialog>
