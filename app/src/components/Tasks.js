@@ -23,6 +23,7 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { UserContext } from "../App";
+import "../App.css"
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
@@ -77,13 +78,13 @@ export default function Tasks() {
           mt: 2,
           minHeight: "650px",
           maxHeight: "650px",
-          overflowY: "scroll",
+          overflowY: "auto",
+          borderRadius: "20px"
         }}
       >
         <CardContent>
           <Grid
             container
-            spacing={0}
           >
             <Grid
               item
@@ -102,7 +103,9 @@ export default function Tasks() {
                   <Typography
                     variant="h6"
                     color="primary"
-                  >
+                    fontWeight={700}
+                    fontFamily={"Nunito"}
+                    >
                     {`${user.given_name}'s `} Tasks
                   </Typography>
                 </Grid>
@@ -168,6 +171,7 @@ export default function Tasks() {
                           variant="subtitle2"
                           color="inherit"
                           sx={{ textDecoration: "line-through" }}
+                          fontFamily={"Nunito"}
                         >
                           {task}
                         </Typography>
@@ -175,6 +179,7 @@ export default function Tasks() {
                         <Typography
                           variant="subtitle2"
                           color="inherit"
+                          fontFamily={"Nunito"}
                         >
                           {task}
                         </Typography>

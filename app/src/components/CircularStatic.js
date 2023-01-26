@@ -11,7 +11,7 @@ import { PomoContext, StudyContext, AudioContext } from "../App";
 import clockalarm from "../assets/clockalarm.mp3";
 import ffseven from "../assets/ffseven.mp3";
 import digital from "../assets/digital.mp3";
-import "../App.css";
+import "../App.css"
 
 function CircularProgressWithLabel(props) {
   const [toggleInfo, setToggleInfo] = useState(false);
@@ -46,19 +46,19 @@ function CircularProgressWithLabel(props) {
                 variant="h1"
                 component="div"
                 color="primary"
-                className="nunito"
-                sx={{ fontWeight: 700 }}
+                fontFamily={"Nunito"}
+                fontWeight={700}
                 onClick={() => setToggleInfo(!toggleInfo)}
               >
                 {`${props.time}`}
               </Typography>
             ) : (
               <Typography
-                variant="h2"
+                variant="h3"
                 component="div"
                 color="primary"
-                className="nunito"
-                sx={{ fontWeight: 700 }}
+                fontFamily={"Nunito"}
+                fontWeight={800}
                 onClick={() => setToggleInfo(!toggleInfo)}
               >
                 {`${props.pomoCount} Pomodoro(s)`}
@@ -131,8 +131,8 @@ function CircularProgressWithLabel(props) {
             <Typography
               variant="h6"
               fontWeight="700"
-              className="nunito"
-            >
+              fontFamily={"Nunito"}
+              >
               Focus
             </Typography>
           </Button>
@@ -151,8 +151,8 @@ function CircularProgressWithLabel(props) {
             <Typography
               variant="h6"
               fontWeight="700"
-              className="nunito"
-            >
+              fontFamily={"Nunito"}
+              >
               Short Break
             </Typography>
           </Button>
@@ -171,8 +171,8 @@ function CircularProgressWithLabel(props) {
             <Typography
               variant="h6"
               fontWeight="700"
-              className="nunito"
-            >
+              fontFamily={"Nunito"}
+              >
               Long Break
             </Typography>
           </Button>

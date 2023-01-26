@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import { Typography } from '@mui/material';
-import Policy from './Policy';
+import React, { useState } from "react";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import { Typography } from "@mui/material";
+import Policy from "./Policy";
 
 export default function PrivacyPolicyDialog() {
   const [open, setOpen] = useState(false);
@@ -18,7 +18,11 @@ export default function PrivacyPolicyDialog() {
 
   return (
     <div>
-      <Typography variant="outlined" onClick={handleClickOpen}>
+      <Typography
+        variant="outlined"
+        fontFamily={"Nunito"}
+        onClick={handleClickOpen}
+      >
         Privacy
       </Typography>
       <Dialog
@@ -29,7 +33,7 @@ export default function PrivacyPolicyDialog() {
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            <Policy/>
+            <Policy />
           </DialogContentText>
         </DialogContent>
       </Dialog>

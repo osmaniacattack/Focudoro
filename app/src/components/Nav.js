@@ -53,6 +53,7 @@ export default function Nav() {
             variant="h6"
             noWrap
             component="a"
+            fontFamily={"Nunito"}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -156,6 +157,7 @@ export default function Nav() {
             variant="h5"
             noWrap
             component="a"
+            fontFamily={"Nunito"}
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },

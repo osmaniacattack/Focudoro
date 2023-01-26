@@ -1,10 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700&display=swap");
-
-@font-face {
+.root {
   font-family: Nunito, sans-serif;
-  src: url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;400;700&display=swap");
-}
-
-.nunito {
-  font-family: Nunito;
 }

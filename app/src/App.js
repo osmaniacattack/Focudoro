@@ -66,20 +66,19 @@ function App() {
               {Object.keys(user).length === 0 ? null : (
                 <Grid
                   container
-                  // spacing={2}
+                  display="flex"
                   direction="row"
-                  alignItems="center"
-                  justifyContent="center"
                   sx={{ bgColor: "#E3F2FD" }}
                 >
-                  <Container>
                   <Grid
                     item
                     xs={12}
+                    md={8}
                     sx={{
                       "@media (min-width: 300px)": {
                         marginTop: "2.5vh",
                       },
+                      m: 'auto'
                     }}
                     
                   >
@@ -97,28 +96,11 @@ function App() {
                       <YoutubeReact />
                     </Paper>
                   </Grid>
-                  {/* <Grid
+                  <Grid
                     item
                     xs={12}
-                  > */}
-                    {/* <Paper
-                      elevation={8}
-                      sx={{
-                        bgcolor: "#fff",
-                        height: "100%",
-                        width: "97%",
-                        borderRadius: "15px",
-                        p: 2
-                      }}
-                    > */}
-                    {/* </Paper> */}
-                  {/* </Grid> */}
-                  </Container>
-                  {/* <Grid
-                    item
-                    xs={12}
-                    lg={4}
-                    // sx={{mx:5}}
+                    md={3}
+                    sx={{m:'auto'}}
                   >
                     <Paper
                       elevation={8}
@@ -126,11 +108,12 @@ function App() {
                         bgcolor: "#fff",
                         height: "100%",
                         width: "100%",
+                        borderRadius:"20px"
                       }}
                     >
                       <Tasks />
                     </Paper>
-                  </Grid> */}
+                  </Grid>
                 </Grid>
               )}
               <Footer />

@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import { Typography } from '@mui/material';
-import Feedback from './Feedback';
+import React, { useState } from "react";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import { Typography } from "@mui/material";
+import Feedback from "./Feedback";
 
 export default function FeedbackDialog() {
   const [open, setOpen] = useState(false);
@@ -18,7 +18,11 @@ export default function FeedbackDialog() {
 
   return (
     <div>
-      <Typography variant="outlined" onClick={handleClickOpen}>
+      <Typography
+        variant="outlined"
+        fontFamily={"Nunito"}
+        onClick={handleClickOpen}
+      >
         Feedback
       </Typography>
       <Dialog
@@ -29,7 +33,7 @@ export default function FeedbackDialog() {
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            <Feedback/>
+            <Feedback />
           </DialogContentText>
         </DialogContent>
       </Dialog>
