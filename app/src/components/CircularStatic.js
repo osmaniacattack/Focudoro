@@ -11,7 +11,7 @@ import { PomoContext, StudyContext, AudioContext } from "../App";
 import clockalarm from "../assets/clockalarm.mp3";
 import ffseven from "../assets/ffseven.mp3";
 import digital from "../assets/digital.mp3";
-import "../App.css"
+import "../App.css";
 
 function CircularProgressWithLabel(props) {
   const [toggleInfo, setToggleInfo] = useState(false);
@@ -49,6 +49,7 @@ function CircularProgressWithLabel(props) {
                 fontFamily={"Nunito"}
                 fontWeight={700}
                 onClick={() => setToggleInfo(!toggleInfo)}
+                sx={{ ":hover": { cursor: "pointer" } }}
               >
                 {`${props.time}`}
               </Typography>
@@ -60,6 +61,7 @@ function CircularProgressWithLabel(props) {
                 fontFamily={"Nunito"}
                 fontWeight={800}
                 onClick={() => setToggleInfo(!toggleInfo)}
+                sx={{ ":hover": { cursor: "pointer" } }}
               >
                 {`${props.pomoCount} Pomodoro(s)`}
               </Typography>
@@ -132,7 +134,7 @@ function CircularProgressWithLabel(props) {
               variant="h6"
               fontWeight={"700"}
               fontFamily={"Nunito"}
-              >
+            >
               Focus
             </Typography>
           </Button>
@@ -152,7 +154,7 @@ function CircularProgressWithLabel(props) {
               variant="h6"
               fontWeight="700"
               fontFamily={"Nunito"}
-              >
+            >
               Break
             </Typography>
           </Button>
@@ -172,7 +174,7 @@ function CircularProgressWithLabel(props) {
               variant="h6"
               fontWeight="700"
               fontFamily={"Nunito"}
-              >
+            >
               Rest
             </Typography>
           </Button>

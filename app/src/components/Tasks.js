@@ -213,7 +213,7 @@ export default function Tasks() {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setOpen(false)}>Cancel</Button>
+            <Button  onClick={() => setOpen(false)}>Cancel</Button>
             <Button
               variant="contained"
               onClick={() => handleAdd()}
@@ -247,7 +247,7 @@ export default function Tasks() {
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setDeleteOpen(false)}>Cancel</Button>
-            <Button onClick={() => handleDelete(deleteIndex)}>Delete</Button>
+            <Button variant="contained" onClick={() => handleDelete(deleteIndex)}>Delete</Button>
           </DialogActions>
         </Dialog>
       </Card>
