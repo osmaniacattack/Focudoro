@@ -33,6 +33,7 @@ export default function FAQ() {
         <Typography
           variant="h3"
           fontWeight={700}
+          fontFamily={"Nunito"}
           textAlign={"center"}
           color="#2D728F"
         >
@@ -52,6 +53,7 @@ export default function FAQ() {
           variant="body1"
           fontWeight={500}
           color="#2D728F"
+          fontFamily={"Nunito"}
           sx={{ m: 2 }}
         >
           Focudoro is a web app designed to help you focus and accomplish your
@@ -66,6 +68,7 @@ export default function FAQ() {
           fontWeight={700}
           textAlign={"center"}
           color="#2D728F"
+          fontFamily={"Nunito"}
         >
           How Does It Work?
         </Typography>
@@ -119,6 +122,7 @@ export default function FAQ() {
           fontWeight={700}
           textAlign={"center"}
           color="#2D728F"
+          fontFamily={"Nunito"}
         >
           Disclaimer
         </Typography>
@@ -137,6 +141,7 @@ export default function FAQ() {
           fontWeight={500}
           color="#2D728F"
           sx={{ m: 2 }}
+          fontFamily={"Nunito"}
         >
           Pomodoro™ and Pomodoro Technique® are registered trademarks of
           Francesco Cirillo. This web app is not affiliated with Francesco
@@ -147,6 +152,7 @@ export default function FAQ() {
           fontWeight={700}
           textAlign={"center"}
           color="#2D728F"
+          fontFamily={"Nunito"}
         >
           Why Focudoro?
         </Typography>
@@ -165,6 +171,7 @@ export default function FAQ() {
           fontWeight={500}
           color="#2D728F"
           sx={{ m: 2 }}
+          fontFamily={"Nunito"}
         >
           In addition to the Pomodoro timer, you can <u>add your own tasks</u>{" "}
           and it will be saved with the Google account you login with for the

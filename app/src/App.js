@@ -54,11 +54,11 @@ function App() {
             <Paper
               sx={{
                 bgcolor: "#E3F2FD",
-                height: "100vh",
+                height: "auto",
                 width: "100%",
-                "@media (max-width: 1199px)": {
-                  height: "100%",
-                },
+                "@media (min-width: 900px)": {
+                  height: "100vh"
+                }
               }}
               elevation={4}
             >
@@ -72,7 +72,7 @@ function App() {
                 >
                   <Grid
                     item
-                    xs={12}
+                    xs={10}
                     md={8}
                     sx={{
                       "@media (min-width: 300px)": {
@@ -89,7 +89,10 @@ function App() {
                         height: "100%",
                         width: "100%",
                         borderRadius: "20px",
-                        p: 2
+                        p: 2,
+                        '@media (max-width: 500px)': {
+                          mx: -2
+                        }
                       }}
                     >
                       <Timer />
@@ -98,7 +101,7 @@ function App() {
                   </Grid>
                   <Grid
                     item
-                    xs={12}
+                    xs={10}
                     md={3}
                     sx={{m:'auto'}}
                   >
@@ -108,7 +111,11 @@ function App() {
                         bgcolor: "#fff",
                         height: "100%",
                         width: "100%",
-                        borderRadius:"20px"
+                        borderRadius:"20px",
+                        '@media (min-width: 300px)': {
+                          mb: 5,
+                          mt: 4
+                        }
                       }}
                     >
                       <Tasks />

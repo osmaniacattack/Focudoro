@@ -20,10 +20,10 @@ import {
   Checkbox,
   IconButton,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { UserContext } from "../App";
-import "../App.css"
+import "../App.css";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
@@ -39,7 +39,9 @@ export default function Tasks() {
     if (storedTasks) {
       setTasks(storedTasks);
     }
-    const storedCompletedTasks = JSON.parse(localStorage.getItem("completedTasks"));
+    const storedCompletedTasks = JSON.parse(
+      localStorage.getItem("completedTasks")
+    );
     if (storedCompletedTasks) {
       setCompletedTasks(storedCompletedTasks);
     }
@@ -68,7 +70,7 @@ export default function Tasks() {
     newTasks.push(newTask);
     setTasks(newTasks);
     localStorage.setItem("tasks", JSON.stringify(newTasks));
-  }
+  };
 
   return (
     <>
@@ -79,13 +81,11 @@ export default function Tasks() {
           minHeight: "650px",
           maxHeight: "650px",
           overflowY: "auto",
-          borderRadius: "20px"
+          borderRadius: "20px",
         }}
       >
         <CardContent>
-          <Grid
-            container
-          >
+          <Grid container>
             <Grid
               item
               xs={12}
@@ -105,32 +105,34 @@ export default function Tasks() {
                     color="primary"
                     fontWeight={700}
                     fontFamily={"Nunito"}
-                    >
+                  >
                     {`${user.given_name}'s `} Tasks
                   </Typography>
                 </Grid>
                 <Grid
                   item
                   xs={3}
+                  sx={{ m: "auto" }}
                 >
                   <Button
                     sx={{ height: 20, p: 2 }}
                     size="small"
-                    variant="contained"
+                    // variant="contained"
                     color="primary"
                     onClick={() => setOpen(true)}
                   >
-                    <AddIcon />
+                    <CreateIcon />
                   </Button>
                 </Grid>
                 <Grid
                   item
                   xs={3}
+                  sx={{ m: "auto" }}
                 >
                   <Button
                     sx={{ height: 20, p: 2 }}
                     size="small"
-                    variant="outlined"
+                    // variant="outlined"
                     color="primary"
                     onClick={() => setDeleteOpen(true)}
                     disabled={tasks.length === 0}
@@ -186,7 +188,7 @@ export default function Tasks() {
                       )}
                     </Grid>
                   </Grid>
-                  <Divider/>
+                  <Divider />
                 </Grid>
               );
             })}
@@ -196,9 +198,9 @@ export default function Tasks() {
           open={open}
           onClose={() => setOpen(false)}
         >
-          <DialogTitle>Add New Task</DialogTitle>
+          <DialogTitle fontFamily={"Nunito"}>Add New Task</DialogTitle>
           <DialogContent>
-            <DialogContentText>
+            <DialogContentText fontFamily={"Nunito"}>
               Add the task you would like to finish during your focus session.
             </DialogContentText>
             <TextField
@@ -212,7 +214,12 @@ export default function Tasks() {
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setOpen(false)}>Cancel</Button>
-            <Button onClick={() => handleAdd()}>Add</Button>
+            <Button
+              variant="contained"
+              onClick={() => handleAdd()}
+            >
+              Add
+            </Button>
           </DialogActions>
         </Dialog>
 
@@ -220,7 +227,7 @@ export default function Tasks() {
           open={deleteOpen}
           onClose={() => setDeleteOpen(false)}
         >
-          <DialogTitle>Delete</DialogTitle>
+          <DialogTitle fontFamily={"Nunito"}>Delete</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Select the task you would like to delete.

@@ -54,7 +54,7 @@ function CircularProgressWithLabel(props) {
               </Typography>
             ) : (
               <Typography
-                variant="h3"
+                variant="h4"
                 component="div"
                 color="primary"
                 fontFamily={"Nunito"}
@@ -82,7 +82,7 @@ function CircularProgressWithLabel(props) {
             disabled={props.isRunning === true}
             color="success"
           >
-            <PlayArrowIcon />
+            <PlayArrowIcon fontSize="large" />
           </Button>
         </Grid>
         <Grid
@@ -96,7 +96,7 @@ function CircularProgressWithLabel(props) {
             color="error"
             disabled={props.isRunning === false}
           >
-            <StopIcon />
+            <StopIcon fontSize="large" />
           </Button>
         </Grid>
         <Grid
@@ -109,7 +109,7 @@ function CircularProgressWithLabel(props) {
             color="warning"
             onClick={props.reset}
           >
-            <RestartAltIcon />
+            <RestartAltIcon fontSize="large" />
           </Button>
         </Grid>
       </Grid>
@@ -130,7 +130,7 @@ function CircularProgressWithLabel(props) {
           >
             <Typography
               variant="h6"
-              fontWeight="700"
+              fontWeight={"700"}
               fontFamily={"Nunito"}
               >
               Focus
@@ -153,7 +153,7 @@ function CircularProgressWithLabel(props) {
               fontWeight="700"
               fontFamily={"Nunito"}
               >
-              Short Break
+              Break
             </Typography>
           </Button>
         </Grid>
@@ -173,7 +173,7 @@ function CircularProgressWithLabel(props) {
               fontWeight="700"
               fontFamily={"Nunito"}
               >
-              Long Break
+              Rest
             </Typography>
           </Button>
         </Grid>

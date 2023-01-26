@@ -171,7 +171,7 @@ export default function YoutubeReact() {
                     variant="h6"
                     sx={{ color: "#fff" }}
                     fontFamily={"Nunito"}
-                    fontWeight={500}
+                    fontWeight={800}
                   >
                     <i>
                       {customURL !== "" && videoInfo !== null
@@ -185,7 +185,7 @@ export default function YoutubeReact() {
                     variant="subtitle2"
                     sx={{ color: "#fff", mt: 0.25 }}
                     fontFamily={"Nunito"}
-                    fontWeight={500}
+                    fontWeight={700}
                   >
                     {`by: `}
                     {customURL !== "" && videoInfo !== null
