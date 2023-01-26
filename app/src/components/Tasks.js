@@ -75,8 +75,8 @@ export default function Tasks() {
         sx={{
           pb: 2,
           mt: 2,
-          minHeight: "470px",
-          maxHeight: "470px",
+          minHeight: "650px",
+          maxHeight: "650px",
           overflowY: "scroll",
         }}
       >

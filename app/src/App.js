@@ -66,21 +66,22 @@ function App() {
               {Object.keys(user).length === 0 ? null : (
                 <Grid
                   container
-                  spacing={2}
+                  // spacing={2}
                   direction="row"
                   alignItems="center"
                   justifyContent="center"
                   sx={{ bgColor: "#E3F2FD" }}
                 >
+                  <Container>
                   <Grid
                     item
-                    xs={10}
-                    lg={7}
+                    xs={12}
                     sx={{
                       "@media (min-width: 300px)": {
                         marginTop: "2.5vh",
                       },
                     }}
+                    
                   >
                     <Paper
                       elevation={8}
@@ -88,16 +89,36 @@ function App() {
                         bgcolor: "#fff",
                         height: "100%",
                         width: "100%",
-                        borderRadius: "15px",
+                        borderRadius: "20px",
+                        p: 2
                       }}
                     >
                       <Timer />
+                      <YoutubeReact />
                     </Paper>
                   </Grid>
-                  <Grid
+                  {/* <Grid
                     item
-                    xs={10}
-                    lg={3}
+                    xs={12}
+                  > */}
+                    {/* <Paper
+                      elevation={8}
+                      sx={{
+                        bgcolor: "#fff",
+                        height: "100%",
+                        width: "97%",
+                        borderRadius: "15px",
+                        p: 2
+                      }}
+                    > */}
+                    {/* </Paper> */}
+                  {/* </Grid> */}
+                  </Container>
+                  {/* <Grid
+                    item
+                    xs={12}
+                    lg={4}
+                    // sx={{mx:5}}
                   >
                     <Paper
                       elevation={8}
@@ -109,41 +130,7 @@ function App() {
                     >
                       <Tasks />
                     </Paper>
-                  </Grid>
-                  <Grid
-                    item
-                    xs={10}
-                    lg={5}
-                  >
-                    <Paper
-                      elevation={8}
-                      sx={{
-                        bgcolor: "#fff",
-                        height: "100%",
-                        width: "100%",
-                        borderRadius: "15px",
-                      }}
-                    >
-                      <PomoCounter />
-                    </Paper>
-                  </Grid>
-                  <Grid
-                    item
-                    xs={10}
-                    lg={5}
-                  >
-                    <Paper
-                      elevation={8}
-                      sx={{
-                        bgcolor: "#fff",
-                        height: "100%",
-                        width: "100%",
-                        borderRadius: "15px",
-                      }}
-                    >
-                      <YoutubeReact />
-                    </Paper>
-                  </Grid>
+                  </Grid> */}
                 </Grid>
               )}
               <Footer />

@@ -24,7 +24,7 @@ function CircularProgressWithLabel(props) {
         <Box sx={{ position: "relative", display: "inline-flex", mt: 3 }}>
           <CircularProgress
             size="20rem"
-            thickness="1"
+            thickness="3"
             color="info"
             variant="determinate"
             value={props.value}
@@ -47,7 +47,7 @@ function CircularProgressWithLabel(props) {
                 component="div"
                 color="primary"
                 className="nunito"
-                sx={{fontWeight: 700}}
+                sx={{ fontWeight: 700 }}
                 onClick={() => setToggleInfo(!toggleInfo)}
               >
                 {`${props.time}`}
@@ -58,7 +58,7 @@ function CircularProgressWithLabel(props) {
                 component="div"
                 color="primary"
                 className="nunito"
-                sx={{fontWeight: 700}}
+                sx={{ fontWeight: 700 }}
                 onClick={() => setToggleInfo(!toggleInfo)}
               >
                 {`${props.pomoCount} Pomodoro(s)`}
@@ -128,7 +128,13 @@ function CircularProgressWithLabel(props) {
             color="info"
             disabled={props.type === "focus"}
           >
-            Focus
+            <Typography
+              variant="h6"
+              fontWeight="700"
+              className="nunito"
+            >
+              Focus
+            </Typography>
           </Button>
         </Grid>
         <Grid
@@ -142,7 +148,13 @@ function CircularProgressWithLabel(props) {
             color="info"
             disabled={props.type === "short"}
           >
-            Short Break
+            <Typography
+              variant="h6"
+              fontWeight="700"
+              className="nunito"
+            >
+              Short Break
+            </Typography>
           </Button>
         </Grid>
         <Grid
@@ -156,7 +168,13 @@ function CircularProgressWithLabel(props) {
             color="info"
             disabled={props.type === "long"}
           >
-            Long Break
+            <Typography
+              variant="h6"
+              fontWeight="700"
+              className="nunito"
+            >
+              Long Break
+            </Typography>
           </Button>
         </Grid>
       </Grid>
