@@ -157,11 +157,11 @@ export default function FAQ() {
           sx={{ m: 2 }}
           fontFamily={"Nunito"}
         >
-          In addition to the Pomodoro timer, you can <u>add your own tasks</u>{" "}
-          and it will be saved with the Google account you login with for the
-          session you are logged in with. Furthermore, this web app currently
-          allows you to add a YouTube video of your choice to listen to on loop
-          as well as having up to{" "}
+          In addition to the Pomodoro timer and its customizations, you can{" "}
+          <u>add your own tasks</u>{" "}
+          and it will be saved for the duration of your session. Furthermore,
+          this web app currently allows you to add a YouTube video of your
+          choice to listen to on loop as well as having up to{" "}
           <u>six different live lo-fi streams on YouTube</u> for your
           convenience! Those streams are:
           <ul>
