@@ -65,6 +65,7 @@ export default function Tasks() {
     newTasks.push(newTask);
     setTasks(newTasks);
     localStorage.setItem("tasks", JSON.stringify(newTasks));
+    setNewTask("");
   };
 
   return (
@@ -202,6 +203,7 @@ export default function Tasks() {
               label="Task"
               fullWidth
               onChange={(e) => setNewTask(e.target.value)}
+              value={newTask}
               variant="standard"
             />
           </DialogContent>
@@ -210,6 +212,7 @@ export default function Tasks() {
             <Button
               variant="contained"
               onClick={() => handleAdd()}
+              disabled={newTask === ""}
             >
               Add
             </Button>
