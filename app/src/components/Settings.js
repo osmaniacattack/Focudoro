@@ -3,19 +3,11 @@ import {
   Typography,
   Container,
   Grid,
-  List,
-  ListItem,
-  ListItemText,
   TextField,
   Switch,
   MenuItem,
-  Divider,
   FormControlLabel,
 } from "@mui/material";
-import Question from "../assets/question.png";
-import Clock from "../assets/clock.png";
-import Research from "../assets/research.png";
-import Music from "../assets/music.png";
 import { AudioContext } from "../App";
 import { StudyContext } from "../App";
 import { YoutubeContext } from "../App";
@@ -24,20 +16,20 @@ export default function Settings() {
   const [alarm, setAlarm] = useContext(AudioContext);
   const [studyTime, setStudyTime] = useContext(StudyContext);
   const [checked, setChecked] = React.useState(false);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const [error, setError] = useState(false);
-  const [customURL, setCustomURL] = useContext(YoutubeContext);
+  const [setCustomURL] = useContext(YoutubeContext);
 
   function handleURLChange(e) {
     setValue(e.target.value);
     setError(false);
     let url = e.target.value;
-    let videoId = url.split('v=')[1];
-    let ampersandPosition = videoId.indexOf('&');
-    if(ampersandPosition !== -1) {
+    let videoId = url.split("v=")[1];
+    let ampersandPosition = videoId.indexOf("&");
+    if (ampersandPosition !== -1) {
       videoId = videoId.substring(0, ampersandPosition);
     }
-    if(!videoId) {
+    if (!videoId) {
       setError(true);
     } else {
       setCustomURL(videoId);
@@ -57,18 +49,19 @@ export default function Settings() {
       <Typography
         variant="h5"
         fontWeight={500}
-        color="#2D728F"
+        color="primary"
         textAlign={"center"}
+        fontFamily={"Nunito"}
       >
-        Settings
+        App Settings
       </Typography>
-      <Divider />
       <Typography
         sx={{ m: 1 }}
         variant="h6"
         fontWeight={400}
         color="gray"
         textAlign={"left"}
+        fontFamily={"Nunito"}
       >
         Alarm Sounds
       </Typography>
@@ -90,6 +83,7 @@ export default function Settings() {
         fontWeight={400}
         color="gray"
         textAlign={"left"}
+        fontFamily={"Nunito"}
       >
         Timer Duration in Minutes
       </Typography>
@@ -117,6 +111,7 @@ export default function Settings() {
         fontWeight={400}
         color="gray"
         textAlign={"left"}
+        fontFamily={"Nunito"}
       >
         YouTube Player
       </Typography>
@@ -126,6 +121,7 @@ export default function Settings() {
         fontWeight={400}
         color="gray"
         textAlign={"left"}
+        fontFamily={"Nunito"}
       >
         Toggle between preset live music stations or enter in your preferred
         YouTube video of choice to listen to on loop.

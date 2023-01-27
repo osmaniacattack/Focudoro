@@ -8,14 +8,14 @@ import FeedbackIcon from '@mui/icons-material/Feedback';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useForm, ValidationError } from '@formspree/react';
+import { useForm } from '@formspree/react';
 import { UserContext } from '../App';
 
 const theme = createTheme();
 
 export default function Feedback() {
   const [state, handleSubmit] = useForm("mjvdklbj");
-  const [user, setUser] = useContext(UserContext);
+  const [user] = useContext(UserContext);
   if (state.succeeded) {
     return <p>Thank you for the feedback!<br/>We appreciate your interest in improving Focudoro.</p>
 }

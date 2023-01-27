@@ -7,7 +7,7 @@ import {
   Tasks,
   Landing,
 } from "./components/index";
-import { Grid, Paper, Button, Typography, Container } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import React, { useState, createContext, useEffect } from "react";
 import Blob from "./assets/blob2.svg"
 

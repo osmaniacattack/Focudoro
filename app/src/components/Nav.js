@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -14,14 +14,10 @@ import PrivacyPolicyDialog from "./PrivacyPolicyDialog";
 import SettingsDialog from "./SettingsDialog";
 import FeedbackDialog from "./FeedbackDialog";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { GoogleLogin } from "@react-oauth/google";
 import { UserContext } from "../App";
-import jwt_decode from "jwt-decode";
 
 export default function Nav() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [user, setUser] = useContext(UserContext);
 
   const handleSignOut = () => {
@@ -33,16 +29,9 @@ export default function Nav() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
