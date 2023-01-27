@@ -9,7 +9,7 @@ import {
 } from "./components/index";
 import { Grid, Paper } from "@mui/material";
 import React, { useState, createContext, useEffect } from "react";
-import Blob from "./assets/blob2.svg"
+import Blob from "./assets/blob2.svg";
 
 export const PomoContext = createContext();
 export const UserContext = createContext();
@@ -25,11 +25,7 @@ function App() {
   const [customURL, setCustomURL] = useState("");
   let localUser = JSON.parse(localStorage.getItem("user"));
   let localPomoCount = JSON.parse(localStorage.getItem("pomoCounts"));
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
+  
   useEffect(() => {
     if (localUser) {
       if (localUser.exp < Date.now() / 1000) {
@@ -57,9 +53,8 @@ function App() {
               ) : (
                 <Paper
                   sx={{
-                    backgroundImage:`url(${Blob})`,
-                    backgroundSize:'cover',
-                    // bgcolor: "#E3F2FD",
+                    backgroundImage: `url(${Blob})`,
+                    backgroundSize: "cover",
                     height: "auto",
                     width: "100%",
                     "@media (min-width: 900px)": {

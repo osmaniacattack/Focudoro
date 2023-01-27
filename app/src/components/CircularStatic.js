@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Button, Grid } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import StopIcon from "@mui/icons-material/Stop";
+import PauseIcon from '@mui/icons-material/Pause';
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { PomoContext, StudyContext, AudioContext } from "../App";
 import clockalarm from "../assets/clockalarm.mp3";
@@ -98,7 +98,7 @@ function CircularProgressWithLabel(props) {
             color="error"
             disabled={props.isRunning === false}
           >
-            <StopIcon fontSize="large" />
+            <PauseIcon fontSize="large" />
           </Button>
         </Grid>
         <Grid

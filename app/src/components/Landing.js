@@ -11,7 +11,7 @@ import jwt_decode from "jwt-decode";
 import FAQ from "./FAQ";
 
 export default function Landing() {
-  const [setUser] = useContext(UserContext);
+  const [user, setUser] = useContext(UserContext);
 
   return (
     <>
