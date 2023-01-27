@@ -213,7 +213,7 @@ export default function Tasks() {
             />
           </DialogContent>
           <DialogActions>
-            <Button  onClick={() => setOpen(false)}>Cancel</Button>
+            <Button onClick={() => setOpen(false)}>Cancel</Button>
             <Button
               variant="contained"
               onClick={() => handleAdd()}
