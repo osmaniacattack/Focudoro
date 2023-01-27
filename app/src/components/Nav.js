@@ -94,11 +94,13 @@ export default function Nav() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">
-                  <AboutDialog />
-                </Typography>
-              </MenuItem>
+              {Object.keys(user).length > 0 ? (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <AboutDialog />
+                  </Typography>
+                </MenuItem>
+              ) : null}
               {Object.keys(user).length > 0 ? (
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
@@ -123,33 +125,6 @@ export default function Nav() {
                   <Typography textAlign="center">Log Out</Typography>
                 </MenuItem>
               ) : null}
-              {Object.keys(user).length === 0 ? (
-                <MenuItem onClick={() => setUser({})}>
-                  <GoogleOAuthProvider clientId="497316340818-l1clnun305pgv50b7h5tmr52q3apkp76.apps.googleusercontent.com">
-                    <GoogleLogin
-                      shape="pill"
-                      onSuccess={async (credentialResponse) => {
-                        try {
-                          console.log(credentialResponse);
-                          let userObject = jwt_decode(
-                            credentialResponse.credential
-                          );
-                          setUser(userObject);
-                          localStorage.setItem(
-                            "user",
-                            JSON.stringify(userObject)
-                          );
-                        } catch (err) {
-                          console.log(err);
-                        }
-                      }}
-                      onError={() => {
-                        console.log("Login Failed");
-                      }}
-                    />
-                  </GoogleOAuthProvider>
-                </MenuItem>
-              ) : null}
             </Menu>
           </Box>
           <Typography
@@ -169,12 +144,14 @@ export default function Nav() {
             FOCUDORO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              <AboutDialog />
-            </Button>
+            {Object.keys(user).length > 0 ? (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                <AboutDialog />
+              </Button>
+            ) : null}
             {Object.keys(user).length > 0 ? (
               <Button
                 onClick={handleCloseNavMenu}
@@ -200,34 +177,14 @@ export default function Nav() {
           </Box>
 
           <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
-            {Object.keys(user).length === 0 ? (
-              <GoogleOAuthProvider clientId="497316340818-l1clnun305pgv50b7h5tmr52q3apkp76.apps.googleusercontent.com">
-                <GoogleLogin
-                  shape="pill"
-                  onSuccess={async (credentialResponse) => {
-                    try {
-                      let userObject = jwt_decode(
-                        credentialResponse.credential
-                      );
-                      setUser(userObject);
-                      localStorage.setItem("user", JSON.stringify(userObject));
-                    } catch (err) {
-                      console.log(err);
-                    }
-                  }}
-                  onError={() => {
-                    console.log("Login Failed");
-                  }}
-                />
-              </GoogleOAuthProvider>
-            ) : (
+            {Object.keys(user).length > 0 ? (
               <Button
                 sx={{ color: "#fff", height: "10" }}
                 onClick={handleSignOut}
               >
                 <LogoutIcon />
               </Button>
-            )}
+            ) : null}
           </Box>
         </Toolbar>
       </Container>

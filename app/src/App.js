@@ -5,11 +5,11 @@ import {
   YoutubeReact,
   Footer,
   Tasks,
-  PomoCounter,
-  LofiCard,
+  Landing,
 } from "./components/index";
 import { Grid, Paper, Button, Typography, Container } from "@mui/material";
 import React, { useState, createContext, useEffect } from "react";
+import Blob from "./assets/blob2.svg"
 
 export const PomoContext = createContext();
 export const UserContext = createContext();
@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     console.log(user);
-  }, [user])
+  }, [user]);
 
   useEffect(() => {
     if (localUser) {
@@ -51,80 +51,83 @@ function App() {
         <AudioContext.Provider value={[audio, setAudio]}>
           <StudyContext.Provider value={[studyTime, setStudyTime]}>
             <YoutubeContext.Provider value={[customURL, setCustomURL]}>
-            <Paper
-              sx={{
-                bgcolor: "#E3F2FD",
-                height: "auto",
-                width: "100%",
-                "@media (min-width: 900px)": {
-                  height: "100vh"
-                }
-              }}
-              elevation={4}
-            >
               <Nav />
-              {Object.keys(user).length === 0 ? null : (
-                <Grid
-                  container
-                  display="flex"
-                  direction="row"
-                  sx={{ bgColor: "#E3F2FD" }}
+              {Object.keys(user).length === 0 ? (
+                <Landing />
+              ) : (
+                <Paper
+                  sx={{
+                    backgroundImage:`url(${Blob})`,
+                    backgroundSize:'cover',
+                    // bgcolor: "#E3F2FD",
+                    height: "auto",
+                    width: "100%",
+                    "@media (min-width: 900px)": {
+                      height: "100vh",
+                    },
+                  }}
+                  elevation={4}
                 >
                   <Grid
-                    item
-                    xs={10}
-                    md={8}
-                    sx={{
-                      "@media (min-width: 300px)": {
-                        marginTop: "2.5vh",
-                      },
-                      m: 'auto'
-                    }}
-                    
+                    container
+                    display="flex"
+                    direction="row"
+                    sx={{ bgColor: "#E3F2FD" }}
                   >
-                    <Paper
-                      elevation={8}
+                    <Grid
+                      item
+                      xs={10}
+                      md={8}
                       sx={{
-                        bgcolor: "#fff",
-                        height: "100%",
-                        width: "100%",
-                        borderRadius: "20px",
-                        p: 2,
-                        '@media (max-width: 500px)': {
-                          mx: -2
-                        }
+                        "@media (min-width: 300px)": {
+                          marginTop: "2.5vh",
+                        },
+                        m: "auto",
                       }}
                     >
-                      <Timer />
-                      <YoutubeReact />
-                    </Paper>
-                  </Grid>
-                  <Grid
-                    item
-                    xs={10}
-                    md={3}
-                    sx={{m:'auto'}}
-                  >
-                    <Paper
-                      elevation={8}
-                      sx={{
-                        bgcolor: "#fff",
-                        height: "100%",
-                        width: "100%",
-                        borderRadius:"20px",
-                        '@media (min-width: 300px)': {
-                          mb: 5,
-                          mt: 4
-                        }
-                      }}
+                      <Paper
+                        elevation={8}
+                        sx={{
+                          bgcolor: "#fff",
+                          height: "100%",
+                          width: "100%",
+                          borderRadius: "20px",
+                          p: 2,
+                          "@media (max-width: 500px)": {
+                            mx: -2,
+                          },
+                        }}
+                      >
+                        <Timer />
+                        <YoutubeReact />
+                      </Paper>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={10}
+                      md={3}
+                      sx={{ m: "auto" }}
                     >
-                      <Tasks />
-                    </Paper>
+                      <Paper
+                        elevation={8}
+                        sx={{
+                          bgcolor: "#fff",
+                          height: "100%",
+                          width: "100%",
+                          borderRadius: "20px",
+                          "@media (min-width: 300px)": {
+                            mb: 5,
+                            mt: 4,
+                          },
+                        }}
+                      >
+                        <Tasks />
+                      </Paper>
+                    </Grid>
                   </Grid>
-                </Grid>
+                  <Footer />
+                </Paper>
               )}
-              <Footer />
-            </Paper>
             </YoutubeContext.Provider>
           </StudyContext.Provider>
         </AudioContext.Provider>
