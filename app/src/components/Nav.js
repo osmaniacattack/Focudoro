@@ -13,6 +13,7 @@ import AboutDialog from "./AboutDialog";
 import PrivacyPolicyDialog from "./PrivacyPolicyDialog";
 import SettingsDialog from "./SettingsDialog";
 import FeedbackDialog from "./FeedbackDialog";
+import UpdatesDialog from "./UpdatesDialog";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { UserContext } from "../App";
 
@@ -105,6 +106,13 @@ export default function Nav() {
               {Object.keys(user).length > 0 ? (
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
+                    <UpdatesDialog />
+                  </Typography>
+                </MenuItem>
+              ) : null}
+              {Object.keys(user).length > 0 ? (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
                     <SettingsDialog />
                   </Typography>
                 </MenuItem>
@@ -155,6 +163,14 @@ export default function Nav() {
             >
               <PrivacyPolicyDialog />
             </Button>
+            {Object.keys(user).length > 0 ? (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                <UpdatesDialog />
+              </Button>
+            ) : null}
             {Object.keys(user).length > 0 ? (
               <Button
                 onClick={handleCloseNavMenu}
