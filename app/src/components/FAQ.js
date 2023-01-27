@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Typography, Grid, List, ListItem, ListItemText } from "@mui/material";
-import Question from "../assets/question.png";
-import Clock from "../assets/clock.png";
-import Research from "../assets/research.png";
-import Music from "../assets/music.png";
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
+import ArticleIcon from "@mui/icons-material/Article";
+import HeadphonesIcon from "@mui/icons-material/Headphones";
 
 export default function FAQ() {
   const cardDescription = [
@@ -41,13 +41,9 @@ export default function FAQ() {
         </Typography>
         <Typography
           textAlign={"center"}
-          sx={{ m: -1 }}
+          sx={{ m: 1 }}
         >
-          <img
-            src={Question}
-            width="25%"
-            alt="Question icon"
-          />
+          <QuestionMarkIcon sx={{ color: "#e6b400", fontSize: "6rem" }} />
         </Typography>
         <Typography
           variant="body1"
@@ -74,13 +70,9 @@ export default function FAQ() {
         </Typography>
         <Typography
           textAlign={"center"}
-          sx={{ m: -2 }}
+          sx={{ m: 1 }}
         >
-          <img
-            src={Clock}
-            width="25%"
-            alt="Clock icon"
-          />
+          <AccessAlarmIcon sx={{ color: "#e6b400", fontSize: "6rem" }} />
         </Typography>
 
         <Typography
@@ -91,7 +83,7 @@ export default function FAQ() {
           <List>
             <ListItem>
               <ListItemText
-                primary={`1.Define tasks to complete in a 25 minute study instance (aka one
+                primary={`1. Define tasks to complete in a 25 minute study instance (aka one
               pomodoro)`}
               />
             </ListItem>
@@ -128,13 +120,9 @@ export default function FAQ() {
         </Typography>
         <Typography
           textAlign={"center"}
-          sx={{ m: -1 }}
+          sx={{ m: 1 }}
         >
-          <img
-            src={Research}
-            width="25%"
-            alt="Pen and paper icon"
-          />
+          <ArticleIcon sx={{ color: "#e6b400", fontSize: "6rem" }} />
         </Typography>
         <Typography
           variant="body1"
@@ -160,11 +148,7 @@ export default function FAQ() {
           textAlign={"center"}
           sx={{ m: 2 }}
         >
-          <img
-            src={Music}
-            width="18%"
-            alt="Music icon"
-          />
+          <HeadphonesIcon sx={{ color: "#e6b400", fontSize: "6rem" }} />
         </Typography>
         <Typography
           variant="subtitle2"
@@ -176,9 +160,10 @@ export default function FAQ() {
           In addition to the Pomodoro timer, you can <u>add your own tasks</u>{" "}
           and it will be saved with the Google account you login with for the
           session you are logged in with. Furthermore, this web app currently
-          allows you to add a YouTube video of your choice to listen to on loop as
-          well as having up to <u>six different live lo-fi streams on YouTube</u>{" "}
-          for your convenience! Those streams are:
+          allows you to add a YouTube video of your choice to listen to on loop
+          as well as having up to{" "}
+          <u>six different live lo-fi streams on YouTube</u> for your
+          convenience! Those streams are:
           <ul>
             {cardDescription.map((card, index) => {
               return (
