@@ -5,9 +5,15 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { Button, Grid } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import PauseIcon from '@mui/icons-material/Pause';
+import PauseIcon from "@mui/icons-material/Pause";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
-import { PomoContext, StudyContext, AudioContext } from "../App";
+import {
+  PomoContext,
+  StudyContext,
+  AudioContext,
+  RestContext,
+  BreakContext,
+} from "../App";
 import clockalarm from "../assets/clockalarm.mp3";
 import ffseven from "../assets/ffseven.mp3";
 import digital from "../assets/digital.mp3";
@@ -128,7 +134,7 @@ function CircularProgressWithLabel(props) {
             variant="text"
             onClick={props.focus}
             color="info"
-            disabled={props.type === "focus"}
+            disabled={props.type === "focus" || props.type === "customStudy"}
           >
             <Typography
               variant="h6"
@@ -148,7 +154,7 @@ function CircularProgressWithLabel(props) {
             variant="text"
             onClick={props.short}
             color="info"
-            disabled={props.type === "short"}
+            disabled={props.type === "short" || props.type === "customBreak"}
           >
             <Typography
               variant="h6"
@@ -168,7 +174,7 @@ function CircularProgressWithLabel(props) {
             variant="text"
             onClick={props.long}
             color="info"
-            disabled={props.type === "long"}
+            disabled={props.type === "long" || props.type === "customRest"}
           >
             <Typography
               variant="h6"
@@ -204,6 +210,8 @@ export default function CircularStatic() {
   const [pomoCount, setPomoCount] = useContext(PomoContext);
   const [audio] = useContext(AudioContext);
   const [studyTime] = useContext(StudyContext);
+  const [restTime] = useContext(RestContext);
+  const [breakTime] = useContext(BreakContext);
 
   const checkPomoCounts = () => {
     const pomoCounts = JSON.parse(localStorage.getItem("pomoCounts"));
@@ -214,7 +222,7 @@ export default function CircularStatic() {
   };
 
   useEffect(() => {
-    if (timeLeft === 0 && (type === "focus" || type === "custom")) {
+    if (timeLeft === 0) {
       switch (audio) {
         case "vintage":
           manualAlarm.play();
@@ -226,8 +234,10 @@ export default function CircularStatic() {
           fanfareAlarm.play();
           break;
       }
-      setPomoCount(pomoCount + 1);
-      checkPomoCounts();
+      if (type === "focus" || type === "customStudy") {
+        setPomoCount(pomoCount + 1);
+        checkPomoCounts();
+      }
       resetTimer();
       setIsRunning(false);
     }
@@ -235,8 +245,18 @@ export default function CircularStatic() {
 
   useEffect(() => {
     setTimeLeft(studyTime * 60);
-    setType("custom");
+    setType("customStudy");
   }, [studyTime]);
+
+  useEffect(() => {
+    setTimeLeft(breakTime * 60);
+    setType("customBreak");
+  }, [breakTime]);
+
+  useEffect(() => {
+    setTimeLeft(restTime * 60);
+    setType("customRest");
+  }, [restTime]);
 
   const handleFocus = () => {
     setType("focus");
@@ -245,12 +265,12 @@ export default function CircularStatic() {
 
   const handleShortBreak = () => {
     setType("short");
-    setTimeLeft(5 * 60); // 5 minutes in seconds
+    setTimeLeft(breakTime * 60); // 5 minutes in seconds
   };
 
   const handleLongBreak = () => {
     setType("long");
-    setTimeLeft(15 * 60); // 15 minutes in seconds
+    setTimeLeft(restTime * 60); // 15 minutes in seconds
   };
 
   useEffect(() => {
@@ -282,16 +302,22 @@ export default function CircularStatic() {
     handleStop();
     switch (type) {
       case "short":
-        setTimeLeft(5 * 60);
+        setTimeLeft(breakTime * 60);
         break;
       case "long":
-        setTimeLeft(15 * 60);
+        setTimeLeft(restTime * 60);
         break;
-      case "custom":
+      case "customStudy":
         setTimeLeft(studyTime * 60);
         break;
-      default:
-        setTimeLeft(25 * 60);
+      case "customBreak":
+        setTimeLeft(breakTime * 60);
+        break;
+      case "customRest":
+        setTimeLeft(restTime * 60);
+        break;
+      case "focus":
+        setTimeLeft(studyTime * 60);
         break;
     }
   };
@@ -306,16 +332,22 @@ export default function CircularStatic() {
 
     switch (type) {
       case "short":
-        duration = 5 * 60;
+        duration = breakTime * 60;
         break;
       case "long":
-        duration = 15 * 60;
+        duration = restTime * 60;
         break;
-      case "custom":
+      case "customStudy":
         duration = studyTime * 60;
         break;
-      default:
-        duration = 25 * 60;
+      case "customBreak":
+        duration = breakTime * 60;
+        break;
+      case "customRest":
+        duration = restTime * 60;
+        break;
+      case "focus":
+        duration = studyTime * 60;
     }
 
     if (timeLeft < 0) {

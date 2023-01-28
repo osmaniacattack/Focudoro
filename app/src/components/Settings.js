@@ -8,17 +8,18 @@ import {
   MenuItem,
   FormControlLabel,
 } from "@mui/material";
-import { AudioContext } from "../App";
-import { StudyContext } from "../App";
-import { YoutubeContext } from "../App";
+import { AudioContext, StudyContext, RestContext, BreakContext, YoutubeContext } from "../App";
+
 
 export default function Settings() {
   const [alarm, setAlarm] = useContext(AudioContext);
   const [studyTime, setStudyTime] = useContext(StudyContext);
+  const [breakTime, setBreakTime] = useContext(BreakContext);
+  const [restTime, setRestTime] = useContext(RestContext);
   const [checked, setChecked] = React.useState(false);
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
-  const [setCustomURL] = useContext(YoutubeContext);
+  const [customURL, setCustomURL] = useContext(YoutubeContext);
 
   function handleURLChange(e) {
     setValue(e.target.value);
@@ -93,7 +94,7 @@ export default function Settings() {
       >
         <Grid
           item
-          xs={12}
+          xs={4}
         >
           <TextField
             fullWidth
@@ -102,6 +103,32 @@ export default function Settings() {
             sx={{ mt: 1 }}
             label="Study Timer"
             onChange={(e) => setStudyTime(e.target.value)}
+          />
+        </Grid>
+        <Grid
+          item
+          xs={4}
+        >
+          <TextField
+            fullWidth
+            value={breakTime}
+            type="number"
+            sx={{ mt: 1 }}
+            label="Break Timer"
+            onChange={(e) => setBreakTime(e.target.value)}
+          />
+        </Grid>
+        <Grid
+          item
+          xs={4}
+        >
+          <TextField
+            fullWidth
+            value={restTime}
+            type="number"
+            sx={{ mt: 1 }}
+            label="Rest Timer"
+            onChange={(e) => setRestTime(e.target.value)}
           />
         </Grid>
       </Grid>

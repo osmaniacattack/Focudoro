@@ -36,6 +36,10 @@ export default function UpdateCard(props) {
               <li>Cleared user text entry when adding a new task</li>
               <li>Added custom timer settings for Break and Rest</li>
               <li>Added an alarm for Break and Rest</li>
+              <li>
+                Fixed the error where a user could not listen to custom music
+                upon entering a valid YouTube URL in settings.
+              </li>
             </ul>
           </Typography>
           <Typography
@@ -43,7 +47,8 @@ export default function UpdateCard(props) {
             color="text.secondary"
             fontFamily="Nunito"
           >
-            Updates to Focudoro will be added bi-weekly pending user feedback and necessary enhancements.
+            Updates to Focudoro will be added bi-weekly pending user feedback
+            and necessary enhancements.
           </Typography>
         </CardContent>
       </CardActionArea>
