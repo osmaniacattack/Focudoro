@@ -1,25 +1,13 @@
 import {
-  Box,
-  Container,
   Grid,
   Typography,
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  CardActionArea,
 } from "@mui/material";
-import React, { useState, useContext } from "react";
-import Background from "../assets/background.png";
+import React, {useContext } from "react";
 import Blob from "../assets/blob2.svg";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
 import { UserContext } from "../App";
 import jwt_decode from "jwt-decode";
-import Question from "../assets/question.png";
-import Research from "../assets/research.png";
-import Idea from "../assets/idea.png";
-import Music from "../assets/music.png";
 import FAQ from "./FAQ";
 
 export default function Landing() {

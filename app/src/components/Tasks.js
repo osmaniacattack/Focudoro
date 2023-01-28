@@ -1,14 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import {
-  Avatar,
   Button,
   Card,
-  CardActions,
   CardContent,
-  Container,
   Divider,
   Grid,
-  Menu,
   MenuItem,
   TextField,
   Typography,
@@ -18,7 +14,6 @@ import {
   DialogContentText,
   DialogTitle,
   Checkbox,
-  IconButton,
 } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -70,6 +65,7 @@ export default function Tasks() {
     newTasks.push(newTask);
     setTasks(newTasks);
     localStorage.setItem("tasks", JSON.stringify(newTasks));
+    setNewTask("");
   };
 
   return (
@@ -117,7 +113,6 @@ export default function Tasks() {
                   <Button
                     sx={{ height: 20, p: 2 }}
                     size="small"
-                    // variant="contained"
                     color="primary"
                     onClick={() => setOpen(true)}
                   >
@@ -132,7 +127,6 @@ export default function Tasks() {
                   <Button
                     sx={{ height: 20, p: 2 }}
                     size="small"
-                    // variant="outlined"
                     color="primary"
                     onClick={() => setDeleteOpen(true)}
                     disabled={tasks.length === 0}
@@ -209,6 +203,7 @@ export default function Tasks() {
               label="Task"
               fullWidth
               onChange={(e) => setNewTask(e.target.value)}
+              value={newTask}
               variant="standard"
             />
           </DialogContent>
@@ -217,6 +212,7 @@ export default function Tasks() {
             <Button
               variant="contained"
               onClick={() => handleAdd()}
+              disabled={newTask === ""}
             >
               Add
             </Button>

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,15 +13,12 @@ import AboutDialog from "./AboutDialog";
 import PrivacyPolicyDialog from "./PrivacyPolicyDialog";
 import SettingsDialog from "./SettingsDialog";
 import FeedbackDialog from "./FeedbackDialog";
+import UpdatesDialog from "./UpdatesDialog";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { GoogleLogin } from "@react-oauth/google";
 import { UserContext } from "../App";
-import jwt_decode from "jwt-decode";
 
 export default function Nav() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [user, setUser] = useContext(UserContext);
 
   const handleSignOut = () => {
@@ -33,16 +30,9 @@ export default function Nav() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
   };
 
   return (
@@ -116,6 +106,13 @@ export default function Nav() {
               {Object.keys(user).length > 0 ? (
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
+                    <UpdatesDialog />
+                  </Typography>
+                </MenuItem>
+              ) : null}
+              {Object.keys(user).length > 0 ? (
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
                     <SettingsDialog />
                   </Typography>
                 </MenuItem>
@@ -166,6 +163,14 @@ export default function Nav() {
             >
               <PrivacyPolicyDialog />
             </Button>
+            {Object.keys(user).length > 0 ? (
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                <UpdatesDialog />
+              </Button>
+            ) : null}
             {Object.keys(user).length > 0 ? (
               <Button
                 onClick={handleCloseNavMenu}

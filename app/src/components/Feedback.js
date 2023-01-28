@@ -1,45 +1,68 @@
-import React, {useContext} from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import FeedbackIcon from '@mui/icons-material/Feedback';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useForm, ValidationError } from '@formspree/react';
-import { UserContext } from '../App';
+import React, { useContext } from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
+import FeedbackIcon from "@mui/icons-material/Feedback";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useForm } from "@formspree/react";
+import { UserContext } from "../App";
 
 const theme = createTheme();
 
 export default function Feedback() {
-  const [state, handleSubmit] = useForm("mjvdklbj");
-  const [user, setUser] = useContext(UserContext);
+  const [user] = useContext(UserContext);
+  const options = {
+    data: {
+      name: `${user.given_name} ${user.family_name}`,
+      email: `${user.email}`,
+    },
+  };
+  const [state, handleSubmit] = useForm("mjvdklbj", options);
   if (state.succeeded) {
-    return <p>Thank you for the feedback!<br/>We appreciate your interest in improving Focudoro.</p>
-}
+    return (
+      <p>
+        Thank you for the feedback!
+        <br />
+        We appreciate your interest in improving Focudoro.
+      </p>
+    );
+  }
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+      >
         <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <FeedbackIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography
+            component="h1"
+            variant="h5"
+          >
             Have Feedback?
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
+            <TextField
               margin="normal"
               required
               fullWidth
