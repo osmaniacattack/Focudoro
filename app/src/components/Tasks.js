@@ -102,7 +102,7 @@ export default function Tasks() {
                     fontWeight={700}
                     fontFamily={"Nunito"}
                   >
-                    {`${user.given_name}'s `} Tasks
+                    {`${user["given_name"]}'s `} Tasks
                   </Typography>
                 </Grid>
                 <Grid
