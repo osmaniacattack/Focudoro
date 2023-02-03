@@ -8,6 +8,10 @@ import jwt_decode from "jwt-decode";
 import FAQ from "./FAQ";
 import axios from "axios";
 
+// Find a way to track login amounts
+// Idea: create an array of logged in times? when a user logs in, the date.now would be added to the array...
+// when pulling data for total logged in, we will only account for single days
+
 export default function Landing() {
   const [user, setUser] = useContext(UserContext);
 
