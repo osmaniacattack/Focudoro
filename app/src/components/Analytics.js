@@ -13,6 +13,7 @@ export default function Analytics() {
   const [pomoCount, setPomoCount] = useContext(PomoContext);
   const [totalMinutes, setTotalMinutes] = useState(0);
   const [lifetimePomodoros, setLifetimePomodoros] = useState(0);
+  const [totalDays, setTotalDays] = useState([]);
   const getRegisteredDateString = () => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     let userRegistered = new Date(user.registered);
@@ -26,8 +27,10 @@ export default function Analytics() {
     const initialTotalMinutes = JSON.parse(
       localStorage.getItem("totalMinutes")
     );
+    const initialTotalDays = JSON.parse(localStorage.getItem("totalDays"));
     setLifetimePomodoros(initialLifePomos || 0);
     setTotalMinutes(initialTotalMinutes || 0);
+    setTotalDays(initialTotalDays || []);
   }, []);
 
   useEffect(() => {
@@ -46,6 +49,11 @@ export default function Analytics() {
         localStorage.setItem(
           "lifetimePomodoros",
           JSON.stringify(updatedUser.data.lifetimePomodoro)
+        );
+        setTotalDays(updatedUser.data.totalDays);
+        localStorage.setItem(
+          "totalDays",
+          JSON.stringify(updatedUser.data.totalDays)
         );
       } catch (err) {
         console.log(err);
@@ -164,7 +172,7 @@ export default function Analytics() {
           fontWeight={1000}
           variant="h6"
         >
-          0
+          {totalDays.length}
         </Typography>
         <Typography
           color="#fff"

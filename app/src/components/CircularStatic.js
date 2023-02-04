@@ -201,6 +201,7 @@ export default function CircularStatic() {
   const [restTime] = useContext(RestContext);
   const [breakTime] = useContext(BreakContext);
   const [user, setUser] = useContext(UserContext);
+  const today = new Date().toDateString();
 
   const updateUser = async (updates) => {
     try {
@@ -224,14 +225,13 @@ export default function CircularStatic() {
   };
 
   useEffect(() => {
-    if(!user){
+    if (!user) {
       setUser(null);
-    }
-    else{
+    } else {
       setLifePomodoros(user.lifetimePomodoro);
       setLifeMinutes(user.totalMinutes);
     }
-  })
+  });
 
   useEffect(() => {
     if (timeLeft === 0) {
@@ -249,10 +249,18 @@ export default function CircularStatic() {
       if (type === "focus" || type === "customStudy") {
         setPomoCount(pomoCount + 1);
         checkPomoCounts();
-        updateUser({
-          lifetimePomodoro: lifePomodoros + 1,
-          totalMinutes: lifeMinutes + currentMinutes,
-        });
+        if (!user.totalDays.includes(today)) {
+          updateUser({
+            lifetimePomodoro: lifePomodoros + 1,
+            totalMinutes: lifeMinutes + currentMinutes,
+            totalDays: [...user.totalDays, today],
+          });
+        } else {
+          updateUser({
+            lifetimePomodoro: lifePomodoros + 1,
+            totalMinutes: lifeMinutes + currentMinutes,
+          });
+        }
       }
       resetTimer();
       setIsRunning(false);
