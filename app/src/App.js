@@ -6,8 +6,9 @@ import {
   Footer,
   Tasks,
   Landing,
+  AmbientRadio,
 } from "./components/index";
-import { Grid, Paper } from "@mui/material";
+import { Divider, Grid, Paper } from "@mui/material";
 import React, { useState, createContext, useEffect } from "react";
 import Blob from "./assets/blob2.svg";
 
@@ -101,6 +102,8 @@ function App() {
                           >
                             <Timer />
                             <YoutubeReact />
+                            <Divider sx={{my:1}} />
+                            <AmbientRadio />
                           </Paper>
                         </Grid>
                         <Grid
