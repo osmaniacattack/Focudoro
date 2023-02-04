@@ -146,7 +146,7 @@ function App() {
                                   fontWeight={1000}
                                   fontStyle="italic"
                                 >
-                                  Ambient Noise Radio
+                                  Ambience Radio
                                 </Typography>
                               </AccordionSummary>
                               <AccordionDetails>
