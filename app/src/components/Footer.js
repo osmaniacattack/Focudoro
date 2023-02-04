@@ -8,8 +8,7 @@ export default function Footer() {
     <React.Fragment>
       <AppBar
         position="fixed"
-        color="info"
-        sx={{ top: "auto", bottom: 0 }}
+        sx={{ top: "auto", bottom: 0, backgroundColor: "#1976D2" }}
       >
         <Typography
           variant="subtitle2"

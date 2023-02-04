@@ -244,11 +244,6 @@ export default function CircularStatic() {
   }, [timeLeft, type]);
 
   useEffect(() => {
-    setTimeLeft(studyTime * 60);
-    setType("customStudy");
-  }, [studyTime]);
-
-  useEffect(() => {
     setTimeLeft(breakTime * 60);
     setType("customBreak");
   }, [breakTime]);
@@ -257,6 +252,11 @@ export default function CircularStatic() {
     setTimeLeft(restTime * 60);
     setType("customRest");
   }, [restTime]);
+
+  useEffect(() => {
+    setTimeLeft(studyTime * 60);
+    setType("customStudy");
+  }, [studyTime]);
 
   const handleFocus = () => {
     setType("focus");
@@ -348,6 +348,7 @@ export default function CircularStatic() {
         break;
       case "focus":
         duration = studyTime * 60;
+        break;
     }
 
     if (timeLeft < 0) {

@@ -157,6 +157,7 @@ export default function Analytics() {
           textAlign={"center"}
           fontFamily="Nunito"
           fontWeight={700}
+          fontStyle="italic"
         >{`Productively vibing since: ${getRegisteredDateString()} `}</Typography>
       </Grid>
     </Grid>
