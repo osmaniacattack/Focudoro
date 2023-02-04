@@ -6,8 +6,23 @@ import {
   Footer,
   Tasks,
   Landing,
+  AmbientRadio,
+  Analytics,
 } from "./components/index";
-import { Grid, Paper } from "@mui/material";
+import {
+  Divider,
+  Grid,
+  Paper,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material";
+
+import InsightsIcon from '@mui/icons-material/Insights';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import MusicNoteIcon from "@mui/icons-material/MusicNote";
+
 import React, { useState, createContext, useEffect } from "react";
 import Blob from "./assets/blob2.svg";
 
@@ -100,7 +115,46 @@ function App() {
                             }}
                           >
                             <Timer />
-                            <YoutubeReact />
+                            <Accordion>
+                              <AccordionSummary
+                                expandIcon={<MusicNoteIcon />}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                              >
+                                <Typography
+                                  variant="h6"
+                                  fontFamily={"Nunito"}
+                                  color="primary"
+                                  fontWeight={1000}
+                                  fontStyle="italic"
+                                >
+                                  LoFi Radio
+                                </Typography>
+                              </AccordionSummary>
+                              <AccordionDetails>
+                                <YoutubeReact />
+                              </AccordionDetails>
+                            </Accordion>
+                            <Accordion sx={{ backgroundColor: "#1976D2" }}>
+                              <AccordionSummary
+                                expandIcon={<MusicNoteIcon />}
+                                aria-controls="panel2a-content"
+                                id="panel2a-header"
+                              >
+                                <Typography
+                                  variant="h6"
+                                  fontFamily={"Nunito"}
+                                  color="#fff"
+                                  fontWeight={1000}
+                                  fontStyle="italic"
+                                >
+                                  Ambience Radio
+                                </Typography>
+                              </AccordionSummary>
+                              <AccordionDetails>
+                                <AmbientRadio />
+                              </AccordionDetails>
+                            </Accordion>
                           </Paper>
                         </Grid>
                         <Grid
@@ -122,7 +176,44 @@ function App() {
                               },
                             }}
                           >
-                            <Tasks />
+                            <Accordion>
+                              <AccordionSummary
+                                expandIcon={<InsightsIcon />}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                              >
+                                <Typography
+                                  variant="h6"
+                                  fontFamily={"Nunito"}
+                                  color="primary"
+                                  fontWeight={1000}
+                                  fontStyle="italic"
+                                >
+                                  Analytics
+                                </Typography>
+                              </AccordionSummary>
+                              <AccordionDetails><Analytics/></AccordionDetails>
+                            </Accordion>
+                            <Accordion>
+                              <AccordionSummary
+                                expandIcon={<AssignmentIcon />}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                              >
+                                <Typography
+                                  variant="h6"
+                                  fontFamily={"Nunito"}
+                                  color="primary"
+                                  fontWeight={1000}
+                                  fontStyle="italic"
+                                >
+                                  {`${user.given_name}'s Tasks`}
+                                </Typography>
+                              </AccordionSummary>
+                              <AccordionDetails>
+                                <Tasks />
+                              </AccordionDetails>
+                            </Accordion>
                           </Paper>
                         </Grid>
                       </Grid>
