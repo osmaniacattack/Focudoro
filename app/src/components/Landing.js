@@ -1,3 +1,5 @@
+/// Lenovo Yoga 720
+
 import { Grid, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import Blob from "../assets/blob2.svg";
@@ -14,6 +16,15 @@ import axios from "axios";
 
 export default function Landing() {
   const [user, setUser] = useContext(UserContext);
+  const today = new Date().toDateString();
+
+  function updateLoginArray(loginArray) {
+    const today = new Date().toDateString();
+    if (!loginArray.includes(today)) {
+      loginArray.push(today);
+    }
+    return loginArray;
+  }
 
   return (
     <>
@@ -84,11 +95,28 @@ export default function Landing() {
                     body,
                     config
                   );
-                  setUser(mongoUser.data.user);
-                  localStorage.setItem(
-                    "user",
-                    JSON.stringify(mongoUser.data.user)
-                  );
+
+                  if (!mongoUser.data.user.totalDays.includes(today)) {
+                    let updatedBody = {
+                      totalDays: mongoUser.data.user.totalDays.push(today),
+                    };
+                    const updatedMongoUser = await axios.put(
+                      `https://focudoro-backend.onrender.com/api/users/${mongoUser.data.user._id}`,
+                      updatedBody,
+                      config
+                    );
+                    setUser(updatedMongoUser.data.user);
+                    localStorage.setItem(
+                      "user",
+                      JSON.stringify(updatedMongoUser.data.user)
+                    );
+                  } else {
+                    setUser(mongoUser.data.user);
+                    localStorage.setItem(
+                      "user",
+                      JSON.stringify(mongoUser.data.user)
+                    );
+                  }
                 } catch (err) {
                   console.log(err);
                 }
