@@ -8,6 +8,7 @@ export { default as PrivacyPolicyDialog } from "./PrivacyPolicyDialog";
 export { default as Settings } from "./Settings";
 export { default as SettingsDialog } from "./SettingsDialog";
 export { default as YoutubeReact } from "./YoutubeReact";
+export { default as AmbientRadio } from "./AmbientRadio";
 export { default as Tasks } from "./Tasks";
 export { default as PomoCounter } from "./PomoCounter";
 export { default as LofiCard } from "./LofiCard";
