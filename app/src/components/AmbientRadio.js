@@ -56,12 +56,10 @@ export default function AmbientRadio() {
   const [currentSoundIdx, setCurrentSoundIdx] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [sound, setSound] = useState(null);
-  const [volume, setVolume] = useState(.5);
+  const [volume, setVolume] = useState(0.5);
 
   useEffect(() => {
-    setSound(
-      new Howl({ src: [soundIds[currentSoundIdx]], loop: true})
-    );
+    setSound(new Howl({ src: [soundIds[currentSoundIdx]], loop: true }));
   }, [currentSoundIdx]);
 
   useEffect(() => {
@@ -129,7 +127,10 @@ export default function AmbientRadio() {
                     fontFamily={"Nunito"}
                     fontWeight={800}
                   >
-                    <i>{playing === true ? `Playing: ` : `Paused: `}{cardDescription[currentSoundIdx]}</i>
+                    <i>
+                      {playing === true ? `Playing: ` : `Paused: `}
+                      {cardDescription[currentSoundIdx]}
+                    </i>
                   </Typography>
                 }
               />
@@ -184,6 +185,7 @@ export default function AmbientRadio() {
             )}
           </IconButton>
           <Slider
+            disabled={playing === false}
             value={volume}
             onChange={(event) => handleVolumeChange(event)}
             min={0}
