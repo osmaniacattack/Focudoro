@@ -94,26 +94,15 @@ export default function Tasks() {
               >
                 <Grid
                   item
-                  xs={6}
-                >
-                  <Typography
-                    variant="h6"
-                    color="primary"
-                    fontWeight={700}
-                    fontFamily={"Nunito"}
-                  >
-                    {`${user.given_name}'s `} Tasks
-                  </Typography>
-                </Grid>
-                <Grid
-                  item
-                  xs={3}
+                  xs={5}
                   sx={{ m: "auto" }}
                 >
                   <Button
                     sx={{ height: 20, p: 2 }}
                     size="small"
                     color="primary"
+                    variant="contained"
+                    fullWidth
                     onClick={() => setOpen(true)}
                   >
                     <CreateIcon />
@@ -121,13 +110,15 @@ export default function Tasks() {
                 </Grid>
                 <Grid
                   item
-                  xs={3}
+                  xs={5}
                   sx={{ m: "auto" }}
                 >
                   <Button
                     sx={{ height: 20, p: 2 }}
                     size="small"
                     color="primary"
+                    variant="contained"
+                    fullWidth
                     onClick={() => setDeleteOpen(true)}
                     disabled={tasks.length === 0}
                   >

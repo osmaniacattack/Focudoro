@@ -7,6 +7,7 @@ import {
   Tasks,
   Landing,
   AmbientRadio,
+  Analytics,
 } from "./components/index";
 import {
   Divider,
@@ -18,7 +19,8 @@ import {
   AccordionDetails,
 } from "@mui/material";
 
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import InsightsIcon from '@mui/icons-material/Insights';
+import AssignmentIcon from '@mui/icons-material/Assignment';
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 
 import React, { useState, createContext, useEffect } from "react";
@@ -174,7 +176,44 @@ function App() {
                               },
                             }}
                           >
-                            <Tasks />
+                            <Accordion>
+                              <AccordionSummary
+                                expandIcon={<InsightsIcon />}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                              >
+                                <Typography
+                                  variant="h6"
+                                  fontFamily={"Nunito"}
+                                  color="primary"
+                                  fontWeight={1000}
+                                  fontStyle="italic"
+                                >
+                                  Analytics
+                                </Typography>
+                              </AccordionSummary>
+                              <AccordionDetails><Analytics/></AccordionDetails>
+                            </Accordion>
+                            <Accordion>
+                              <AccordionSummary
+                                expandIcon={<AssignmentIcon />}
+                                aria-controls="panel1a-content"
+                                id="panel1a-header"
+                              >
+                                <Typography
+                                  variant="h6"
+                                  fontFamily={"Nunito"}
+                                  color="primary"
+                                  fontWeight={1000}
+                                  fontStyle="italic"
+                                >
+                                  {`${user.given_name}'s Tasks`}
+                                </Typography>
+                              </AccordionSummary>
+                              <AccordionDetails>
+                                <Tasks />
+                              </AccordionDetails>
+                            </Accordion>
                           </Paper>
                         </Grid>
                       </Grid>
