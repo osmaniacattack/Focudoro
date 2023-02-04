@@ -17,6 +17,10 @@ import {
 } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AccessTimeIcon from '@mui/icons-material/AccessTime'; // Lifetime Pomodoros
+import MoreTimeIcon from '@mui/icons-material/MoreTime'; // Pomodoros this session
+import HourglassBottomIcon from '@mui/icons-material/HourglassBottom'; // Minutes Focused
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'; // Total logins
 import { UserContext } from "../App";
 import "../App.css";
 
@@ -233,7 +237,12 @@ export default function Tasks() {
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setDeleteOpen(false)}>Cancel</Button>
-            <Button variant="contained" onClick={() => handleDelete(deleteIndex)}>Delete</Button>
+            <Button
+              variant="contained"
+              onClick={() => handleDelete(deleteIndex)}
+            >
+              Delete
+            </Button>
           </DialogActions>
         </Dialog>
       </Card>
