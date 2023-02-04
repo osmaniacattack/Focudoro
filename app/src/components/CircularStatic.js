@@ -13,14 +13,15 @@ import {
   AudioContext,
   RestContext,
   BreakContext,
+  UserContext,
 } from "../App";
 import clockalarm from "../assets/clockalarm.mp3";
 import ffseven from "../assets/ffseven.mp3";
 import digital from "../assets/digital.mp3";
+import axios from "axios";
 import "../App.css";
 
 function CircularProgressWithLabel(props) {
-  const [toggleInfo, setToggleInfo] = useState(false);
   return (
     <>
       <Typography
@@ -47,31 +48,15 @@ function CircularProgressWithLabel(props) {
               justifyContent: "center",
             }}
           >
-            {toggleInfo === false ? (
-              <Typography
-                variant="h1"
-                component="div"
-                color="primary"
-                fontFamily={"Nunito"}
-                fontWeight={700}
-                onClick={() => setToggleInfo(!toggleInfo)}
-                sx={{ ":hover": { cursor: "pointer" } }}
-              >
-                {`${props.time}`}
-              </Typography>
-            ) : (
-              <Typography
-                variant="h4"
-                component="div"
-                color="primary"
-                fontFamily={"Nunito"}
-                fontWeight={800}
-                onClick={() => setToggleInfo(!toggleInfo)}
-                sx={{ ":hover": { cursor: "pointer" } }}
-              >
-                {`${props.pomoCount} Pomodoro(s)`}
-              </Typography>
-            )}
+            <Typography
+              variant="h1"
+              component="div"
+              color="primary"
+              fontFamily={"Nunito"}
+              fontWeight={700}
+            >
+              {`${props.time}`}
+            </Typography>
           </Box>
         </Box>
       </Typography>
@@ -203,15 +188,32 @@ export default function CircularStatic() {
   const manualAlarm = new Audio(clockalarm);
   const fanfareAlarm = new Audio(ffseven);
   const digitalAlarm = new Audio(digital);
-  const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 minutes in seconds
+  const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
   const [type, setType] = useState("focus");
+  const [currentMinutes, setCurrentMinutes] = useState(25 * 60);
   const [intervalId, setIntervalId] = useState(null);
+  const [lifePomodoros, setLifePomodoros] = useState(0);
+  const [lifeMinutes, setLifeMinutes] = useState(0);
   const [pomoCount, setPomoCount] = useContext(PomoContext);
   const [audio] = useContext(AudioContext);
   const [studyTime] = useContext(StudyContext);
   const [restTime] = useContext(RestContext);
   const [breakTime] = useContext(BreakContext);
+  const [user, setUser] = useContext(UserContext);
+
+  const updateUser = async (updates) => {
+    try {
+      const response = await axios.put(
+        `https://focudoro-backend.onrender.com/api/users/${user._id}`,
+        updates
+      );
+      return response.data;
+    } catch (error) {
+      console.error(error.response.data);
+      throw error;
+    }
+  };
 
   const checkPomoCounts = () => {
     const pomoCounts = JSON.parse(localStorage.getItem("pomoCounts"));
@@ -220,6 +222,16 @@ export default function CircularStatic() {
     }
     localStorage.setItem("pomoCounts", JSON.stringify(pomoCount));
   };
+
+  useEffect(() => {
+    if(!user){
+      setUser(null);
+    }
+    else{
+      setLifePomodoros(user.lifetimePomodoro);
+      setLifeMinutes(user.totalMinutes);
+    }
+  })
 
   useEffect(() => {
     if (timeLeft === 0) {
@@ -237,6 +249,10 @@ export default function CircularStatic() {
       if (type === "focus" || type === "customStudy") {
         setPomoCount(pomoCount + 1);
         checkPomoCounts();
+        updateUser({
+          lifetimePomodoro: lifePomodoros + 1,
+          totalMinutes: lifeMinutes + currentMinutes,
+        });
       }
       resetTimer();
       setIsRunning(false);
@@ -255,11 +271,13 @@ export default function CircularStatic() {
 
   useEffect(() => {
     setTimeLeft(studyTime * 60);
+    setCurrentMinutes(studyTime * 60);
     setType("customStudy");
   }, [studyTime]);
 
   const handleFocus = () => {
     setType("focus");
+    setCurrentMinutes(studyTime * 60);
     setTimeLeft(studyTime * 60); // 25 minutes in seconds
   };
 
@@ -309,6 +327,7 @@ export default function CircularStatic() {
         break;
       case "customStudy":
         setTimeLeft(studyTime * 60);
+        setCurrentMinutes(studyTime * 60);
         break;
       case "customBreak":
         setTimeLeft(breakTime * 60);
@@ -318,6 +337,7 @@ export default function CircularStatic() {
         break;
       case "focus":
         setTimeLeft(studyTime * 60);
+        setCurrentMinutes(studyTime * 60);
         break;
     }
   };
