@@ -94,7 +94,6 @@ export default function Tasks() {
               >
                 <Grid
                   item
-                  xs={5}
                   sx={{ m: "auto" }}
                 >
                   <Button

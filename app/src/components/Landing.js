@@ -1,14 +1,16 @@
-import {
-  Grid,
-  Typography,
-} from "@mui/material";
-import React, {useContext } from "react";
+import { Grid, Typography } from "@mui/material";
+import React, { useContext } from "react";
 import Blob from "../assets/blob2.svg";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
 import { UserContext } from "../App";
 import jwt_decode from "jwt-decode";
 import FAQ from "./FAQ";
+import axios from "axios";
+
+// Find a way to track login amounts
+// Idea: create an array of logged in times? when a user logs in, the date.now would be added to the array...
+// when pulling data for total logged in, we will only account for single days
 
 export default function Landing() {
   const [user, setUser] = useContext(UserContext);
@@ -23,11 +25,16 @@ export default function Landing() {
           height: "50vh",
         }}
       >
-        <Grid item xs={0} md={2}/>
         <Grid
           item
-          xs={12} md={8}
-          sx={{ m:5 }}
+          xs={0}
+          md={2}
+        />
+        <Grid
+          item
+          xs={12}
+          md={8}
+          sx={{ m: 5 }}
         >
           <Typography
             variant={"h2"}
@@ -58,9 +65,30 @@ export default function Landing() {
               shape="rectangular"
               onSuccess={async (credentialResponse) => {
                 try {
+                  const config = {
+                    headers: {
+                      "Access-Control-Allow-Origin": "*",
+                    },
+                  };
+
                   let userObject = jwt_decode(credentialResponse.credential);
-                  setUser(userObject);
-                  localStorage.setItem("user", JSON.stringify(userObject));
+                  // add function to send user email, name and given name to backend;
+
+                  let body = {
+                    email: userObject.email,
+                    given_name: userObject.given_name,
+                    family_name: userObject.family_name,
+                  };
+                  const mongoUser = await axios.post(
+                    "https://focudoro-backend.onrender.com/api/users",
+                    body,
+                    config
+                  );
+                  setUser(mongoUser.data.user);
+                  localStorage.setItem(
+                    "user",
+                    JSON.stringify(mongoUser.data.user)
+                  );
                 } catch (err) {
                   console.log(err);
                 }
@@ -71,7 +99,11 @@ export default function Landing() {
             />
           </GoogleOAuthProvider>
         </Grid>
-        <Grid item xs={0} md={2}/>
+        <Grid
+          item
+          xs={0}
+          md={2}
+        />
       </Grid>
       <Grid
         container
@@ -79,17 +111,20 @@ export default function Landing() {
       >
         <Grid
           item
-          xs={1} sm={3}
+          xs={1}
+          sm={3}
         />
         <Grid
           item
-          xs={10} sm={6}
+          xs={10}
+          sm={6}
         >
           <FAQ />
         </Grid>
         <Grid
           item
-          xs={1} sm={3}
+          xs={1}
+          sm={3}
         />
       </Grid>
     </>

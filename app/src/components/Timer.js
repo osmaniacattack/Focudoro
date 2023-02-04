@@ -8,3 +8,5 @@ export default function Timer() {
     </>
   );
 }
+
+// When a user's countdown timer hits 0, make an API call to update the user's total pomodoro, pomodoro minutes
