@@ -176,7 +176,7 @@ function App() {
                               },
                             }}
                           >
-                            <Accordion>
+                            <Accordion defaultExpanded={true}>
                               <AccordionSummary
                                 expandIcon={<InsightsIcon />}
                                 aria-controls="panel1a-content"

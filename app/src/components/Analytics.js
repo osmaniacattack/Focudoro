@@ -29,7 +29,7 @@ export default function Analytics() {
   return (
     <Grid
       container
-      sx={{ backgroundColor: "#1976D2" }}
+      sx={{ backgroundColor: "#1976D2", borderRadius:"25px" }}
     >
       <Grid
         item
@@ -147,12 +147,18 @@ export default function Analytics() {
           Total Days Logged
         </Typography>
       </Grid>
-      <Typography
-        color="#fff"
-        textAlign={"center"}
-        fontFamily="Nunito"
-        fontWeight={500}
-      >{`Productively vibing since: ${getRegisteredDateString()} `}</Typography>
+      <Grid
+        item
+        xs={12}
+        p={2}
+      >
+        <Typography
+          color="#fff"
+          textAlign={"center"}
+          fontFamily="Nunito"
+          fontWeight={700}
+        >{`Productively vibing since: ${getRegisteredDateString()} `}</Typography>
+      </Grid>
     </Grid>
   );
 }
