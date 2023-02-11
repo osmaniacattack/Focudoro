@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
-import { Grid, Typography } from "@mui/material";
+import { Divider, Grid, Typography } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime"; // Lifetime Pomodoros
 import MoreTimeIcon from "@mui/icons-material/MoreTime"; // Pomodoros this session
 import HourglassBottomIcon from "@mui/icons-material/HourglassBottom"; // Minutes Focused
@@ -82,7 +82,8 @@ export default function Analytics() {
           color="#fff"
           textAlign={"center"}
           fontFamily="Nunito"
-          fontWeight={1000}
+          fontWeight={700}
+          fontSize={"3rem"}
           variant="h6"
         >
           {pomoCount}
@@ -111,8 +112,9 @@ export default function Analytics() {
           color="#fff"
           textAlign={"center"}
           fontFamily="Nunito"
-          fontWeight={1000}
+          fontWeight={700}
           variant="h6"
+          fontSize={"3rem"}
         >
           {lifetimePomodoros}
         </Typography>
@@ -140,8 +142,9 @@ export default function Analytics() {
           color="#fff"
           textAlign={"center"}
           fontFamily="Nunito"
-          fontWeight={1000}
+          fontWeight={700}
           variant="h6"
+          fontSize={"3rem"}
         >
           {totalMinutes / 60}
         </Typography>
@@ -169,8 +172,9 @@ export default function Analytics() {
           color="#fff"
           textAlign={"center"}
           fontFamily="Nunito"
-          fontWeight={1000}
+          fontWeight={700}
           variant="h6"
+          fontSize={"3rem"}
         >
           {totalDays.length}
         </Typography>

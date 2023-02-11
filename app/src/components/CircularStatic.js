@@ -7,6 +7,9 @@ import { Button, Grid } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
+import PsychologyIcon from "@mui/icons-material/Psychology";
+import LocalCafeIcon from "@mui/icons-material/LocalCafe";
+import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
 import {
   PomoContext,
   StudyContext,
@@ -14,6 +17,7 @@ import {
   RestContext,
   BreakContext,
   UserContext,
+  TimerContext,
 } from "../App";
 import clockalarm from "../assets/clockalarm.mp3";
 import ffseven from "../assets/ffseven.mp3";
@@ -32,7 +36,7 @@ function CircularProgressWithLabel(props) {
           <CircularProgress
             size="20rem"
             thickness="3"
-            color="info"
+            color={props.isRunning === true ? "info" : "error"}
             variant="determinate"
             value={props.value}
           />
@@ -60,10 +64,7 @@ function CircularProgressWithLabel(props) {
           </Box>
         </Box>
       </Typography>
-      <Grid
-        container
-        sx={{ p: 2 }}
-      >
+      <Grid container>
         <Grid
           item
           xs={4}
@@ -75,7 +76,9 @@ function CircularProgressWithLabel(props) {
             disabled={props.isRunning === true}
             color="success"
           >
-            <PlayArrowIcon fontSize="large" />
+            <Typography fontSize="4rem">
+              <PlayArrowIcon fontSize="inherit" />
+            </Typography>
           </Button>
         </Grid>
         <Grid
@@ -89,7 +92,9 @@ function CircularProgressWithLabel(props) {
             color="error"
             disabled={props.isRunning === false}
           >
-            <PauseIcon fontSize="large" />
+            <Typography fontSize="4rem">
+              <PauseIcon fontSize="inherit" />
+            </Typography>
           </Button>
         </Grid>
         <Grid
@@ -102,75 +107,88 @@ function CircularProgressWithLabel(props) {
             color="warning"
             onClick={props.reset}
           >
-            <RestartAltIcon fontSize="large" />
+            <Typography fontSize="4rem">
+              <RestartAltIcon fontSize="inherit" />
+            </Typography>
           </Button>
         </Grid>
       </Grid>
-      <Grid
-        container
-        sx={{ p: 2 }}
+      <Box
+        sx={{
+          display: {
+            xs: "block",
+            sm: "block",
+            md: "block",
+            lg: "none",
+            xl: "none",
+          },
+        }}
       >
         <Grid
-          item
-          xs={4}
+          container
+          display="flex"
+          flexDirection="row"
+          spacing={3}
         >
-          <Button
-            fullWidth
-            variant="text"
-            onClick={props.focus}
-            color="info"
-            disabled={props.type === "focus" || props.type === "customStudy"}
+          <Grid
+            item
+            xs={4}
           >
-            <Typography
-              variant="h6"
-              fontWeight={"700"}
-              fontFamily={"Nunito"}
+            <Button
+              size="large"
+              variant="text"
+              fullWidth
+              onClick={props.focus}
+              disabled={props.type === "focus" || props.type === "customStudy"}
             >
-              Focus
-            </Typography>
-          </Button>
-        </Grid>
-        <Grid
-          item
-          xs={4}
-        >
-          <Button
-            fullWidth
-            variant="text"
-            onClick={props.short}
-            color="info"
-            disabled={props.type === "short" || props.type === "customBreak"}
+              <Typography
+                textAlign={"center"}
+                fontSize="4rem"
+              >
+                <PsychologyIcon fontSize="inherit" />
+              </Typography>
+            </Button>
+          </Grid>
+          <Grid
+            item
+            xs={4}
           >
-            <Typography
-              variant="h6"
-              fontWeight="700"
-              fontFamily={"Nunito"}
+            <Button
+              size="large"
+              variant="text"
+              fullWidth
+              onClick={props.short}
+              disabled={props.type === "short" || props.type === "customBreak"}
             >
-              Break
-            </Typography>
-          </Button>
-        </Grid>
-        <Grid
-          item
-          xs={4}
-        >
-          <Button
-            fullWidth
-            variant="text"
-            onClick={props.long}
-            color="info"
-            disabled={props.type === "long" || props.type === "customRest"}
+              <Typography
+                textAlign={"center"}
+                fontSize="4rem"
+              >
+                <LocalCafeIcon fontSize="inherit" />
+              </Typography>
+            </Button>
+          </Grid>
+          <Grid
+            item
+            xs={4}
           >
-            <Typography
-              variant="h6"
-              fontWeight="700"
-              fontFamily={"Nunito"}
+            <Button
+              size="large"
+              variant="text"
+              fullWidth
+              onClick={props.long}
+              disabled={props.type === "long" || props.type === "customRest"}
             >
-              Rest
-            </Typography>
-          </Button>
+              <Typography
+                textAlign={"center"}
+                fontSize="4rem"
+              >
+                <SelfImprovementIcon fontSize="inherit" />
+              </Typography>
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
+      </Box>
     </>
   );
 }
@@ -190,7 +208,7 @@ export default function CircularStatic() {
   const digitalAlarm = new Audio(digital);
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
-  const [type, setType] = useState("focus");
+  const [type, setType] = useContext(TimerContext);
   const [currentMinutes, setCurrentMinutes] = useState(25 * 60);
   const [intervalId, setIntervalId] = useState(null);
   const [lifePomodoros, setLifePomodoros] = useState(0);
@@ -282,6 +300,20 @@ export default function CircularStatic() {
     setCurrentMinutes(studyTime * 60);
     setType("customStudy");
   }, [studyTime]);
+
+  useEffect(() => {
+    switch(type){
+      case "focus":
+        handleFocus();
+        break;
+      case "short":
+        handleShortBreak();
+        break;
+      case "long":
+        handleLongBreak();
+        break;
+    }
+  }, [type])
 
   const handleFocus = () => {
     setType("focus");
