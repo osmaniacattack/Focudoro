@@ -1,3 +1,5 @@
+/// Lenovo Yoga 720
+
 import { Grid, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import Blob from "../assets/blob2.svg";

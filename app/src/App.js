@@ -22,7 +22,7 @@ import {
 import InsightsIcon from '@mui/icons-material/Insights';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
-
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import React, { useState, createContext, useEffect } from "react";
 import Blob from "./assets/blob2.svg";
 
@@ -176,9 +176,9 @@ function App() {
                               },
                             }}
                           >
-                            <Accordion>
+                            <Accordion defaultExpanded={true}>
                               <AccordionSummary
-                                expandIcon={<InsightsIcon />}
+                                expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                               >
@@ -187,16 +187,16 @@ function App() {
                                   fontFamily={"Nunito"}
                                   color="primary"
                                   fontWeight={1000}
-                                  fontStyle="italic"
+                                  // fontStyle="italic"
                                 >
-                                  Analytics
+                                  {`✨ FocuFeats`}
                                 </Typography>
                               </AccordionSummary>
                               <AccordionDetails><Analytics/></AccordionDetails>
                             </Accordion>
                             <Accordion>
                               <AccordionSummary
-                                expandIcon={<AssignmentIcon />}
+                                expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                               >
@@ -205,9 +205,9 @@ function App() {
                                   fontFamily={"Nunito"}
                                   color="primary"
                                   fontWeight={1000}
-                                  fontStyle="italic"
+                                  // fontStyle="italic"
                                 >
-                                  {`${user.given_name}'s Tasks`}
+                                  {`📌 FocuTasks`}
                                 </Typography>
                               </AccordionSummary>
                               <AccordionDetails>

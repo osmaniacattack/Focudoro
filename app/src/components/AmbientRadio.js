@@ -94,7 +94,7 @@ export default function AmbientRadio() {
     }
   };
 
-  const cardDescription = [["Ocean Waves"], ["Cozy Fireplace"], ["Rain Drops"]];
+  const cardDescription = [["🌊 Ocean Waves 🌊"], ["🔥 Cozy Fireplace 🔥"], ["☔️ Rain Drops ☔️"]];
 
   const handleVolumeChange = (event, newValue) => {
     setVolume(event.target.value);
