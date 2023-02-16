@@ -19,3 +19,4 @@ export { default as Updates } from "./Updates";
 export { default as UpdatesDialog } from "./UpdatesDialog";
 export { default as Footer } from "./Footer";
 export {default as TimerToggles} from "./TimerToggles";
+export {default as CircularIndeterminate} from './CircularIndeterminate';
