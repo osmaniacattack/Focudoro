@@ -1,7 +1,5 @@
-/// Lenovo Yoga 720
-
 import { Grid, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import Blob from "../assets/blob2.svg";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
@@ -9,13 +7,11 @@ import { UserContext } from "../App";
 import jwt_decode from "jwt-decode";
 import FAQ from "./FAQ";
 import axios from "axios";
-
-// Find a way to track login amounts
-// Idea: create an array of logged in times? when a user logs in, the date.now would be added to the array...
-// when pulling data for total logged in, we will only account for single days
+import CircularIndeterminate from "./CircularIndeterminate";
 
 export default function Landing() {
   const [user, setUser] = useContext(UserContext);
+  const [submitted, setSubmitted] = useState(false);
 
   return (
     <>
@@ -62,10 +58,12 @@ export default function Landing() {
           >
             <i>{`Hey, scroll down to learn more :)`}</i>
           </Typography>
+          {submitted === false ?
           <GoogleOAuthProvider clientId="497316340818-l1clnun305pgv50b7h5tmr52q3apkp76.apps.googleusercontent.com">
             <GoogleLogin
               shape="rectangular"
               onSuccess={async (credentialResponse) => {
+                setSubmitted(true);
                 try {
                   const config = {
                     headers: {
@@ -74,7 +72,6 @@ export default function Landing() {
                   };
 
                   let userObject = jwt_decode(credentialResponse.credential);
-                  // add function to send user email, name and given name to backend;
 
                   let body = {
                     email: userObject.email,
@@ -97,9 +94,10 @@ export default function Landing() {
               }}
               onError={() => {
                 console.log("Login Failed");
+                setSubmitted(false);
               }}
             />
-          </GoogleOAuthProvider>
+          </GoogleOAuthProvider> : <CircularIndeterminate/>}
         </Grid>
         <Grid
           item

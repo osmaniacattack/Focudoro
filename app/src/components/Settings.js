@@ -8,7 +8,7 @@ import {
   MenuItem,
   FormControlLabel,
 } from "@mui/material";
-import { AudioContext, StudyContext, RestContext, BreakContext, YoutubeContext } from "../App";
+import { AudioContext, StudyContext, RestContext, BreakContext, YoutubeContext, BackgroundContext } from "../App";
 
 
 export default function Settings() {
@@ -16,6 +16,7 @@ export default function Settings() {
   const [studyTime, setStudyTime] = useContext(StudyContext);
   const [breakTime, setBreakTime] = useContext(BreakContext);
   const [restTime, setRestTime] = useContext(RestContext);
+  const [background, setBackground] = useContext(BackgroundContext);
   const [checked, setChecked] = React.useState(false);
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
@@ -74,6 +75,7 @@ export default function Settings() {
         sx={{ my: 1 }}
         label="Alarm Sound"
       >
+        <MenuItem value="soft">Soft Alarm</MenuItem>
         <MenuItem value="vintage">Vintage Alarm</MenuItem>
         <MenuItem value="digital">Digital Alarm</MenuItem>
         <MenuItem value="victory">Victory Fanfare</MenuItem>
@@ -132,6 +134,28 @@ export default function Settings() {
           />
         </Grid>
       </Grid>
+      <Typography
+        sx={{ m: 1 }}
+        variant="h6"
+        fontWeight={400}
+        color="gray"
+        textAlign={"left"}
+        fontFamily={"Nunito"}
+      >
+        Backgrounds
+      </Typography>
+      <TextField
+        fullWidth
+        select
+        value={background}
+        onChange={(e) => setBackground(e.target.value)}
+        sx={{ my: 1 }}
+        label="Backgrounds"
+      >
+        <MenuItem value="blob">Default</MenuItem>
+        <MenuItem value="waves">Waves</MenuItem>
+        <MenuItem value="lowPoly">Low Poly</MenuItem>
+      </TextField>
       <Typography
         sx={{ my: 1 }}
         variant="h6"

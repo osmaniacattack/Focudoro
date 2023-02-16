@@ -19,9 +19,10 @@ import {
   UserContext,
   TimerContext,
 } from "../App";
-import clockalarm from "../assets/clockalarm.mp3";
-import ffseven from "../assets/ffseven.mp3";
-import digital from "../assets/digital.mp3";
+import clockalarm from "../assets/alarms/clockalarm.mp3";
+import ffseven from "../assets/alarms/ffseven.mp3";
+import digital from "../assets/alarms/digital.mp3";
+import soft from "../assets/alarms/soft.mp3";
 import axios from "axios";
 import "../App.css";
 
@@ -206,6 +207,7 @@ export default function CircularStatic() {
   const manualAlarm = new Audio(clockalarm);
   const fanfareAlarm = new Audio(ffseven);
   const digitalAlarm = new Audio(digital);
+  const softAlarm = new Audio(soft);
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
   const [type, setType] = useContext(TimerContext);
@@ -254,6 +256,9 @@ export default function CircularStatic() {
   useEffect(() => {
     if (timeLeft === 0) {
       switch (audio) {
+        case "soft":
+          softAlarm.play();
+          break;
         case "vintage":
           manualAlarm.play();
           break;

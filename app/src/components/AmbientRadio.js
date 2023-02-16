@@ -20,9 +20,9 @@ import SkipNextIcon from "@mui/icons-material/SkipNext";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import { useTheme, styled } from "@mui/material/styles";
-import Fire from "../assets/ambient-fire.mp3";
-import Rain from "../assets/ambient-rain.mp3";
-import Waves from "../assets/ambient-waves.mp3";
+import Fire from "../assets/ambience/ambient-fire.mp3";
+import Rain from "../assets/ambience/ambient-rain.mp3";
+import Waves from "../assets/ambience/ambient-waves.mp3";
 import { Howl, Howler } from "howler";
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
@@ -94,7 +94,7 @@ export default function AmbientRadio() {
     }
   };
 
-  const cardDescription = [["🌊 Ocean Waves 🌊"], ["🔥 Cozy Fireplace 🔥"], ["☔️ Rain Drops ☔️"]];
+  const cardDescription = [["Ocean Waves"], ["Cozy Fireplace"], ["Rain Drops"]];
 
   const handleVolumeChange = (event, newValue) => {
     setVolume(event.target.value);
