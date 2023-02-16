@@ -62,6 +62,20 @@ export default function Analytics() {
     setTimeout(fetchData, 20 * 1000);
   }, [pomoCount]);
 
+  function formatTime(seconds) {
+    if (seconds < 60) {
+      return [seconds,`Total Seconds Focused`];
+    } else if (seconds < 3600) {
+      const minutes = Math.floor(seconds / 60);
+      return [minutes, "Total Minutes Focused"];
+    } else {
+      const hours = Math.floor(seconds / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      return [hours + "." + (minutes < 10 ? "0" : "") + minutes, "Total Hours Focused"];
+    }
+  }
+  
+
   return (
     <Grid
       container
@@ -146,7 +160,7 @@ export default function Analytics() {
           variant="h6"
           fontSize={"3rem"}
         >
-          {totalMinutes / 60}
+          {formatTime(totalMinutes)[0]}
         </Typography>
         <Typography
           color="#fff"
@@ -154,7 +168,7 @@ export default function Analytics() {
           fontFamily="Nunito"
           fontWeight={700}
         >
-          Total Minutes Focused
+          {formatTime(totalMinutes)[1]}
         </Typography>
       </Grid>
       <Grid

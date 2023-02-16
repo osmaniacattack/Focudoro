@@ -72,7 +72,6 @@ export default function Landing() {
                   };
 
                   let userObject = jwt_decode(credentialResponse.credential);
-
                   let body = {
                     email: userObject.email,
                     given_name: userObject.given_name,

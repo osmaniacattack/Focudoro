@@ -135,7 +135,7 @@ export default function Settings() {
         </Grid>
       </Grid>
       <Typography
-        sx={{ m: 1 }}
+        sx={{ my: 1 }}
         variant="h6"
         fontWeight={400}
         color="gray"

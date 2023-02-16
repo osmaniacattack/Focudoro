@@ -23,7 +23,7 @@ export default function AboutDialog() {
         fontFamily={"Nunito"}
         onClick={handleClickOpen}
       >
-        UPDATES
+        Updates
       </Typography>
       <Dialog
         open={open}
