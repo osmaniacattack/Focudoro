@@ -23,7 +23,18 @@ import BackspaceIcon from "@mui/icons-material/Backspace";
 import YouTube from "react-youtube";
 import { useTheme, styled } from "@mui/material/styles";
 import { YoutubeContext } from "../App";
+import { cardDescription } from "../utils/radio";
 import axios from "axios";
+
+const API_KEY = process.env.YOUTUBE_API_KEY;
+const VIDEO_IDS = [
+  "jfKfPfyJRdk",
+  "kgx4WGK0oNU",
+  "e3L1PIY1pN8",
+  "7NOSDKb0HlU",
+  "IUT1qAhMY4w",
+  "Ha2UW8a0Vzc",
+];
 
 const CardWrapper = styled(MainCard)(({ theme }) => ({
   backgroundColor: theme.palette.primary.dark,
@@ -54,14 +65,6 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 export default function YoutubeReact() {
   const theme = useTheme();
-  const [videoIds] = useState([
-    "jfKfPfyJRdk",
-    "kgx4WGK0oNU",
-    "e3L1PIY1pN8",
-    "7NOSDKb0HlU",
-    "IUT1qAhMY4w",
-    "Ha2UW8a0Vzc",
-  ]);
   const [currentVideoIdx, setCurrentVideoIdx] = useState(1);
   const [player, setPlayer] = useState(null);
   const [show, setShow] = useState(false);
@@ -69,8 +72,7 @@ export default function YoutubeReact() {
   const [videoInfo, setVideoInfo] = useState(null);
   const playerRef = useRef(null);
 
-  const API_KEY = "AIzaSyCf2ymIc7M9-YaFmwm_V1krweRPkRiFtK0";
-
+  // Gets youtube video based on customURL input
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
@@ -84,6 +86,7 @@ export default function YoutubeReact() {
     }
   }, [customURL]);
 
+  // If customURL is cleared, turn off custom player and set ID back to first radio
   useEffect(() => {
     if (customURL === "") {
       setCurrentVideoIdx(1);
@@ -102,10 +105,11 @@ export default function YoutubeReact() {
   );
 
   const onEnd = useCallback(() => {
-    setCurrentVideoIdx((currentVideoIdx + 1) % videoIds.length);
-    player.loadVideoById(videoIds[currentVideoIdx]);
-  }, [currentVideoIdx, videoIds, player]);
+    setCurrentVideoIdx((currentVideoIdx + 1) % VIDEO_IDS.length);
+    player.loadVideoById(VIDEO_IDS[currentVideoIdx]);
+  }, [currentVideoIdx, player]);
 
+  // Loops the video if a custom radio is playing
   const onCustomEnd = useCallback((event) => {
     setPlayer(event.target);
     event.target.playVideo();
@@ -130,30 +134,15 @@ export default function YoutubeReact() {
 
   const handleBack = () => {
     currentVideoIdx === 0
-      ? setCurrentVideoIdx(videoIds.length - 1)
+      ? setCurrentVideoIdx(VIDEO_IDS.length - 1)
       : setCurrentVideoIdx((currentVideoIdx) => currentVideoIdx - 1);
   };
 
   const handleForward = () => {
-    currentVideoIdx === videoIds.length - 1
+    currentVideoIdx === VIDEO_IDS.length - 1
       ? setCurrentVideoIdx(0)
       : setCurrentVideoIdx((currentVideoIdx) => currentVideoIdx + 1);
   };
-
-  const cardDescription = [
-    ["lofi hip hop radio - beats to relax/study to", "Lofi Girl"],
-    [
-      `jazz/lofi hip hop radio🌱chill beats to relax/study to [LIVE 24/7]`,
-      "Abao in Tokyo",
-    ],
-    ["coffee shop radio // 24/7 lofi hip-hop beats", "STEEZYASF*CK"],
-    ["lofi hip hop radio - beats to study/relax to 🐾", "Chillhop Music"],
-    ["24/7 Korean Underground Indie/R&B/Hip-hop Radio", "Mellowbeat Seeker"],
-    [
-      "Tokyo cafe ☕ Beautiful relaxing jazz music and bossa nova piano for stress relief",
-      "In the Rain",
-    ],
-  ];
 
   const handleVolumeChange = (event, newValue) => {
     playerRef.current.internalPlayer.setVolume(newValue);
@@ -216,7 +205,7 @@ export default function YoutubeReact() {
               videoId={
                 customURL !== "" && videoInfo !== null
                   ? customURL
-                  : videoIds[currentVideoIdx]
+                  : VIDEO_IDS[currentVideoIdx]
               }
               opts={opts}
               onReady={onReady}

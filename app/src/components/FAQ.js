@@ -4,22 +4,9 @@ import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import ArticleIcon from "@mui/icons-material/Article";
 import HeadphonesIcon from "@mui/icons-material/Headphones";
+import { cardDescription } from "../utils/radio";
 
 export default function FAQ() {
-  const cardDescription = [
-    ["lofi hip hop radio - beats to relax/study to", "Lofi Girl"],
-    [
-      `jazz/lofi hip hop radio🌱chill beats to relax/study to [LIVE 24/7]`,
-      "Abao in Tokyo",
-    ],
-    ["coffee shop radio // 24/7 lofi hip-hop beats", "STEEZYASF*CK"],
-    ["lofi hip hop radio - beats to study/relax to 🐾", "Chillhop Music"],
-    ["24/7 Korean Underground Indie/R&B/Hip-hop Radio", "Mellowbeat Seeker"],
-    [
-      "Tokyo cafe ☕ Beautiful relaxing jazz music and bossa nova piano for stress relief",
-      "In the Rain",
-    ],
-  ];
   return (
     <Grid container>
       <Grid
@@ -158,11 +145,10 @@ export default function FAQ() {
           fontFamily={"Nunito"}
         >
           In addition to the Pomodoro timer and its customizations, you can{" "}
-          <u>add your own tasks</u>{" "}
-          and it will be saved for the duration of your session. Furthermore,
-          this web app currently allows you to add a YouTube video of your
-          choice to listen to on loop as well as having up to{" "}
-          <u>six different live lo-fi streams on YouTube</u> for your
+          <u>add your own tasks</u> and it will be saved for the duration of
+          your session. Furthermore, this web app currently allows you to add a
+          YouTube video of your choice to listen to on loop as well as having up
+          to <u>six different live lo-fi streams on YouTube</u> for your
           convenience! Those streams are:
           <ul>
             {cardDescription.map((card, index) => {

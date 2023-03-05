@@ -1,13 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useContext } from "react";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import { Button, Grid, IconButton } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import PsychologyIcon from "@mui/icons-material/Psychology";
 import LocalCafeIcon from "@mui/icons-material/LocalCafe";
 import SelfImprovementIcon from "@mui/icons-material/SelfImprovement";
 import { TimerContext } from "../App";
-import axios from "axios";
 import "../App.css";
 
 export default function TimerToggles() {

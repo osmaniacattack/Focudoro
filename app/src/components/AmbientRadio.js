@@ -50,6 +50,9 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
   },
 }));
 
+const CARD_DESCRIPTIONS = [["Ocean Waves"], ["Cozy Fireplace"], ["Rain Drops"]];
+
+
 export default function AmbientRadio() {
   const theme = useTheme();
   const [soundIds] = useState([Waves, Fire, Rain]);
@@ -58,26 +61,32 @@ export default function AmbientRadio() {
   const [sound, setSound] = useState(null);
   const [volume, setVolume] = useState(0.5);
 
+  // Sets the sound state if the current sound ID for ambient radio changes.
   useEffect(() => {
     setSound(new Howl({ src: [soundIds[currentSoundIdx]], loop: true }));
   }, [currentSoundIdx]);
 
+  // Sets the volume if the volume input changes.
   useEffect(() => {
     if (sound) {
       sound.volume(volume);
     }
   }, [volume]);
 
+  // Plays sound and sets the truthy value to true.
   const handlePlay = () => {
     sound.play();
     setPlaying(true);
   };
 
+  // Pauses sound and sets the truthy value to false.
   const handlePause = () => {
     sound.pause();
     setPlaying(false);
   };
 
+  // Allows the user to cycle to the end of the radio array
+  // if they clicked back while the pointer is at the beginning of the array.
   const handleBack = () => {
     if (currentSoundIdx === 0) {
       setCurrentSoundIdx(soundIds.length - 1);
@@ -86,6 +95,8 @@ export default function AmbientRadio() {
     }
   };
 
+  // Allows the user to cycle to the beginning of the radio array
+  // if they clicked forward while the pointer is at the end of the array.
   const handleForward = () => {
     if (currentSoundIdx === soundIds.length - 1) {
       setCurrentSoundIdx(0);
@@ -94,8 +105,8 @@ export default function AmbientRadio() {
     }
   };
 
-  const cardDescription = [["Ocean Waves"], ["Cozy Fireplace"], ["Rain Drops"]];
-
+  // Event handler to change the state of volume. Once the state is changed,
+  // the useEffect sets the sound object with a new volume value.
   const handleVolumeChange = (event, newValue) => {
     setVolume(event.target.value);
     sound.volume(event.target.value);
@@ -129,7 +140,7 @@ export default function AmbientRadio() {
                   >
                     <i>
                       {playing === true ? `Playing: ` : `Paused: `}
-                      {cardDescription[currentSoundIdx]}
+                      {CARD_DESCRIPTIONS[currentSoundIdx]}
                     </i>
                   </Typography>
                 }

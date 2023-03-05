@@ -39,18 +39,19 @@ export const YoutubeContext = createContext();
 export const TimerContext = createContext();
 export const BackgroundContext = createContext();
 
+let localUser = JSON.parse(localStorage.getItem("user"));
+let localPomoCount = JSON.parse(localStorage.getItem("pomoCounts"));
+
 function App() {
   const [pomoCount, setPomoCount] = useState(0);
   const [user, setUser] = useState({});
   const [audio, setAudio] = useState("soft");
-  const [background, setBackground] = useState("blob");
+  const [background, setBackground] = useState("waves");
   const [studyTime, setStudyTime] = useState(25);
   const [breakTime, setBreakTime] = useState(5);
   const [restTime, setRestTime] = useState(15);
   const [customURL, setCustomURL] = useState("");
   const [type, setType] = useState("focus");
-  let localUser = JSON.parse(localStorage.getItem("user"));
-  let localPomoCount = JSON.parse(localStorage.getItem("pomoCounts"));
 
   useEffect(() => {
     if (localUser) {
