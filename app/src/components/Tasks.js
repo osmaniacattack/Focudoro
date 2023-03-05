@@ -17,10 +17,6 @@ import {
 } from "@mui/material";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
-import AccessTimeIcon from '@mui/icons-material/AccessTime'; // Lifetime Pomodoros
-import MoreTimeIcon from '@mui/icons-material/MoreTime'; // Pomodoros this session
-import HourglassBottomIcon from '@mui/icons-material/HourglassBottom'; // Minutes Focused
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'; // Total logins
 import { UserContext } from "../App";
 import "../App.css";
 
@@ -31,8 +27,8 @@ export default function Tasks() {
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [completedTasks, setCompletedTasks] = useState([]);
   const [deleteIndex, setDeleteIndex] = useState(0);
-  const [user] = useContext(UserContext);
 
+  // Retrieves tasks from user's localStorage and sets stage
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem("tasks"));
     if (storedTasks) {
@@ -46,6 +42,7 @@ export default function Tasks() {
     }
   }, []);
 
+  // Handler for when user clicks checkbox
   const handleCheckboxChange = (index) => {
     const newCompletedTasks = [...completedTasks];
     if (newCompletedTasks.includes(index)) {
@@ -57,6 +54,7 @@ export default function Tasks() {
     localStorage.setItem("completedTasks", JSON.stringify(newCompletedTasks));
   };
 
+  // Delete task handler. Takes index and splices new tasks, sets updated state.
   const handleDelete = (index) => {
     let newTasks = [...tasks];
     newTasks.splice(index, 1);
@@ -64,6 +62,7 @@ export default function Tasks() {
     localStorage.setItem("tasks", JSON.stringify(newTasks));
   };
 
+  // Add task handler. Creates copy, pushes input, sets updated state.
   const handleAdd = () => {
     let newTasks = [...tasks];
     newTasks.push(newTask);

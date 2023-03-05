@@ -26,6 +26,11 @@ import soft from "../assets/alarms/soft.mp3";
 import axios from "axios";
 import "../App.css";
 
+const MANUAL_ALARM = new Audio(clockalarm);
+const FANFARE_ALARM = new Audio(ffseven);
+const DIGITAL_ALARM = new Audio(digital);
+const SOFT_ALARM = new Audio(soft);
+
 function CircularProgressWithLabel(props) {
   return (
     <>
@@ -194,20 +199,7 @@ function CircularProgressWithLabel(props) {
   );
 }
 
-CircularProgressWithLabel.propTypes = {
-  /**
-   * The value of the progress indicator for the determinate variant.
-   * Value between 0 and 100.
-   * @default 0
-   */
-  value: PropTypes.number.isRequired,
-};
-
 export default function CircularStatic() {
-  const manualAlarm = new Audio(clockalarm);
-  const fanfareAlarm = new Audio(ffseven);
-  const digitalAlarm = new Audio(digital);
-  const softAlarm = new Audio(soft);
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
   const [type, setType] = useContext(TimerContext);
@@ -223,6 +215,7 @@ export default function CircularStatic() {
   const [user, setUser] = useContext(UserContext);
   const today = new Date().toDateString();
 
+  // Updates user after a Pomodoro completes.
   const updateUser = async (updates) => {
     try {
       const response = await axios.put(
@@ -236,6 +229,8 @@ export default function CircularStatic() {
     }
   };
 
+  // Updates pomodoro counts for the day in localStorage.
+  // Need to add a check if the day is outdated.
   const checkPomoCounts = () => {
     const pomoCounts = JSON.parse(localStorage.getItem("pomoCounts"));
     if (pomoCounts) {
@@ -244,6 +239,7 @@ export default function CircularStatic() {
     localStorage.setItem("pomoCounts", JSON.stringify(pomoCount));
   };
 
+  // Sets totalPomodoros and minutes studied from db to user state
   useEffect(() => {
     if (!user) {
       setUser(null);
@@ -253,20 +249,23 @@ export default function CircularStatic() {
     }
   });
 
+  // plays alarm if timeLeft is 0.
+  // if type is of focus/customStudy, it makes an API call to
+  // update the user db.
   useEffect(() => {
     if (timeLeft === 0) {
       switch (audio) {
         case "soft":
-          softAlarm.play();
+          SOFT_ALARM.play();
           break;
         case "vintage":
-          manualAlarm.play();
+          MANUAL_ALARM.play();
           break;
         case "digital":
-          digitalAlarm.play();
+          DIGITAL_ALARM.play();
           break;
         case "victory":
-          fanfareAlarm.play();
+          FANFARE_ALARM.play();
           break;
       }
       if (type === "focus" || type === "customStudy") {
@@ -290,22 +289,26 @@ export default function CircularStatic() {
     }
   }, [timeLeft, type]);
 
+  // Handles custom break time input
   useEffect(() => {
     setTimeLeft(breakTime * 60);
     setType("customBreak");
   }, [breakTime]);
 
+  // Handles custom rest time input
   useEffect(() => {
     setTimeLeft(restTime * 60);
     setType("customRest");
   }, [restTime]);
 
+  // Handles custom study time input
   useEffect(() => {
     setTimeLeft(studyTime * 60);
     setCurrentMinutes(studyTime * 60);
     setType("customStudy");
   }, [studyTime]);
 
+  // Switches timer type
   useEffect(() => {
     switch(type){
       case "focus":
@@ -320,6 +323,7 @@ export default function CircularStatic() {
     }
   }, [type])
 
+  // Handlers for setting the time and type.
   const handleFocus = () => {
     setType("focus");
     setCurrentMinutes(studyTime * 60);
@@ -342,6 +346,8 @@ export default function CircularStatic() {
     }
   }, [timeLeft]);
 
+
+  // Timer handler; uses interval to decrease total time by a second every second
   const handleStart = () => {
     setIsRunning(true);
     setIntervalId(
@@ -361,6 +367,8 @@ export default function CircularStatic() {
     clearInterval(intervalId);
     setIsRunning(false);
   };
+
+  // Resets time based on current type of timer
   const resetTimer = () => {
     handleStop();
     switch (type) {
@@ -391,10 +399,8 @@ export default function CircularStatic() {
   const seconds = timeLeft % 60;
 
   // Get timer logic, and map 25 minutes, 5 minutes, 15 minutes to 0,100
-
   const remainingTime = () => {
     let duration = 0;
-
     switch (type) {
       case "short":
         duration = breakTime * 60;

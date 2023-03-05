@@ -1,6 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import React, { useState, useContext } from "react";
 import Blob from "../assets/blob2.svg";
+import Waves from "../assets/waves.svg";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
 import { UserContext } from "../App";
@@ -18,9 +19,10 @@ export default function Landing() {
       <Grid
         container
         sx={{
-          backgroundImage: `url(${Blob})`,
+          backgroundImage: `url(${Waves})`,
           backgroundSize: "cover",
-          height: "50vh",
+          backgroundRepeat: "no-repeat",
+          height: "100vh",
         }}
       >
         <Grid
@@ -37,8 +39,8 @@ export default function Landing() {
           <Typography
             variant={"h2"}
             fontFamily={"Nunito"}
-            fontWeight={700}
-            color="#fff"
+            fontWeight={900}
+            color="primary"
           >
             Focudoro
           </Typography>
@@ -46,14 +48,14 @@ export default function Landing() {
             variant="h4"
             fontFamily={"Nunito"}
             fontWeight={700}
-            color="#fff"
+            color="primary"
           >
             productivity with chill, lo-fi vibes.
           </Typography>
           <Typography
             fontFamily={"Nunito"}
             fontWeight={300}
-            color="#fff"
+            color="#primary"
             sx={{ mb: 5 }}
           >
             <i>{`Hey, scroll down to learn more :)`}</i>

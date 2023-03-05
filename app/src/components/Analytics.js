@@ -5,6 +5,7 @@ import MoreTimeIcon from "@mui/icons-material/MoreTime"; // Pomodoros this sessi
 import HourglassBottomIcon from "@mui/icons-material/HourglassBottom"; // Minutes Focused
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth"; // Total logins
 import { UserContext, PomoContext } from "../App";
+import { formatTime, getRegisteredDateString } from "../utils/time";
 import axios from "axios";
 import "../App.css";
 
@@ -14,12 +15,9 @@ export default function Analytics() {
   const [totalMinutes, setTotalMinutes] = useState(0);
   const [lifetimePomodoros, setLifetimePomodoros] = useState(0);
   const [totalDays, setTotalDays] = useState([]);
-  const getRegisteredDateString = () => {
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    let userRegistered = new Date(user.registered);
-    return userRegistered.toLocaleDateString("en-US", options);
-  };
 
+  // Checks local storage to see if the lifetimePomodoros, totalMinutes, and loggedDays are saved
+  // Uses retrieved values to initiate state for the analytics component
   useEffect(() => {
     const initialLifePomos = JSON.parse(
       localStorage.getItem("lifetimePomodoros")
@@ -33,6 +31,8 @@ export default function Analytics() {
     setTotalDays(initialTotalDays || []);
   }, []);
 
+  // When user completes a pomodoro, retrieves the latest user data after 20 seconds
+  // Expects user data object to update total minutes, lifetimePomodoros, and loggedDays
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -61,20 +61,6 @@ export default function Analytics() {
     };
     setTimeout(fetchData, 20 * 1000);
   }, [pomoCount]);
-
-  function formatTime(seconds) {
-    if (seconds < 60) {
-      return [seconds,`Total Seconds Focused`];
-    } else if (seconds < 3600) {
-      const minutes = Math.floor(seconds / 60);
-      return [minutes, "Total Minutes Focused"];
-    } else {
-      const hours = Math.floor(seconds / 3600);
-      const minutes = Math.floor((seconds % 3600) / 60);
-      return [hours + "." + (minutes < 10 ? "0" : "") + minutes, "Total Hours Focused"];
-    }
-  }
-  
 
   return (
     <Grid
@@ -212,7 +198,9 @@ export default function Analytics() {
           fontFamily="Nunito"
           fontWeight={700}
           fontStyle="italic"
-        >{`Productively vibing since: ${getRegisteredDateString()} `}</Typography>
+        >{`Productively vibing since: ${getRegisteredDateString(
+          user
+        )} `}</Typography>
       </Grid>
     </Grid>
   );

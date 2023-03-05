@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTheme, styled } from "@mui/material/styles";
 import {
-  Avatar,
   Box,
   List,
   ListItem,
-  ListItemAvatar,
   ListItemText,
   Typography,
 } from "@mui/material";

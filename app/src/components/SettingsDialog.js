@@ -11,7 +11,6 @@ export default function SettingsDialog() {
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
